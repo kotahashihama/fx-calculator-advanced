@@ -1,8 +1,19 @@
 <template>
   <div>
-    <nuxt />
+    <nuxt></nuxt>
+    <TheFooter></TheFooter>
   </div>
 </template>
+
+<script>
+import TheFooter from '@/layouts/TheFooter.vue'
+
+export default {
+  components: {
+    TheFooter
+  }
+}
+</script>
 
 <style>
 html {
