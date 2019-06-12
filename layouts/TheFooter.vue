@@ -6,9 +6,13 @@
   </footer>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .footer {
-  padding: 1em 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5em;
+  height: $footer-height;
   background: #f1f1f1;
 }
 

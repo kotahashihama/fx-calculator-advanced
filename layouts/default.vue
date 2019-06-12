@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 html {
   font-family: '游ゴシック Medium', YuGothic, YuGothicM,
     'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo,
@@ -39,4 +39,6 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+
+$header-height: 64px;
 </style>

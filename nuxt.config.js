@@ -34,7 +34,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
   /*
    ** Axios module configuration
@@ -49,5 +50,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  styleResources: {
+    sass: ['@/assets/scss/variables.scss']
   }
 }

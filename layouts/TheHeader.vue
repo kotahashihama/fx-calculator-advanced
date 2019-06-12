@@ -41,8 +41,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.8em;
-  height: 64px;
+  padding: 0 1.8em;
+  height: $header-height;
   background: #f1f1f1;
 
   &__left {
