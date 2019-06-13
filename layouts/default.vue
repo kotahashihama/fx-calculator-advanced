@@ -19,6 +19,14 @@ export default {
 </script>
 
 <style lang="scss">
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
 html {
   font-family: '游ゴシック Medium', YuGothic, YuGothicM,
     'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo,
@@ -33,12 +41,8 @@ html {
   color: #333;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
+button {
+  outline: none;
+  cursor: pointer;
 }
-
-$header-height: 64px;
 </style>

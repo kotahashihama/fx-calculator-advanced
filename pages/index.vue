@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import CalculatingForm from '@/components/calculator/CalculatingForm.vue'
+import CalculatingForm from '@/components/calculator/calculating-form/CalculatingForm.vue'
 import CalculatedResult from '@/components/common/calculated-result/CalculatedResult.vue'
-import CalculationProcessor from '@/components/calculator/CalculationProcessor.vue'
+import CalculationProcessor from '@/components/calculator/calculation-processor/CalculationProcessor.vue'
 
 export default {
   components: {
