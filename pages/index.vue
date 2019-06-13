@@ -1,24 +1,29 @@
 <template>
   <div class="calculator">
-    <CalculatingForm
-      class="calculating-form"
-      :balance="balance"
-      :target-margin-level="targetMarginLevel"
-      @inputBalance="updateBalance"
-      @inputTargetMarginLevel="updateTargetMarginLevel"
-    ></CalculatingForm>
-    <CalculatedResult class="calculated-result"></CalculatedResult>
+    <div class="monitor">
+      <CalculatingForm
+        class="calculating-form"
+        :balance="balance"
+        :target-margin-level="targetMarginLevel"
+        @inputBalance="updateBalance"
+        @inputTargetMarginLevel="updateTargetMarginLevel"
+      ></CalculatingForm>
+      <CalculatedResult class="calculated-result"></CalculatedResult>
+    </div>
+    <CalculationProcessor></CalculationProcessor>
   </div>
 </template>
 
 <script>
 import CalculatingForm from '@/components/calculator/CalculatingForm.vue'
 import CalculatedResult from '@/components/common/calculated-result/CalculatedResult.vue'
+import CalculationProcessor from '@/components/calculator/CalculationProcessor.vue'
 
 export default {
   components: {
     CalculatingForm,
-    CalculatedResult
+    CalculatedResult,
+    CalculationProcessor
   },
   data() {
     return {
@@ -39,8 +44,12 @@ export default {
 
 <style lang="scss" scoped>
 .calculator {
-  display: flex;
   height: calc(100vh - (#{$header-height} + #{$footer-height}));
+}
+
+.monitor {
+  display: flex;
+  height: calc(100% - 50px);
 }
 
 .calculating-form,
@@ -58,6 +67,11 @@ export default {
   border: solid 2px #d0d0d0;
   border-left: none;
   padding: 2em;
-  width: calc(100% - 300px);
+  width: calc(100% - 320px);
+}
+
+.calculation-processer {
+  width: 100%;
+  height: 50px;
 }
 </style>
