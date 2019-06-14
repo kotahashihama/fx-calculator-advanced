@@ -36,28 +36,6 @@ export default {
     CalculatingFormExchange,
     CalculatingFormAssumedRates,
     CalculatingFormTargetMarginLevel
-  },
-  data() {
-    return {
-      balanceInherited: this.balance,
-      targetMarginLevelInherited: this.targetMarginLevel
-    }
-  },
-  methods: {
-    inputBalance(balance) {
-      if (balance === '') {
-        this.balanceInherited = 0
-        balance = 0
-      }
-      this.$emit('inputBalance', balance)
-    },
-    inputTargetMarginLevel(targetMarginLevel) {
-      if (targetMarginLevel === '') {
-        this.targetMarginLevelInherited = 0
-        targetMarginLevel = 0
-      }
-      this.$emit('inputTargetMarginLevel', targetMarginLevel)
-    }
   }
 }
 </script>
