@@ -1,6 +1,6 @@
 <template>
   <div class="header-user">
-    <span class="ame">ゲスト</span>
+    <span class="name">ゲスト</span>
     <img
       src="https://randomuser.me/api/portraits/men/46.jpg"
       alt="ゲスト"
