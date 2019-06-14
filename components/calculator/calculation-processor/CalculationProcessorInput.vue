@@ -1,6 +1,6 @@
 <template>
   <div class="calculation-processor-input">
-    <input type="text" value="無題" class="input" />
+    <input class="input" type="text" value="無題" />
   </div>
 </template>
 

@@ -1,18 +1,18 @@
 <template>
   <div class="calculation-processor">
-    <Input></Input>
-    <Buttons></Buttons>
+    <CalculationProcessorInput />
+    <CalculationProcessorButtons />
   </div>
 </template>
 
 <script>
-import Input from '@/components/calculator/calculation-processor/CalculationProcessorInput.vue'
-import Buttons from '@/components/calculator/calculation-processor/CalculationProcessorButtons.vue'
+import CalculationProcessorInput from '@/components/calculator/calculation-processor/CalculationProcessorInput.vue'
+import CalculationProcessorButtons from '@/components/calculator/calculation-processor/CalculationProcessorButtons.vue'
 
 export default {
   components: {
-    Input,
-    Buttons
+    CalculationProcessorInput,
+    CalculationProcessorButtons
   }
 }
 </script>

@@ -9,15 +9,16 @@
 <style lang="scss" scoped>
 .calculation-processor-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 400px;
 }
 
 .button {
   white-space: nowrap;
-  padding: 0.5em 1.3em;
+  padding: 0.4em 1.3em;
   border: none;
-  border-radius: 25px;
+  border-radius: 3px;
   background: #4ac361;
   color: #fff;
   font-size: 0.9em;
