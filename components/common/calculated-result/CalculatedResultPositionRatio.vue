@@ -4,6 +4,6 @@
 
 <style lang="scss" scoped>
 .calculated-result-position-ratio {
-  margin-bottom: 1.4em;
+  margin-bottom: 18px;
 }
 </style>

@@ -59,14 +59,14 @@ export default {
 
 .calculating-form {
   border: solid 2px #d0d0d0;
-  padding: 2em;
+  padding: 23px;
   width: 320px;
 }
 
 .calculated-result {
   border: solid 2px #d0d0d0;
   border-left: none;
-  padding: 2em;
+  padding: 23px;
   width: calc(100% - 320px);
 }
 

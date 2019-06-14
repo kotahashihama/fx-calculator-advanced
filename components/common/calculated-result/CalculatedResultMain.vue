@@ -53,8 +53,8 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 1.2em;
-  padding: 1em;
+  margin-bottom: 20px;
+  padding: 16px;
   border: solid 2px #007aff;
   background: #d6e9ff;
 }

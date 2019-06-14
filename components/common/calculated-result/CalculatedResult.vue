@@ -41,7 +41,7 @@ export default {
   display: flex;
 
   &__left {
-    margin-right: 1.2em;
+    margin-right: 17px;
     width: 33%;
   }
 

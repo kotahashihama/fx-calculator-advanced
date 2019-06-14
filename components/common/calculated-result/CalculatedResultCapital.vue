@@ -79,9 +79,9 @@ export default {
 
 <style lang="scss" scoped>
 .calculated-result-capital {
-  margin-bottom: 1.4em;
+  margin-bottom: 18px;
   border: solid 1px #d0d0d0;
-  padding: 1em;
+  padding: 16px;
   width: 100%;
 }
 </style>

@@ -50,7 +50,7 @@ export default {
 <style lang="scss" scoped>
 .calculating-form-exchange {
   &__item {
-    margin-bottom: 0.8em;
+    margin-bottom: 14px;
     text-align: center;
   }
 }

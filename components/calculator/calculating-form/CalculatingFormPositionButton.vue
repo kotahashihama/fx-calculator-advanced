@@ -9,7 +9,7 @@
   border-radius: 3px;
   background: #4ac361;
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   width: 48%;
 }
 </style>

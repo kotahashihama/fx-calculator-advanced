@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 .calculation-processor {
   display: flex;
-  padding: 0 1em;
+  padding: 0 13px;
   height: 50px;
 }
 </style>

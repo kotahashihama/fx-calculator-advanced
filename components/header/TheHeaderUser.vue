@@ -14,12 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1.2em;
+  margin-right: 17px;
 }
 
 .name {
   margin-right: 0.5em;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 .image {

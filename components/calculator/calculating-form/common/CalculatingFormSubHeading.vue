@@ -11,6 +11,6 @@
   text-align: center;
   background: #fff;
   color: #49c361;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 </style>

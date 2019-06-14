@@ -53,7 +53,6 @@ export default {
 <style lang="scss" scoped>
 .calculated-result-assumed-rates {
   border-collapse: collapse;
-  padding: 1em;
   width: 100%;
 }
 </style>

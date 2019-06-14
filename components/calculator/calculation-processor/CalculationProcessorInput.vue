@@ -20,6 +20,6 @@
   padding: 0.2em 0.4em;
   width: 100%;
   background: #fff;
-  font-size: 1em;
+  font-size: 1rem;
 }
 </style>

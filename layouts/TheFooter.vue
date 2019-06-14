@@ -19,7 +19,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 0.5em;
+  padding: 0 13px;
   height: $footer-height;
   background: #f1f1f1;
 }

@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .calculating-form-assumed-rates {
   &__item {
-    margin-bottom: 0.8em;
+    margin-bottom: 14px;
     text-align: center;
   }
 }
@@ -65,6 +65,6 @@ export default {
   background: #f1f1f1;
   color: #333;
   width: 100px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 </style>

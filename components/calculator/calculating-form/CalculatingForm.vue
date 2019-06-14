@@ -65,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 .calculating-form {
   &__item {
-    margin-bottom: 1.3em;
+    margin-bottom: 20px;
   }
 }
 </style>
