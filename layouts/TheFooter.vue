@@ -1,10 +1,18 @@
 <template>
   <footer class="footer">
-    <p class="copyright">
-      <small>&copy; ポジション計算機 developed by Kota Hashihama</small>
-    </p>
+    <TheFooterCopyright />
   </footer>
 </template>
+
+<script>
+import TheFooterCopyright from '@/components/footer/TheFooterCopyright.vue'
+
+export default {
+  components: {
+    TheFooterCopyright
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .footer {
@@ -14,9 +22,5 @@
   padding: 0 0.5em;
   height: $footer-height;
   background: #f1f1f1;
-}
-
-.copyright {
-  text-align: center;
 }
 </style>
