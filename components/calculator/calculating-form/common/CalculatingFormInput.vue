@@ -1,6 +1,27 @@
 <template>
-  <input class="calculating-form-input" />
+  <input v-model="innerValue" class="calculating-form-input" />
 </template>
+
+<script>
+export default {
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    innerValue: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('input', value)
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .calculating-form-input {

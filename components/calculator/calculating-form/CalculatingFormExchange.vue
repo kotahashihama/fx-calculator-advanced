@@ -3,10 +3,15 @@
     <CalculatingFormHeading>取引所</CalculatingFormHeading>
 
     <p class="calculating-form-exchange__item">
-      <input id="international" type="radio" name="exchange" />
-      <label for="international">海外</label>
-      <input id="domestic" type="radio" name="exchange" />
-      <label for="domestic">国内</label>
+      <label
+        v-for="(value, key) in $store.state.exchanges"
+        :key="key"
+        :for="key"
+      >
+        <input :id="key" v-model="exchange" :value="key" type="radio" />{{
+          value
+        }}
+      </label>
     </p>
 
     <p class="calculating-form-exchange__item">
@@ -15,8 +20,15 @@
           取引通貨単位（通貨）
         </CalculatingFormSubHeading>
       </label>
-      <CalculatingFormSelect id="trading-unit">
-        <option value="">100000</option>
+      <CalculatingFormSelect id="trading-unit" v-model="tradingUnit">
+        <option
+          v-for="(value, index) in $store.state.tradingUnits[
+            $store.state.exchange
+          ]"
+          :key="index"
+          :value="value"
+          >{{ value }}</option
+        >
       </CalculatingFormSelect>
     </p>
 
@@ -26,8 +38,15 @@
           レバレッジ（倍）
         </CalculatingFormSubHeading>
       </label>
-      <CalculatingFormSelect id="leverage">
-        <option value="">1000</option>
+      <CalculatingFormSelect id="leverage" v-model="leverage">
+        <option
+          v-for="(value, index) in $store.state.leverages[
+            $store.state.exchange
+          ]"
+          :key="index"
+          :value="value"
+          >{{ value }}</option
+        >
       </CalculatingFormSelect>
     </p>
   </div>
@@ -43,6 +62,32 @@ export default {
     CalculatingFormHeading,
     CalculatingFormSubHeading,
     CalculatingFormSelect
+  },
+  computed: {
+    exchange: {
+      get() {
+        return this.$store.state.exchange
+      },
+      set(value) {
+        this.$store.commit('updateExchange', value)
+      }
+    },
+    tradingUnit: {
+      get() {
+        return this.$store.state.tradingUnit[this.exchange]
+      },
+      set(value) {
+        this.$store.commit('updateTradingUnit', value)
+      }
+    },
+    leverage: {
+      get() {
+        return this.$store.state.leverage[this.exchange]
+      },
+      set(value) {
+        this.$store.commit('updateLeverage', value)
+      }
+    }
   }
 }
 </script>

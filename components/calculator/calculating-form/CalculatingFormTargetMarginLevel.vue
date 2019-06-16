@@ -5,8 +5,9 @@
     </label>
     <CalculatingFormInput
       id="target-margin-level"
+      v-model.number="targetMarginLevel"
       type="number"
-    ></CalculatingFormInput>
+    />
   </p>
 </template>
 
@@ -18,6 +19,16 @@ export default {
   components: {
     CalculatingFormHeading,
     CalculatingFormInput
+  },
+  computed: {
+    targetMarginLevel: {
+      get() {
+        return this.$store.state.targetMarginLevel
+      },
+      set(value) {
+        this.$store.commit('updateTargetMarginLevel', value || 0)
+      }
+    }
   }
 }
 </script>

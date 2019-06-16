@@ -8,6 +8,10 @@
       class="calculating-form__item"
     ></CalculatingFormBalance>
 
+    <CalculatingFormTargetMarginLevel
+      class="calculating-form__item"
+    ></CalculatingFormTargetMarginLevel>
+
     <CalculatingFormExchange
       class="calculating-form__item"
     ></CalculatingFormExchange>
@@ -15,10 +19,6 @@
     <CalculatingFormAssumedRates
       class="calculating-form__item"
     ></CalculatingFormAssumedRates>
-
-    <CalculatingFormTargetMarginLevel
-      class="calculating-form__item"
-    ></CalculatingFormTargetMarginLevel>
   </div>
 </template>
 
