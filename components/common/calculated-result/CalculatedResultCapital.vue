@@ -6,7 +6,7 @@
           残高
         </template>
         <template v-slot:content>
-          921,478 円
+          {{ $store.state.balance | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -42,7 +42,7 @@
           取引所
         </template>
         <template v-slot:content>
-          海外
+          {{ $store.state.exchanges[$store.state.exchange] }}
         </template>
       </CalculatedResultCapitalItem>
 
@@ -51,7 +51,8 @@
           取引通貨単位
         </template>
         <template v-slot:content>
-          100,000 通貨
+          {{ $store.state.tradingUnit[$store.state.exchange] | digitSeparator }}
+          通貨
         </template>
       </CalculatedResultCapitalItem>
 
@@ -60,7 +61,7 @@
           レバレッジ
         </template>
         <template v-slot:content>
-          1,000 ％
+          {{ $store.state.leverage[$store.state.exchange] | digitSeparator }} ％
         </template>
       </CalculatedResultCapitalItem>
     </tbody>

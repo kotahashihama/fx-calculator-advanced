@@ -3,37 +3,64 @@
     <tbody>
       <CalculatedResultAssumedRatesItem>
         <template v-slot:pair>
-          🇬🇧 GBP/USD
+          🇯🇵 {{ $store.state.currencyPairs.JPY.USD.name }}
         </template>
         <template v-slot:assumed-rate>
-          1.27216
+          {{ $store.state.currencyPairs.JPY.USD.assumedRate | digitSeparator }}
         </template>
       </CalculatedResultAssumedRatesItem>
 
       <CalculatedResultAssumedRatesItem>
         <template v-slot:pair>
-          🇦🇺 AUD/USD
+          🇪🇺 {{ $store.state.currencyPairs.USD.EUR.name }}
         </template>
         <template v-slot:assumed-rate>
-          0.69836
+          {{ $store.state.currencyPairs.USD.EUR.assumedRate | digitSeparator }}
         </template>
       </CalculatedResultAssumedRatesItem>
 
       <CalculatedResultAssumedRatesItem>
         <template v-slot:pair>
-          🇯🇵 USD/JPY
+          🇬🇧 {{ $store.state.currencyPairs.USD.GBP.name }}
         </template>
         <template v-slot:assumed-rate>
-          108.131
+          {{ $store.state.currencyPairs.USD.GBP.assumedRate | digitSeparator }}
         </template>
       </CalculatedResultAssumedRatesItem>
 
       <CalculatedResultAssumedRatesItem>
         <template v-slot:pair>
-          🇪🇺 EUR/USD
+          🇦🇺 {{ $store.state.currencyPairs.USD.AUD.name }}
         </template>
         <template v-slot:assumed-rate>
-          1.1266
+          {{ $store.state.currencyPairs.USD.AUD.assumedRate | digitSeparator }}
+        </template>
+      </CalculatedResultAssumedRatesItem>
+
+      <CalculatedResultAssumedRatesItem>
+        <template v-slot:pair>
+          🇪🇺 {{ $store.state.currencyPairs.JPY.EUR.name }}
+        </template>
+        <template v-slot:assumed-rate>
+          {{ $store.state.currencyPairs.JPY.EUR.assumedRate | digitSeparator }}
+        </template>
+      </CalculatedResultAssumedRatesItem>
+
+      <CalculatedResultAssumedRatesItem>
+        <template v-slot:pair>
+          🇬🇧 {{ $store.state.currencyPairs.JPY.GBP.name }}
+        </template>
+        <template v-slot:assumed-rate>
+          {{ $store.state.currencyPairs.JPY.GBP.assumedRate | digitSeparator }}
+        </template>
+      </CalculatedResultAssumedRatesItem>
+
+      <CalculatedResultAssumedRatesItem>
+        <template v-slot:pair>
+          🇦🇺 {{ $store.state.currencyPairs.JPY.AUD.name }}
+        </template>
+        <template v-slot:assumed-rate>
+          {{ $store.state.currencyPairs.JPY.AUD.assumedRate | digitSeparator }}
         </template>
       </CalculatedResultAssumedRatesItem>
     </tbody>

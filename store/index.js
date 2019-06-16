@@ -107,7 +107,7 @@ export const mutations = {
   updateAssumedRateEURJPY(state, assumedRateEURJPY) {
     state.currencyPairs.JPY.EUR.assumedRate = assumedRateEURJPY
   },
-  updateAssumedRateGBPJPY(st2ate, assumedRateGBPJPY) {
+  updateAssumedRateGBPJPY(state, assumedRateGBPJPY) {
     state.currencyPairs.JPY.GBP.assumedRate = assumedRateGBPJPY
   },
   updateAssumedRateAUDJPY(state, assumedRateAUDJPY) {
