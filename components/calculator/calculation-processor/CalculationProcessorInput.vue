@@ -1,8 +1,28 @@
 <template>
   <div class="calculation-processor-input">
-    <input class="input" type="text" value="無題" />
+    <input v-model="title" class="input" type="text" @blur="setUntitled" />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    title: {
+      get() {
+        return this.$store.state.title
+      },
+      set(value) {
+        this.$store.commit('updateTitle', value)
+      }
+    }
+  },
+  methods: {
+    setUntitled() {
+      this.$store.commit('updateTitle', '無題')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .calculation-processor-input {

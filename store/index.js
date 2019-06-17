@@ -76,6 +76,9 @@ export const getters = {
 }
 
 export const mutations = {
+  updateTitle(state, title) {
+    state.title = title
+  },
   updateBalance(state, balance) {
     state.balance = balance
   },
