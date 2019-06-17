@@ -17,6 +17,7 @@
           v-model.number="assumedRateUSDJPY"
           class="input"
           type="number"
+          step="0.001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -36,6 +37,7 @@
           v-model.number="assumedRateEURUSD"
           class="input"
           type="number"
+          step="0.00001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -55,6 +57,7 @@
           v-model.number="assumedRateGBPUSD"
           class="input"
           type="number"
+          step="0.00001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -74,6 +77,7 @@
           v-model.number="assumedRateAUDUSD"
           class="input"
           type="number"
+          step="0.00001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -93,6 +97,7 @@
           v-model.number="assumedRateEURJPY"
           class="input"
           type="number"
+          step="0.001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -112,6 +117,7 @@
           v-model.number="assumedRateGBPJPY"
           class="input"
           type="number"
+          step="0.001"
         ></CalculatingFormInput>
       </span>
     </p>
@@ -131,6 +137,7 @@
           v-model.number="assumedRateAUDJPY"
           class="input"
           type="number"
+          step="0.001"
         ></CalculatingFormInput>
       </span>
     </p>

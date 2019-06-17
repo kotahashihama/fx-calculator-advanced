@@ -1,5 +1,12 @@
 <template>
-  <input v-model="innerValue" class="calculating-form-input" type="number" />
+  <input
+    v-model="innerValue"
+    class="calculating-form-input"
+    type="number"
+    min="0"
+    autocomplete="off"
+    @keypress="validate"
+  />
 </template>
 
 <script>
@@ -17,6 +24,20 @@ export default {
       },
       set(value) {
         this.$emit('input', value || 0)
+      }
+    }
+  },
+  methods: {
+    validate(event) {
+      const charCode = event.which ? event.which : event.keyCode
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        event.preventDefault()
+      } else {
+        return true
       }
     }
   }
