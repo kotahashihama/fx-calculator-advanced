@@ -9,7 +9,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceUsdJpy')">
+        <button class="button" @click="$store.commit('setCurrentPriceUsdJpy')">
           現在値
         </button>
         <CalculatingFormInput
@@ -29,7 +29,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceEurUsd')">
+        <button class="button" @click="$store.commit('setCurrentPriceEurUsd')">
           現在値
         </button>
         <CalculatingFormInput
@@ -49,7 +49,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceGbpUsd')">
+        <button class="button" @click="$store.commit('setCurrentPriceGbpUsd')">
           現在値
         </button>
         <CalculatingFormInput
@@ -69,7 +69,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceAudUsd')">
+        <button class="button" @click="$store.commit('setCurrentPriceAudUsd')">
           現在値
         </button>
         <CalculatingFormInput
@@ -89,7 +89,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceEurJpy')">
+        <button class="button" @click="$store.commit('setCurrentPriceEurJpy')">
           現在値
         </button>
         <CalculatingFormInput
@@ -109,7 +109,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceGbpJpy')">
+        <button class="button" @click="$store.commit('setCurrentPriceGbpJpy')">
           現在値
         </button>
         <CalculatingFormInput
@@ -129,7 +129,7 @@
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentPriceAudJpy')">
+        <button class="button" @click="$store.commit('setCurrentPriceAudJpy')">
           現在値
         </button>
         <CalculatingFormInput

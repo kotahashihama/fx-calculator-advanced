@@ -2,39 +2,39 @@ const currencyPairs = {
   usd: {
     eur: {
       symbol: 'EUR/USD',
-      currentPrice: 1,
-      assumedPrice: 1.2
+      currentPrice: 0,
+      assumedPrice: 0
     },
     gbp: {
       symbol: 'GBP/USD',
-      currentPrice: 3,
+      currentPrice: 0,
       assumedPrice: 0
     },
     aud: {
       symbol: 'AUD/USD',
-      currentPrice: 5,
+      currentPrice: 0,
       assumedPrice: 0
     }
   },
   jpy: {
     usd: {
       symbol: 'USD/JPY',
-      currentPrice: 7,
+      currentPrice: 0,
       assumedPrice: 110
     },
     eur: {
       symbol: 'EUR/JPY',
-      currentPrice: 9,
-      assumedPrice: 120
+      currentPrice: 0,
+      assumedPrice: 0
     },
     gbp: {
       symbol: 'GBP/JPY',
-      currentPrice: 11,
+      currentPrice: 0,
       assumedPrice: 0
     },
     aud: {
       symbol: 'AUD/JPY',
-      currentPrice: 13,
+      currentPrice: 0,
       assumedPrice: 0
     }
   }
@@ -597,32 +597,67 @@ export const mutations = {
   updateAssumedPriceAudJpy(state, assumedPriceAudJpy) {
     state.currencyPairs.jpy.aud.assumedPrice = assumedPriceAudJpy
   },
-  getCurrentPriceUsdJpy(state) {
+  setCurrentPriceUsdJpy(state) {
     state.currencyPairs.jpy.usd.assumedPrice =
       state.currencyPairs.jpy.usd.currentPrice
   },
-  getCurrentPriceEurUsd(state) {
+  setCurrentPriceEurUsd(state) {
     state.currencyPairs.usd.eur.assumedPrice =
       state.currencyPairs.usd.eur.currentPrice
   },
-  getCurrentPriceGbpUsd(state) {
+  setCurrentPriceGbpUsd(state) {
     state.currencyPairs.usd.gbp.assumedPrice =
       state.currencyPairs.usd.gbp.currentPrice
   },
-  getCurrentPriceAudUsd(state) {
+  setCurrentPriceAudUsd(state) {
     state.currencyPairs.usd.aud.assumedPrice =
       state.currencyPairs.usd.aud.currentPrice
   },
-  getCurrentPriceEurJpy(state) {
+  setCurrentPriceEurJpy(state) {
     state.currencyPairs.jpy.eur.assumedPrice =
       state.currencyPairs.jpy.eur.currentPrice
   },
-  getCurrentPriceGbpJpy(state) {
+  setCurrentPriceGbpJpy(state) {
     state.currencyPairs.jpy.gbp.assumedPrice =
       state.currencyPairs.jpy.gbp.currentPrice
   },
-  getCurrentPriceAudJpy(state) {
+  setCurrentPriceAudJpy(state) {
     state.currencyPairs.jpy.aud.assumedPrice =
       state.currencyPairs.jpy.aud.currentPrice
+  },
+  getCurrentPriceUsdJpy(state, currentPriceUsdJpy) {
+    const result = Math.round(currentPriceUsdJpy * 1000) / 1000
+    state.currencyPairs.jpy.usd.currentPrice = result
+    state.currencyPairs.jpy.usd.assumedPrice = result
+  },
+  getCurrentPriceEurUsd(state, currentPriceEurUsd) {
+    const result = Math.round((1 / currentPriceEurUsd) * 100000) / 100000
+    state.currencyPairs.usd.eur.currentPrice = result
+    state.currencyPairs.usd.eur.assumedPrice = result
+  },
+  getCurrentPriceGbpUsd(state, currentPriceGbpUsd) {
+    const result = Math.round((1 / currentPriceGbpUsd) * 100000) / 100000
+    state.currencyPairs.usd.gbp.currentPrice = result
+    state.currencyPairs.usd.gbp.assumedPrice = result
+  },
+  getCurrentPriceAudUsd(state, currentPriceAudUsd) {
+    const result = Math.round((1 / currentPriceAudUsd) * 100000) / 100000
+    state.currencyPairs.usd.aud.currentPrice = result
+    state.currencyPairs.usd.aud.assumedPrice = result
+  },
+  getCurrentPriceEurJpy(state, currentPriceEurJpy) {
+    const result = Math.round((1 / currentPriceEurJpy) * 1000) / 1000
+    state.currencyPairs.jpy.eur.currentPrice = result
+    state.currencyPairs.jpy.eur.assumedPrice = result
+  },
+  getCurrentPriceGbpJpy(state, currentPriceGbpJpy) {
+    const result = Math.round((1 / currentPriceGbpJpy) * 1000) / 1000
+    state.currencyPairs.jpy.gbp.currentPrice = result
+    state.currencyPairs.jpy.gbp.assumedPrice = result
+  },
+  getCurrentPriceAudJpy(state, currentPriceAudJpy) {
+    const result = Math.round((1 / currentPriceAudJpy) * 1000) / 1000
+    state.currencyPairs.jpy.aud.currentPrice = result
+    state.currencyPairs.jpy.aud.assumedPrice = result
   }
 }
