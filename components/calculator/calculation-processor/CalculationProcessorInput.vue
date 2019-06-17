@@ -1,6 +1,6 @@
 <template>
   <div class="calculation-processor-input">
-    <input v-model="title" class="input" type="text" @blur="setUntitled" />
+    <input v-model="title" class="input" type="text" />
   </div>
 </template>
 
@@ -12,13 +12,8 @@ export default {
         return this.$store.state.title
       },
       set(value) {
-        this.$store.commit('updateTitle', value)
+        this.$store.commit('updateTitle', value || '無題')
       }
-    }
-  },
-  methods: {
-    setUntitled() {
-      this.$store.commit('updateTitle', '無題')
     }
   }
 }
