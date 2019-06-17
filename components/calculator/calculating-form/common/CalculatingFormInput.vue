@@ -1,5 +1,5 @@
 <template>
-  <input v-model="innerValue" class="calculating-form-input" />
+  <input v-model="innerValue" class="calculating-form-input" type="number" />
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
         return this.value
       },
       set(value) {
-        this.$emit('input', value)
+        this.$emit('input', value || 0)
       }
     }
   }

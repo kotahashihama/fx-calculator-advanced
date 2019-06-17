@@ -6,7 +6,6 @@
     <CalculatingFormInput
       id="target-margin-level"
       v-model.number="targetMarginLevel"
-      type="number"
     />
   </p>
 </template>

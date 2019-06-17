@@ -3,7 +3,7 @@
     <label for="balance">
       <CalculatingFormHeading>残高（円）</CalculatingFormHeading>
     </label>
-    <CalculatingFormInput id="balance" v-model.number="balance" type="number" />
+    <CalculatingFormInput id="balance" v-model.number="balance" />
   </p>
 </template>
 
@@ -22,7 +22,7 @@ export default {
         return this.$store.state.balance
       },
       set(value) {
-        this.$store.commit('updateBalance', value || 0)
+        this.$store.commit('updateBalance', value)
       }
     }
   }
