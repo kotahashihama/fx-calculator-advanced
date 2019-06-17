@@ -1,20 +1,20 @@
 <template>
-  <div class="calculating-form-assumed-rates">
+  <div class="calculating-form-assumed-prices">
     <CalculatingFormHeading>仮定レート</CalculatingFormHeading>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="usd-jpy">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Usd-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.JPY.USD.name
+          $store.state.currencyPairs.jpy.usd.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateUSDJPY')">
+        <button class="button" @click="$store.commit('getCurrentPriceUsdJpy')">
           現在値
         </button>
         <CalculatingFormInput
-          id="usd-jpy"
-          v-model.number="assumedRateUSDJPY"
+          id="Usd-Jpy"
+          v-model.number="assumedPriceUsdJpy"
           class="input"
           type="number"
           step="0.001"
@@ -22,19 +22,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="eur-usd">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Eur-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.USD.EUR.name
+          $store.state.currencyPairs.usd.eur.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateEURUSD')">
+        <button class="button" @click="$store.commit('getCurrentPriceEurUsd')">
           現在値
         </button>
         <CalculatingFormInput
-          id="eur-usd"
-          v-model.number="assumedRateEURUSD"
+          id="Eur-Usd"
+          v-model.number="assumedPriceEurUsd"
           class="input"
           type="number"
           step="0.00001"
@@ -42,19 +42,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="gbp-usd">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Gbp-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.USD.GBP.name
+          $store.state.currencyPairs.usd.gbp.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateGBPUSD')">
+        <button class="button" @click="$store.commit('getCurrentPriceGbpUsd')">
           現在値
         </button>
         <CalculatingFormInput
-          id="gbp-usd"
-          v-model.number="assumedRateGBPUSD"
+          id="Gbp-Usd"
+          v-model.number="assumedPriceGbpUsd"
           class="input"
           type="number"
           step="0.00001"
@@ -62,19 +62,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="aud-usd">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Aud-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.USD.AUD.name
+          $store.state.currencyPairs.usd.aud.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateAUDUSD')">
+        <button class="button" @click="$store.commit('getCurrentPriceAudUsd')">
           現在値
         </button>
         <CalculatingFormInput
-          id="aud-usd"
-          v-model.number="assumedRateAUDUSD"
+          id="Aud-Usd"
+          v-model.number="assumedPriceAudUsd"
           class="input"
           type="number"
           step="0.00001"
@@ -82,19 +82,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="eur-jpy">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Eur-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.JPY.EUR.name
+          $store.state.currencyPairs.jpy.eur.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateEURJPY')">
+        <button class="button" @click="$store.commit('getCurrentPriceEurJpy')">
           現在値
         </button>
         <CalculatingFormInput
-          id="eur-jpy"
-          v-model.number="assumedRateEURJPY"
+          id="Eur-Jpy"
+          v-model.number="assumedPriceEurJpy"
           class="input"
           type="number"
           step="0.001"
@@ -102,19 +102,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="gbp-jpy">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Gbp-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.JPY.GBP.name
+          $store.state.currencyPairs.jpy.gbp.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateGBPJPY')">
+        <button class="button" @click="$store.commit('getCurrentPriceGbpJpy')">
           現在値
         </button>
         <CalculatingFormInput
-          id="gbp-jpy"
-          v-model.number="assumedRateGBPJPY"
+          id="Gbp-Jpy"
+          v-model.number="assumedPriceGbpJpy"
           class="input"
           type="number"
           step="0.001"
@@ -122,19 +122,19 @@
       </span>
     </p>
 
-    <p class="calculating-form-assumed-rates__item">
-      <label for="aud-jpy">
+    <p class="calculating-form-assumed-prices__item">
+      <label for="Aud-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.JPY.AUD.name
+          $store.state.currencyPairs.jpy.aud.symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
-        <button class="button" @click="$store.commit('getCurrentRateAUDJPY')">
+        <button class="button" @click="$store.commit('getCurrentPriceAudJpy')">
           現在値
         </button>
         <CalculatingFormInput
-          id="aud-jpy"
-          v-model.number="assumedRateAUDJPY"
+          id="Aud-Jpy"
+          v-model.number="assumedPriceAudJpy"
           class="input"
           type="number"
           step="0.001"
@@ -156,60 +156,60 @@ export default {
     CalculatingFormInput
   },
   computed: {
-    assumedRateUSDJPY: {
+    assumedPriceUsdJpy: {
       get() {
-        return this.$store.state.currencyPairs.JPY.USD.assumedRate
+        return this.$store.state.currencyPairs.jpy.usd.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateUSDJPY', value)
+        this.$store.commit('updateAssumedPriceUsdJpy', value)
       }
     },
-    assumedRateEURUSD: {
+    assumedPriceEurUsd: {
       get() {
-        return this.$store.state.currencyPairs.USD.EUR.assumedRate
+        return this.$store.state.currencyPairs.usd.eur.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateEURUSD', value)
+        this.$store.commit('updateAssumedPriceEurUsd', value)
       }
     },
-    assumedRateGBPUSD: {
+    assumedPriceGbpUsd: {
       get() {
-        return this.$store.state.currencyPairs.USD.GBP.assumedRate
+        return this.$store.state.currencyPairs.usd.gbp.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateGBPUSD', value)
+        this.$store.commit('updateAssumedPriceGbpUsd', value)
       }
     },
-    assumedRateAUDUSD: {
+    assumedPriceAudUsd: {
       get() {
-        return this.$store.state.currencyPairs.USD.AUD.assumedRate
+        return this.$store.state.currencyPairs.usd.aud.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateAUDUSD', value)
+        this.$store.commit('updateAssumedPriceAudUsd', value)
       }
     },
-    assumedRateEURJPY: {
+    assumedPriceEurJpy: {
       get() {
-        return this.$store.state.currencyPairs.JPY.EUR.assumedRate
+        return this.$store.state.currencyPairs.jpy.eur.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateEURJPY', value)
+        this.$store.commit('updateAssumedPriceEurJpy', value)
       }
     },
-    assumedRateGBPJPY: {
+    assumedPriceGbpJpy: {
       get() {
-        return this.$store.state.currencyPairs.JPY.GBP.assumedRate
+        return this.$store.state.currencyPairs.jpy.gbp.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateGBPJPY', value)
+        this.$store.commit('updateAssumedPriceGbpJpy', value)
       }
     },
-    assumedRateAUDJPY: {
+    assumedPriceAudJpy: {
       get() {
-        return this.$store.state.currencyPairs.JPY.AUD.assumedRate
+        return this.$store.state.currencyPairs.jpy.aud.assumedPrice
       },
       set(value) {
-        this.$store.commit('updateAssumedRateAUDJPY', value)
+        this.$store.commit('updateAssumedPriceAudJpy', value)
       }
     }
   }
@@ -217,7 +217,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.calculating-form-assumed-rates {
+.calculating-form-assumed-prices {
   &__item {
     margin-bottom: 14px;
     text-align: center;

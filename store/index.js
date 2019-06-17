@@ -1,41 +1,41 @@
 const currencyPairs = {
-  USD: {
-    EUR: {
-      name: 'EUR/USD',
-      currentRate: 1,
-      assumedRate: 1.2
+  usd: {
+    eur: {
+      symbol: 'EUR/USD',
+      currentPrice: 1,
+      assumedPrice: 1.2
     },
-    GBP: {
-      name: 'GBP/USD',
-      currentRate: 3,
-      assumedRate: 0
+    gbp: {
+      symbol: 'GBP/USD',
+      currentPrice: 3,
+      assumedPrice: 0
     },
-    AUD: {
-      name: 'AUD/USD',
-      currentRate: 5,
-      assumedRate: 0
+    aud: {
+      symbol: 'AUD/USD',
+      currentPrice: 5,
+      assumedPrice: 0
     }
   },
-  JPY: {
-    USD: {
-      name: 'USD/JPY',
-      currentRate: 7,
-      assumedRate: 110
+  jpy: {
+    usd: {
+      symbol: 'USD/JPY',
+      currentPrice: 7,
+      assumedPrice: 110
     },
-    EUR: {
-      name: 'EUR/JPY',
-      currentRate: 9,
-      assumedRate: 120
+    eur: {
+      symbol: 'EUR/JPY',
+      currentPrice: 9,
+      assumedPrice: 120
     },
-    GBP: {
-      name: 'GBP/JPY',
-      currentRate: 11,
-      assumedRate: 0
+    gbp: {
+      symbol: 'GBP/JPY',
+      currentPrice: 11,
+      assumedPrice: 0
     },
-    AUD: {
-      name: 'AUD/JPY',
-      currentRate: 13,
-      assumedRate: 0
+    aud: {
+      symbol: 'AUD/JPY',
+      currentPrice: 13,
+      assumedPrice: 0
     }
   }
 }
@@ -43,30 +43,30 @@ const currencyPairs = {
 export const state = () => ({
   title: '無題',
   currencyPairs,
-  positions: [
+  openTrades: [
     {
-      currencyPair: 'USD/JPY',
+      symbol: 'USD/JPY',
       action: '売',
       lot: 0.02,
-      rate: 108.598
+      openPrice: 108.598
     },
     {
-      currencyPair: 'USD/JPY',
+      symbol: 'USD/JPY',
       action: '売',
       lot: 0.02,
-      rate: 108.598
+      openPrice: 108.598
     },
     {
-      currencyPair: 'EUR/USD',
+      symbol: 'EUR/USD',
       action: '売',
       lot: 0.02,
-      rate: 1.21
+      openPrice: 1.21
     }
   ],
   balance: 200000,
   targetMarginLevel: 1000,
-  exchange: 'international',
-  exchanges: {
+  broker: 'international',
+  brokers: {
     international: '海外',
     domestic: '国内'
   },
@@ -90,7 +90,7 @@ export const state = () => ({
 
 export const getters = {
   equity(state, getters) {
-    return state.balance + getters.unrealizedValue
+    return state.balance + getters.floatingPl
   },
   freeMargin(state, getters) {
     return getters.equity - getters.margin
@@ -98,457 +98,457 @@ export const getters = {
 
   margin(state, getters) {
     return (
-      getters.marginUSDJPY +
-      getters.marginEURUSD +
-      getters.marginGBPUSD +
-      getters.marginAUDUSD +
-      getters.marginEURJPY +
-      getters.marginGBPJPY +
-      getters.marginAUDJPY
+      getters.marginUsdJpy +
+      getters.marginEurUsd +
+      getters.marginGbpUsd +
+      getters.marginAudUsd +
+      getters.marginEurJpy +
+      getters.marginGbpJpy +
+      getters.marginAudJpy
     )
   },
-  marginUSDJPY(state) {
+  marginUsdJpy(state) {
     let margin = 0
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === USDJPY.name
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === usdJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
-      margin += (tradingSize * USDJPY.assumedRate) / leverage
+      margin += (tradingSize * usdJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginEURUSD(state) {
+  marginEurUsd(state) {
     let margin = 0
-    const EURUSD = state.currencyPairs.USD.EUR
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURUSD.name
+    const eurUsd = state.currencyPairs.usd.eur
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
       margin +=
-        (tradingSize * EURUSD.assumedRate * USDJPY.assumedRate) / leverage
+        (tradingSize * eurUsd.assumedPrice * usdJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginGBPUSD(state) {
+  marginGbpUsd(state) {
     let margin = 0
-    const GBPUSD = state.currencyPairs.USD.GBP
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPUSD.name
+    const gbpUsd = state.currencyPairs.usd.gbp
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
       margin +=
-        (tradingSize * GBPUSD.assumedRate * USDJPY.assumedRate) / leverage
+        (tradingSize * gbpUsd.assumedPrice * usdJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginAUDUSD(state) {
+  marginAudUsd(state) {
     let margin = 0
-    const AUDUSD = state.currencyPairs.USD.AUD
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDUSD.name
+    const audUsd = state.currencyPairs.usd.aud
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
       margin +=
-        (tradingSize * AUDUSD.assumedRate * USDJPY.assumedRate) / leverage
+        (tradingSize * audUsd.assumedPrice * usdJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginEURJPY(state) {
+  marginEurJpy(state) {
     let margin = 0
-    const EURJPY = state.currencyPairs.JPY.EUR
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURJPY.name
+    const eurJpy = state.currencyPairs.jpy.eur
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
-      margin += (tradingSize * EURJPY.assumedRate) / leverage
+      margin += (tradingSize * eurJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginGBPJPY(state) {
+  marginGbpJpy(state) {
     let margin = 0
-    const GBPJPY = state.currencyPairs.JPY.GBP
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPJPY.name
+    const gbpJpy = state.currencyPairs.jpy.gbp
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
-      margin += (tradingSize * GBPJPY.assumedRate) / leverage
+      margin += (tradingSize * gbpJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
-  marginAUDJPY(state) {
+  marginAudJpy(state) {
     let margin = 0
-    const AUDJPY = state.currencyPairs.JPY.AUD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDJPY.name
+    const audJpy = state.currencyPairs.jpy.aud
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
-      const leverage = state.leverage[state.exchange]
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const leverage = state.leverage[state.broker]
 
-      margin += (tradingSize * AUDJPY.assumedRate) / leverage
+      margin += (tradingSize * audJpy.assumedPrice) / leverage
     }
 
     return Math.round(margin)
   },
 
-  unrealizedValue(state, getters) {
+  floatingPl(state, getters) {
     return (
-      getters.unrealizedValueUSDJPY +
-      getters.unrealizedValueEURUSD +
-      getters.unrealizedValueGBPUSD +
-      getters.unrealizedValueAUDUSD +
-      getters.unrealizedValueEURJPY +
-      getters.unrealizedValueGBPJPY +
-      getters.unrealizedValueAUDJPY
+      getters.floatingPlUsdJpy +
+      getters.floatingPlEurUsd +
+      getters.floatingPlGbpUsd +
+      getters.floatingPlAudUsd +
+      getters.floatingPlEurJpy +
+      getters.floatingPlGbpJpy +
+      getters.floatingPlAudJpy
     )
   },
-  unrealizedValueUSDJPY(state) {
-    let unrealizedValue = 0
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === USDJPY.name
+  floatingPlUsdJpy(state) {
+    let floatingPl = 0
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === usdJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = USDJPY.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = usdJpy.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue += gap * tradingSize
+      if (openTrade.action === '買') {
+        floatingPl += gap * tradingSize
       } else {
-        unrealizedValue += -gap * tradingSize
+        floatingPl += -gap * tradingSize
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueEURUSD(state) {
-    let unrealizedValue = 0
-    const EURUSD = state.currencyPairs.USD.EUR
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURUSD.name
+  floatingPlEurUsd(state) {
+    let floatingPl = 0
+    const eurUsd = state.currencyPairs.usd.eur
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = EURUSD.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = eurUsd.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue = gap * tradingSize * USDJPY.assumedRate
+      if (openTrade.action === '買') {
+        floatingPl = gap * tradingSize * usdJpy.assumedPrice
       } else {
-        unrealizedValue += -gap * tradingSize * USDJPY.assumedRate
+        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueGBPUSD(state) {
-    let unrealizedValue = 0
-    const GBPUSD = state.currencyPairs.USD.GBP
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPUSD.name
+  floatingPlGbpUsd(state) {
+    let floatingPl = 0
+    const gbpUsd = state.currencyPairs.usd.gbp
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = GBPUSD.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = gbpUsd.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue = gap * tradingSize * USDJPY.assumedRate
+      if (openTrade.action === '買') {
+        floatingPl = gap * tradingSize * usdJpy.assumedPrice
       } else {
-        unrealizedValue += -gap * tradingSize * USDJPY.assumedRate
+        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueAUDUSD(state) {
-    let unrealizedValue = 0
-    const AUDUSD = state.currencyPairs.USD.AUD
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDUSD.name
+  floatingPlAudUsd(state) {
+    let floatingPl = 0
+    const audUsd = state.currencyPairs.usd.aud
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = AUDUSD.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = audUsd.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue = gap * tradingSize * USDJPY.assumedRate
+      if (openTrade.action === '買') {
+        floatingPl = gap * tradingSize * usdJpy.assumedPrice
       } else {
-        unrealizedValue += -gap * tradingSize * USDJPY.assumedRate
+        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueEURJPY(state) {
-    let unrealizedValue = 0
-    const EURJPY = state.currencyPairs.JPY.EUR
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURJPY.name
+  floatingPlEurJpy(state) {
+    let floatingPl = 0
+    const eurJpy = state.currencyPairs.jpy.eur
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = EURJPY.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = eurJpy.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue += gap * tradingSize
+      if (openTrade.action === '買') {
+        floatingPl += gap * tradingSize
       } else {
-        unrealizedValue += -gap * tradingSize
+        floatingPl += -gap * tradingSize
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueGBPJPY(state) {
-    let unrealizedValue = 0
-    const GBPJPY = state.currencyPairs.JPY.GBP
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPJPY.name
+  floatingPlGbpJpy(state) {
+    let floatingPl = 0
+    const gbpJpy = state.currencyPairs.jpy.gbp
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = GBPJPY.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = gbpJpy.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue += gap * tradingSize
+      if (openTrade.action === '買') {
+        floatingPl += gap * tradingSize
       } else {
-        unrealizedValue += -gap * tradingSize
+        floatingPl += -gap * tradingSize
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
-  unrealizedValueAUDJPY(state) {
-    let unrealizedValue = 0
-    const AUDJPY = state.currencyPairs.JPY.AUD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDJPY.name
+  floatingPlAudJpy(state) {
+    let floatingPl = 0
+    const audJpy = state.currencyPairs.jpy.aud
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = AUDJPY.assumedRate - position.rate
-      const tradingSize = state.tradingUnit[state.exchange] * position.lot
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = audJpy.assumedPrice - openTrade.openPrice
+      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
 
-      if (position.action === '買') {
-        unrealizedValue += gap * tradingSize
+      if (openTrade.action === '買') {
+        floatingPl += gap * tradingSize
       } else {
-        unrealizedValue += -gap * tradingSize
+        floatingPl += -gap * tradingSize
       }
     }
 
-    return Math.round(unrealizedValue)
+    return Math.round(floatingPl)
   },
 
-  unrealizedPips(state, getters) {
+  floatingPips(state, getters) {
     return (
-      getters.unrealizedPipsUSDJPY +
-      getters.unrealizedPipsEURUSD +
-      getters.unrealizedPipsGBPUSD +
-      getters.unrealizedPipsAUDUSD +
-      getters.unrealizedPipsEURJPY +
-      getters.unrealizedPipsGBPJPY +
-      getters.unrealizedPipsAUDJPY
+      getters.floatingPipsUsdJpy +
+      getters.floatingPipsEurUsd +
+      getters.floatingPipsGbpUsd +
+      getters.floatingPipsAudUsd +
+      getters.floatingPipsEurJpy +
+      getters.floatingPipsGbpJpy +
+      getters.floatingPipsAudJpy
     )
   },
-  unrealizedPipsUSDJPY(state) {
-    let unrealizedPips = 0
-    const USDJPY = state.currencyPairs.JPY.USD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === USDJPY.name
+  floatingPipsUsdJpy(state) {
+    let floatingPips = 0
+    const usdJpy = state.currencyPairs.jpy.usd
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === usdJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = USDJPY.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = usdJpy.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips += gap * 100
+      if (openTrade.action === '買') {
+        floatingPips += gap * 100
       } else {
-        unrealizedPips += -gap * 100
+        floatingPips += -gap * 100
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsEURUSD(state) {
-    let unrealizedPips = 0
-    const EURUSD = state.currencyPairs.USD.EUR
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURUSD.name
+  floatingPipsEurUsd(state) {
+    let floatingPips = 0
+    const eurUsd = state.currencyPairs.usd.eur
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = EURUSD.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = eurUsd.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips = gap * 10000
+      if (openTrade.action === '買') {
+        floatingPips = gap * 10000
       } else {
-        unrealizedPips += -gap * 10000
+        floatingPips += -gap * 10000
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsGBPUSD(state) {
-    let unrealizedPips = 0
-    const GBPUSD = state.currencyPairs.USD.GBP
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPUSD.name
+  floatingPipsGbpUsd(state) {
+    let floatingPips = 0
+    const gbpUsd = state.currencyPairs.usd.gbp
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = GBPUSD.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = gbpUsd.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips = gap * 10000
+      if (openTrade.action === '買') {
+        floatingPips = gap * 10000
       } else {
-        unrealizedPips += -gap * 10000
+        floatingPips += -gap * 10000
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsAUDUSD(state) {
-    let unrealizedPips = 0
-    const AUDUSD = state.currencyPairs.USD.AUD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDUSD.name
+  floatingPipsAudUsd(state) {
+    let floatingPips = 0
+    const audUsd = state.currencyPairs.usd.aud
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audUsd.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = AUDUSD.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = audUsd.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips = gap * 10000
+      if (openTrade.action === '買') {
+        floatingPips = gap * 10000
       } else {
-        unrealizedPips += -gap * 10000
+        floatingPips += -gap * 10000
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsEURJPY(state) {
-    let unrealizedPips = 0
-    const EURJPY = state.currencyPairs.JPY.EUR
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === EURJPY.name
+  floatingPipsEurJpy(state) {
+    let floatingPips = 0
+    const eurJpy = state.currencyPairs.jpy.eur
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === eurJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = EURJPY.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = eurJpy.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips += gap * 100
+      if (openTrade.action === '買') {
+        floatingPips += gap * 100
       } else {
-        unrealizedPips += -gap * 100
+        floatingPips += -gap * 100
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsGBPJPY(state) {
-    let unrealizedPips = 0
-    const GBPJPY = state.currencyPairs.JPY.GBP
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === GBPJPY.name
+  floatingPipsGbpJpy(state) {
+    let floatingPips = 0
+    const gbpJpy = state.currencyPairs.jpy.gbp
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === gbpJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = GBPJPY.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = gbpJpy.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips += gap * 100
+      if (openTrade.action === '買') {
+        floatingPips += gap * 100
       } else {
-        unrealizedPips += -gap * 100
+        floatingPips += -gap * 100
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
-  unrealizedPipsAUDJPY(state) {
-    let unrealizedPips = 0
-    const AUDJPY = state.currencyPairs.JPY.AUD
-    const positions = state.positions.filter(position => {
-      return position.currencyPair === AUDJPY.name
+  floatingPipsAudJpy(state) {
+    let floatingPips = 0
+    const audJpy = state.currencyPairs.jpy.aud
+    const openTrades = state.openTrades.filter(openTrade => {
+      return openTrade.symbol === audJpy.symbol
     })
 
-    for (let i = 0; i < positions.length; i++) {
-      const position = positions[i]
-      const gap = AUDJPY.assumedRate - position.rate
+    for (let i = 0; i < openTrades.length; i++) {
+      const openTrade = openTrades[i]
+      const gap = audJpy.assumedPrice - openTrade.openPrice
 
-      if (position.action === '買') {
-        unrealizedPips += gap * 100
+      if (openTrade.action === '買') {
+        floatingPips += gap * 100
       } else {
-        unrealizedPips += -gap * 100
+        floatingPips += -gap * 100
       }
     }
 
-    return Math.round(unrealizedPips * 10) / 10
+    return Math.round(floatingPips * 10) / 10
   },
 
   marginLevel(state, getters) {
-    if (state.positions.length) {
+    if (state.openTrades.length) {
       return Math.round((getters.equity / getters.margin) * 10000) / 100
     } else {
       return 0
@@ -566,63 +566,63 @@ export const mutations = {
   updateTargetMarginLevel(state, targetMarginLevel) {
     state.targetMarginLevel = targetMarginLevel
   },
-  updateExchange(state, exchange) {
-    state.exchange = exchange
+  updateBroker(state, broker) {
+    state.broker = broker
   },
   updateTradingUnit(state, tradingUnit) {
-    state.tradingUnit[state.exchange] = tradingUnit
+    state.tradingUnit[state.broker] = tradingUnit
   },
   updateLeverage(state, leverage) {
-    state.leverage[state.exchange] = leverage
+    state.leverage[state.broker] = leverage
   },
 
-  updateAssumedRateUSDJPY(state, assumedRateUSDJPY) {
-    state.currencyPairs.JPY.USD.assumedRate = assumedRateUSDJPY
+  updateAssumedPriceUsdJpy(state, assumedPriceUsdJpy) {
+    state.currencyPairs.jpy.usd.assumedPrice = assumedPriceUsdJpy
   },
-  updateAssumedRateEURUSD(state, assumedRateEURUSD) {
-    state.currencyPairs.USD.EUR.assumedRate = assumedRateEURUSD
+  updateAssumedPriceEurUsd(state, assumedPriceEurUsd) {
+    state.currencyPairs.usd.eur.assumedPrice = assumedPriceEurUsd
   },
-  updateAssumedRateGBPUSD(state, assumedRateGBPUSD) {
-    state.currencyPairs.USD.GBP.assumedRate = assumedRateGBPUSD
+  updateAssumedPriceGbpUsd(state, assumedPriceGbpUsd) {
+    state.currencyPairs.usd.gbp.assumedPrice = assumedPriceGbpUsd
   },
-  updateAssumedRateAUDUSD(state, assumedRateAUDUSD) {
-    state.currencyPairs.USD.AUD.assumedRate = assumedRateAUDUSD
+  updateAssumedPriceAudUsd(state, assumedPriceAudUsd) {
+    state.currencyPairs.usd.aud.assumedPrice = assumedPriceAudUsd
   },
-  updateAssumedRateEURJPY(state, assumedRateEURJPY) {
-    state.currencyPairs.JPY.EUR.assumedRate = assumedRateEURJPY
+  updateAssumedPriceEurJpy(state, assumedPriceEurJpy) {
+    state.currencyPairs.jpy.eur.assumedPrice = assumedPriceEurJpy
   },
-  updateAssumedRateGBPJPY(state, assumedRateGBPJPY) {
-    state.currencyPairs.JPY.GBP.assumedRate = assumedRateGBPJPY
+  updateAssumedPriceGbpJpy(state, assumedPriceGbpJpy) {
+    state.currencyPairs.jpy.gbp.assumedPrice = assumedPriceGbpJpy
   },
-  updateAssumedRateAUDJPY(state, assumedRateAUDJPY) {
-    state.currencyPairs.JPY.AUD.assumedRate = assumedRateAUDJPY
+  updateAssumedPriceAudJpy(state, assumedPriceAudJpy) {
+    state.currencyPairs.jpy.aud.assumedPrice = assumedPriceAudJpy
   },
-  getCurrentRateUSDJPY(state) {
-    state.currencyPairs.JPY.USD.assumedRate =
-      state.currencyPairs.JPY.USD.currentRate
+  getCurrentPriceUsdJpy(state) {
+    state.currencyPairs.jpy.usd.assumedPrice =
+      state.currencyPairs.jpy.usd.currentPrice
   },
-  getCurrentRateEURUSD(state) {
-    state.currencyPairs.USD.EUR.assumedRate =
-      state.currencyPairs.USD.EUR.currentRate
+  getCurrentPriceEurUsd(state) {
+    state.currencyPairs.usd.eur.assumedPrice =
+      state.currencyPairs.usd.eur.currentPrice
   },
-  getCurrentRateGBPUSD(state) {
-    state.currencyPairs.USD.GBP.assumedRate =
-      state.currencyPairs.USD.GBP.currentRate
+  getCurrentPriceGbpUsd(state) {
+    state.currencyPairs.usd.gbp.assumedPrice =
+      state.currencyPairs.usd.gbp.currentPrice
   },
-  getCurrentRateAUDUSD(state) {
-    state.currencyPairs.USD.AUD.assumedRate =
-      state.currencyPairs.USD.AUD.currentRate
+  getCurrentPriceAudUsd(state) {
+    state.currencyPairs.usd.aud.assumedPrice =
+      state.currencyPairs.usd.aud.currentPrice
   },
-  getCurrentRateEURJPY(state) {
-    state.currencyPairs.JPY.EUR.assumedRate =
-      state.currencyPairs.JPY.EUR.currentRate
+  getCurrentPriceEurJpy(state) {
+    state.currencyPairs.jpy.eur.assumedPrice =
+      state.currencyPairs.jpy.eur.currentPrice
   },
-  getCurrentRateGBPJPY(state) {
-    state.currencyPairs.JPY.GBP.assumedRate =
-      state.currencyPairs.JPY.GBP.currentRate
+  getCurrentPriceGbpJpy(state) {
+    state.currencyPairs.jpy.gbp.assumedPrice =
+      state.currencyPairs.jpy.gbp.currentPrice
   },
-  getCurrentRateAUDJPY(state) {
-    state.currencyPairs.JPY.AUD.assumedRate =
-      state.currencyPairs.JPY.AUD.currentRate
+  getCurrentPriceAudJpy(state) {
+    state.currencyPairs.jpy.aud.assumedPrice =
+      state.currencyPairs.jpy.aud.currentPrice
   }
 }

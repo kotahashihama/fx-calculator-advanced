@@ -1,5 +1,5 @@
 <template>
-  <table class="calculated-result-positions">
+  <table class="calculated-result-open-trades">
     <thead>
       <tr>
         <th class="heading">通貨ペア</th>
@@ -10,39 +10,39 @@
       </tr>
     </thead>
     <tbody>
-      <CalculatedResultPositionsItem
-        v-for="(position, index) in $store.state.positions"
+      <CalculatedResultOpenTradesItem
+        v-for="(openTrade, index) in $store.state.openTrades"
         :key="index"
       >
         <template v-slot:currency-pair>
-          {{ position.currencyPair }}
+          {{ openTrade.symbol }}
         </template>
         <template v-slot:action>
-          {{ position.action }}
+          {{ openTrade.action }}
         </template>
         <template v-slot:lot>
-          {{ position.lot }}
+          {{ openTrade.lot }}
         </template>
-        <template v-slot:order-rate>
-          {{ position.rate }}
+        <template v-slot:order-price>
+          {{ openTrade.openPrice }}
         </template>
-      </CalculatedResultPositionsItem>
+      </CalculatedResultOpenTradesItem>
     </tbody>
   </table>
 </template>
 
 <script>
-import CalculatedResultPositionsItem from '@/components/common/calculated-result/CalculatedResultPositionsItem.vue'
+import CalculatedResultOpenTradesItem from '@/components/common/calculated-result/CalculatedResultOpenTradesItem.vue'
 
 export default {
   components: {
-    CalculatedResultPositionsItem
+    CalculatedResultOpenTradesItem
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.calculated-result-positions {
+.calculated-result-open-trades {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;

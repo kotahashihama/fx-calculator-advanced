@@ -6,13 +6,13 @@
       <div class="calculation-details__left">
         <CalculatedResultCapital />
 
-        <CalculatedResultAssumedRates />
+        <CalculatedResultAssumedPrices />
       </div>
 
       <div class="calculation-details__right">
-        <CalculatedResultPositionRatio />
+        <CalculatedResultOpenTradeRatio />
 
-        <CalculatedResultPositions />
+        <CalculatedResultOpenTrades />
       </div>
     </div>
   </div>
@@ -21,17 +21,17 @@
 <script>
 import CalculatedResultMain from '@/components/common/calculated-result/CalculatedResultMain.vue'
 import CalculatedResultCapital from '@/components/common/calculated-result/CalculatedResultCapital.vue'
-import CalculatedResultAssumedRates from '@/components/common/calculated-result/CalculatedResultAssumedRates.vue'
-import CalculatedResultPositionRatio from '@/components/common/calculated-result/CalculatedResultPositionRatio.vue'
-import CalculatedResultPositions from '@/components/common/calculated-result/CalculatedResultPositions.vue'
+import CalculatedResultAssumedPrices from '@/components/common/calculated-result/CalculatedResultAssumedPrices.vue'
+import CalculatedResultOpenTradeRatio from '@/components/common/calculated-result/CalculatedResultOpenTradeRatio.vue'
+import CalculatedResultOpenTrades from '@/components/common/calculated-result/CalculatedResultOpenTrades.vue'
 
 export default {
   components: {
     CalculatedResultMain,
     CalculatedResultCapital,
-    CalculatedResultAssumedRates,
-    CalculatedResultPositionRatio,
-    CalculatedResultPositions
+    CalculatedResultAssumedPrices,
+    CalculatedResultOpenTradeRatio,
+    CalculatedResultOpenTrades
   }
 }
 </script>

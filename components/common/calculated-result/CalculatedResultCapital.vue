@@ -42,7 +42,7 @@
           取引所
         </template>
         <template v-slot:content>
-          {{ $store.state.exchanges[$store.state.exchange] }}
+          {{ $store.state.brokers[$store.state.broker] }}
         </template>
       </CalculatedResultCapitalItem>
 
@@ -51,7 +51,7 @@
           取引単位
         </template>
         <template v-slot:content>
-          {{ $store.state.tradingUnit[$store.state.exchange] | digitSeparator }}
+          {{ $store.state.tradingUnit[$store.state.broker] | digitSeparator }}
           通貨
         </template>
       </CalculatedResultCapitalItem>
@@ -61,7 +61,7 @@
           レバレッジ
         </template>
         <template v-slot:content>
-          {{ $store.state.leverage[$store.state.exchange] | digitSeparator }} ％
+          {{ $store.state.leverage[$store.state.broker] | digitSeparator }} ％
         </template>
       </CalculatedResultCapitalItem>
     </tbody>

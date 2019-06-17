@@ -1,16 +1,16 @@
 <template>
-  <tr class="calculated-result-assumed-rates-item">
+  <tr class="calculated-result-assumed-prices-item">
     <td class="heading">
       <slot name="pair" />
     </td>
     <td class="content">
-      <slot name="assumed-rate" />
+      <slot name="assumed-price" />
     </td>
   </tr>
 </template>
 
 <style lang="scss" scoped>
-.calculated-result-assumed-rates-item {
+.calculated-result-assumed-prices-item {
   border-bottom: dotted 1px #b5b5b5;
 }
 

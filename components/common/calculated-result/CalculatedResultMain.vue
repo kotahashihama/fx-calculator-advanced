@@ -2,11 +2,11 @@
   <div class="calculated-result-main">
     <CalculatedResultMainItem>
       <template v-slot:heading>
-        含み<span v-if="$store.getters.unrealizedValue >= 0">益</span
+        含み<span v-if="$store.getters.floatingPl >= 0">益</span
         ><span v-else>損</span>
       </template>
       <template v-slot:value>
-        {{ $store.getters.unrealizedValue | digitSeparator }}
+        {{ $store.getters.floatingPl | digitSeparator }}
       </template>
       <template v-slot:unit>
         円
@@ -18,7 +18,7 @@
         含みピップス
       </template>
       <template v-slot:value>
-        {{ $store.getters.unrealizedPips | digitSeparator }}
+        {{ $store.getters.floatingPips | digitSeparator }}
       </template>
       <template v-slot:unit>
         pips

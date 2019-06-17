@@ -1,8 +1,8 @@
 <template>
   <div class="calculating-form">
-    <CalculatingFormPosition
+    <CalculatingFormOpenTrade
       class="calculating-form__item"
-    ></CalculatingFormPosition>
+    ></CalculatingFormOpenTrade>
 
     <CalculatingFormBalance
       class="calculating-form__item"
@@ -12,29 +12,29 @@
       class="calculating-form__item"
     ></CalculatingFormTargetMarginLevel>
 
-    <CalculatingFormExchange
+    <CalculatingFormBroker
       class="calculating-form__item"
-    ></CalculatingFormExchange>
+    ></CalculatingFormBroker>
 
-    <CalculatingFormAssumedRates
+    <CalculatingFormAssumedPrices
       class="calculating-form__item"
-    ></CalculatingFormAssumedRates>
+    ></CalculatingFormAssumedPrices>
   </div>
 </template>
 
 <script>
-import CalculatingFormPosition from '@/components/calculator/calculating-form/CalculatingFormPosition.vue'
+import CalculatingFormOpenTrade from '@/components/calculator/calculating-form/CalculatingFormOpenTrade.vue'
 import CalculatingFormBalance from '@/components/calculator/calculating-form/CalculatingFormBalance.vue'
-import CalculatingFormExchange from '@/components/calculator/calculating-form/CalculatingFormExchange.vue'
-import CalculatingFormAssumedRates from '@/components/calculator/calculating-form/CalculatingFormAssumedRates.vue'
+import CalculatingFormBroker from '@/components/calculator/calculating-form/CalculatingFormBroker.vue'
+import CalculatingFormAssumedPrices from '@/components/calculator/calculating-form/CalculatingFormAssumedPrices.vue'
 import CalculatingFormTargetMarginLevel from '@/components/calculator/calculating-form/CalculatingFormTargetMarginLevel.vue'
 
 export default {
   components: {
-    CalculatingFormPosition,
+    CalculatingFormOpenTrade,
     CalculatingFormBalance,
-    CalculatingFormExchange,
-    CalculatingFormAssumedRates,
+    CalculatingFormBroker,
+    CalculatingFormAssumedPrices,
     CalculatingFormTargetMarginLevel
   }
 }

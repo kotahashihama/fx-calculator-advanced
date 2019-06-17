@@ -1,20 +1,16 @@
 <template>
-  <div class="calculating-form-exchange">
+  <div class="calculating-form-broker">
     <CalculatingFormHeading>取引所</CalculatingFormHeading>
 
-    <p class="calculating-form-exchange__item">
-      <label
-        v-for="(value, key) in $store.state.exchanges"
-        :key="key"
-        :for="key"
-      >
-        <input :id="key" v-model="exchange" :value="key" type="radio" />{{
+    <p class="calculating-form-broker__item">
+      <label v-for="(value, key) in $store.state.brokers" :key="key" :for="key">
+        <input :id="key" v-model="broker" :value="key" type="radio" />{{
           value
         }}
       </label>
     </p>
 
-    <p class="calculating-form-exchange__item">
+    <p class="calculating-form-broker__item">
       <label for="trading-unit">
         <CalculatingFormSubHeading>
           取引単位（通貨）
@@ -23,7 +19,7 @@
       <CalculatingFormSelect id="trading-unit" v-model="tradingUnit">
         <option
           v-for="(value, index) in $store.state.tradingUnits[
-            $store.state.exchange
+            $store.state.broker
           ]"
           :key="index"
           :value="value"
@@ -32,7 +28,7 @@
       </CalculatingFormSelect>
     </p>
 
-    <p class="calculating-form-exchange__item">
+    <p class="calculating-form-broker__item">
       <label for="leverage">
         <CalculatingFormSubHeading>
           レバレッジ（倍）
@@ -40,9 +36,7 @@
       </label>
       <CalculatingFormSelect id="leverage" v-model="leverage">
         <option
-          v-for="(value, index) in $store.state.leverages[
-            $store.state.exchange
-          ]"
+          v-for="(value, index) in $store.state.leverages[$store.state.broker]"
           :key="index"
           :value="value"
           >{{ value }}</option
@@ -64,17 +58,17 @@ export default {
     CalculatingFormSelect
   },
   computed: {
-    exchange: {
+    broker: {
       get() {
-        return this.$store.state.exchange
+        return this.$store.state.broker
       },
       set(value) {
-        this.$store.commit('updateExchange', value)
+        this.$store.commit('updateBroker', value)
       }
     },
     tradingUnit: {
       get() {
-        return this.$store.state.tradingUnit[this.exchange]
+        return this.$store.state.tradingUnit[this.broker]
       },
       set(value) {
         this.$store.commit('updateTradingUnit', value)
@@ -82,7 +76,7 @@ export default {
     },
     leverage: {
       get() {
-        return this.$store.state.leverage[this.exchange]
+        return this.$store.state.leverage[this.broker]
       },
       set(value) {
         this.$store.commit('updateLeverage', value)
@@ -93,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.calculating-form-exchange {
+.calculating-form-broker {
   &__item {
     margin-bottom: 14px;
     text-align: center;

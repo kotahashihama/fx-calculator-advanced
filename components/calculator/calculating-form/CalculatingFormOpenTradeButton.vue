@@ -1,9 +1,9 @@
 <template>
-  <button class="calculating-form-position-button"><slot /></button>
+  <button class="calculating-form-open-trade-button"><slot /></button>
 </template>
 
 <style lang="scss" scoped>
-.calculating-form-position-button {
+.calculating-form-open-trade-button {
   padding: 0.4em 1.3em;
   border: none;
   border-radius: 3px;
