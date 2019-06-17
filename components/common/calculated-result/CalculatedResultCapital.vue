@@ -15,7 +15,7 @@
           有効証拠金
         </template>
         <template v-slot:content>
-          921,478 円
+          {{ $store.getters.equity | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -24,7 +24,7 @@
           余剰証拠金
         </template>
         <template v-slot:content>
-          921,478 円
+          {{ $store.getters.freeMargin | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -33,7 +33,7 @@
           必要証拠金
         </template>
         <template v-slot:content>
-          921,478 円
+          {{ $store.getters.margin | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 

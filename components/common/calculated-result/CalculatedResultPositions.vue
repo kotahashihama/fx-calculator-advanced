@@ -10,48 +10,21 @@
       </tr>
     </thead>
     <tbody>
-      <CalculatedResultPositionsItem>
-        <template v-slot:pair>
-          GBP/USD
+      <CalculatedResultPositionsItem
+        v-for="(position, index) in $store.state.positions"
+        :key="index"
+      >
+        <template v-slot:currency-pair>
+          {{ position.currencyPair }}
         </template>
         <template v-slot:action>
-          買
+          {{ position.action }}
         </template>
         <template v-slot:lot>
-          0.02
+          {{ position.lot }}
         </template>
         <template v-slot:order-rate>
-          1.27041
-        </template>
-      </CalculatedResultPositionsItem>
-
-      <CalculatedResultPositionsItem>
-        <template v-slot:pair>
-          GBP/USD
-        </template>
-        <template v-slot:action>
-          買
-        </template>
-        <template v-slot:lot>
-          0.02
-        </template>
-        <template v-slot:order-rate>
-          1.27041
-        </template>
-      </CalculatedResultPositionsItem>
-
-      <CalculatedResultPositionsItem>
-        <template v-slot:pair>
-          GBP/USD
-        </template>
-        <template v-slot:action>
-          買
-        </template>
-        <template v-slot:lot>
-          0.02
-        </template>
-        <template v-slot:order-rate>
-          1.27041
+          {{ position.rate }}
         </template>
       </CalculatedResultPositionsItem>
     </tbody>

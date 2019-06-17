@@ -1,7 +1,7 @@
 <template>
   <tr class="calculated-result-positions-item">
     <td class="calculated-result-positions-item__item">
-      <slot name="pair" />
+      <slot name="currency-pair" />
     </td>
     <td class="calculated-result-positions-item__item">
       <slot name="action" />
