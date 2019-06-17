@@ -48,7 +48,7 @@
 
       <CalculatedResultCapitalItem>
         <template v-slot:heading>
-          取引通貨単位
+          取引単位
         </template>
         <template v-slot:content>
           {{ $store.state.tradingUnit[$store.state.exchange] | digitSeparator }}

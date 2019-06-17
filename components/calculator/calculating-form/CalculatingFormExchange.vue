@@ -17,7 +17,7 @@
     <p class="calculating-form-exchange__item">
       <label for="trading-unit">
         <CalculatingFormSubHeading>
-          取引通貨単位（通貨）
+          取引単位（通貨）
         </CalculatingFormSubHeading>
       </label>
       <CalculatingFormSelect id="trading-unit" v-model="tradingUnit">
