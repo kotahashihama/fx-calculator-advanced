@@ -1,13 +1,7 @@
 <template>
   <div class="calculator">
     <div class="monitor">
-      <CalculatingForm
-        class="calculating-form"
-        :balance="balance"
-        :target-margin-level="targetMarginLevel"
-        @inputBalance="updateBalance"
-        @inputTargetMarginLevel="updateTargetMarginLevel"
-      ></CalculatingForm>
+      <CalculatingForm class="calculating-form"></CalculatingForm>
       <CalculatedResult class="calculated-result"></CalculatedResult>
     </div>
     <CalculationProcessor></CalculationProcessor>
@@ -24,20 +18,6 @@ export default {
     CalculatingForm,
     CalculatedResult,
     CalculationProcessor
-  },
-  data() {
-    return {
-      balance: 200000,
-      targetMarginLevel: 1000
-    }
-  },
-  methods: {
-    updateBalance(balance) {
-      this.balance = balance
-    },
-    updateTargetMarginLevel(targetMarginLevel) {
-      this.targetMarginLevel = targetMarginLevel
-    }
   }
 }
 </script>
