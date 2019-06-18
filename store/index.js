@@ -46,7 +46,7 @@ export const state = () => ({
   openTrades: [
     {
       symbol: 'USD/JPY',
-      action: '売',
+      action: '買',
       lot: 0.02,
       openPrice: 108.598
     },
@@ -108,129 +108,115 @@ export const getters = {
     )
   },
   marginUsdJpy(state) {
-    let margin = 0
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === usdJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === usdJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
+      const result = (tradingSize * usdJpy.assumedPrice) / leverage
 
-      margin += (tradingSize * usdJpy.assumedPrice) / leverage
-    }
+      return sum + result
+    }, 0)
 
-    return Math.round(margin)
+    return Math.round(total)
   },
   marginEurUsd(state) {
-    let margin = 0
     const eurUsd = state.currencyPairs.usd.eur
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
-
-      margin +=
+      const result =
         (tradingSize * eurUsd.assumedPrice * usdJpy.assumedPrice) / leverage
-    }
 
-    return Math.round(margin)
+      return sum + result
+    }, 0)
+
+    return Math.round(total)
   },
   marginGbpUsd(state) {
-    let margin = 0
     const gbpUsd = state.currencyPairs.usd.gbp
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
-
-      margin +=
+      const result =
         (tradingSize * gbpUsd.assumedPrice * usdJpy.assumedPrice) / leverage
-    }
 
-    return Math.round(margin)
+      return sum + result
+    }, 0)
+
+    return Math.round(total)
   },
   marginAudUsd(state) {
-    let margin = 0
     const audUsd = state.currencyPairs.usd.aud
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
-
-      margin +=
+      const result =
         (tradingSize * audUsd.assumedPrice * usdJpy.assumedPrice) / leverage
-    }
 
-    return Math.round(margin)
+      return sum + result
+    }, 0)
+
+    return Math.round(total)
   },
   marginEurJpy(state) {
-    let margin = 0
     const eurJpy = state.currencyPairs.jpy.eur
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
+      const result = (tradingSize * eurJpy.assumedPrice) / leverage
 
-      margin += (tradingSize * eurJpy.assumedPrice) / leverage
-    }
+      return sum + result
+    }, 0)
 
-    return Math.round(margin)
+    return Math.round(total)
   },
   marginGbpJpy(state) {
-    let margin = 0
     const gbpJpy = state.currencyPairs.jpy.gbp
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
+      const result = (tradingSize * gbpJpy.assumedPrice) / leverage
 
-      margin += (tradingSize * gbpJpy.assumedPrice) / leverage
-    }
+      return sum + result
+    }, 0)
 
-    return Math.round(margin)
+    return Math.round(total)
   },
   marginAudJpy(state) {
-    let margin = 0
     const audJpy = state.currencyPairs.jpy.aud
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
       const leverage = state.leverage[state.broker]
+      const result = (tradingSize * audJpy.assumedPrice) / leverage
 
-      margin += (tradingSize * audJpy.assumedPrice) / leverage
-    }
+      return sum + result
+    }, 0)
 
-    return Math.round(margin)
+    return Math.round(total)
   },
 
   floatingPl(state, getters) {
@@ -245,154 +231,147 @@ export const getters = {
     )
   },
   floatingPlUsdJpy(state) {
-    let floatingPl = 0
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === usdJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === usdJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = usdJpy.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize
+      const resultSell = -gap * tradingSize
 
       if (openTrade.action === '買') {
-        floatingPl += gap * tradingSize
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlEurUsd(state) {
-    let floatingPl = 0
     const eurUsd = state.currencyPairs.usd.eur
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = eurUsd.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize * usdJpy.assumedPrice
+      const resultSell = -gap * tradingSize * usdJpy.assumedPrice
 
       if (openTrade.action === '買') {
-        floatingPl = gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlGbpUsd(state) {
-    let floatingPl = 0
     const gbpUsd = state.currencyPairs.usd.gbp
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = gbpUsd.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize * usdJpy.assumedPrice
+      const resultSell = -gap * tradingSize * usdJpy.assumedPrice
 
       if (openTrade.action === '買') {
-        floatingPl = gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlAudUsd(state) {
-    let floatingPl = 0
     const audUsd = state.currencyPairs.usd.aud
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = audUsd.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize * usdJpy.assumedPrice
+      const resultSell = -gap * tradingSize * usdJpy.assumedPrice
 
       if (openTrade.action === '買') {
-        floatingPl = gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize * usdJpy.assumedPrice
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlEurJpy(state) {
-    let floatingPl = 0
     const eurJpy = state.currencyPairs.jpy.eur
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = eurJpy.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize
+      const resultSell = -gap * tradingSize
 
       if (openTrade.action === '買') {
-        floatingPl += gap * tradingSize
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlGbpJpy(state) {
-    let floatingPl = 0
     const gbpJpy = state.currencyPairs.jpy.gbp
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = gbpJpy.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize
+      const resultSell = -gap * tradingSize
 
       if (openTrade.action === '買') {
-        floatingPl += gap * tradingSize
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
   floatingPlAudJpy(state) {
-    let floatingPl = 0
     const audJpy = state.currencyPairs.jpy.aud
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = audJpy.assumedPrice - openTrade.openPrice
       const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const resultBuy = gap * tradingSize
+      const resultSell = -gap * tradingSize
 
       if (openTrade.action === '買') {
-        floatingPl += gap * tradingSize
+        return sum + resultBuy
       } else {
-        floatingPl += -gap * tradingSize
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPl)
+    return Math.round(total)
   },
 
   floatingPips(state, getters) {
@@ -407,144 +386,137 @@ export const getters = {
     )
   },
   floatingPipsUsdJpy(state) {
-    let floatingPips = 0
     const usdJpy = state.currencyPairs.jpy.usd
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === usdJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === usdJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = usdJpy.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 100
+      const resultSell = -gap * 100
 
       if (openTrade.action === '買') {
-        floatingPips += gap * 100
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 100
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsEurUsd(state) {
-    let floatingPips = 0
     const eurUsd = state.currencyPairs.usd.eur
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = eurUsd.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 10000
+      const resultSell = -gap * 10000
 
       if (openTrade.action === '買') {
-        floatingPips = gap * 10000
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 10000
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsGbpUsd(state) {
-    let floatingPips = 0
     const gbpUsd = state.currencyPairs.usd.gbp
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = gbpUsd.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 10000
+      const resultSell = -gap * 10000
 
       if (openTrade.action === '買') {
-        floatingPips = gap * 10000
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 10000
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsAudUsd(state) {
-    let floatingPips = 0
     const audUsd = state.currencyPairs.usd.aud
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audUsd.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audUsd.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = audUsd.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 10000
+      const resultSell = -gap * 10000
 
       if (openTrade.action === '買') {
-        floatingPips = gap * 10000
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 10000
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsEurJpy(state) {
-    let floatingPips = 0
     const eurJpy = state.currencyPairs.jpy.eur
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === eurJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === eurJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = eurJpy.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 100
+      const resultSell = -gap * 100
 
       if (openTrade.action === '買') {
-        floatingPips += gap * 100
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 100
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsGbpJpy(state) {
-    let floatingPips = 0
     const gbpJpy = state.currencyPairs.jpy.gbp
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === gbpJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === gbpJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = gbpJpy.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 100
+      const resultSell = -gap * 100
 
       if (openTrade.action === '買') {
-        floatingPips += gap * 100
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 100
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
   floatingPipsAudJpy(state) {
-    let floatingPips = 0
     const audJpy = state.currencyPairs.jpy.aud
-    const openTrades = state.openTrades.filter(openTrade => {
-      return openTrade.symbol === audJpy.symbol
-    })
-
-    for (let i = 0; i < openTrades.length; i++) {
-      const openTrade = openTrades[i]
+    const openTrades = state.openTrades.filter(
+      openTrade => openTrade.symbol === audJpy.symbol
+    )
+    const total = openTrades.reduce((sum, openTrade) => {
       const gap = audJpy.assumedPrice - openTrade.openPrice
+      const resultBuy = gap * 100
+      const resultSell = -gap * 100
 
       if (openTrade.action === '買') {
-        floatingPips += gap * 100
+        return sum + resultBuy
       } else {
-        floatingPips += -gap * 100
+        return sum + resultSell
       }
-    }
+    }, 0)
 
-    return Math.round(floatingPips * 10) / 10
+    return Math.round(total * 10) / 10
   },
 
   marginLevel(state, getters) {
