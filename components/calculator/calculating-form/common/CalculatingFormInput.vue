@@ -30,14 +30,19 @@ export default {
   methods: {
     validate(event) {
       const charCode = event.which ? event.which : event.keyCode
+      const zero = 48
+      const nine = 57
+      const dot = 46
+      const backSpace = 8
+
       if (
-        charCode > 31 &&
-        (charCode < 48 || charCode > 57) &&
-        charCode !== 46
+        (charCode >= zero && charCode <= nine) ||
+        charCode === dot ||
+        charCode === backSpace
       ) {
-        event.preventDefault()
-      } else {
         return true
+      } else {
+        event.preventDefault()
       }
     }
   }
