@@ -1,44 +1,47 @@
-const currencyPairs = {
-  usd: {
-    eur: {
-      symbol: 'EUR/USD',
-      currentPrice: 0,
-      assumedPrice: 0
-    },
-    gbp: {
-      symbol: 'GBP/USD',
-      currentPrice: 0,
-      assumedPrice: 0
-    },
-    aud: {
-      symbol: 'AUD/USD',
-      currentPrice: 0,
-      assumedPrice: 0
-    }
+const currencyPairs = [
+  {
+    symbol: 'USD/JPY',
+    pair: ['USD', 'JPY'],
+    currentPrice: 0,
+    assumedPrice: 0
   },
-  jpy: {
-    usd: {
-      symbol: 'USD/JPY',
-      currentPrice: 0,
-      assumedPrice: 110
-    },
-    eur: {
-      symbol: 'EUR/JPY',
-      currentPrice: 0,
-      assumedPrice: 0
-    },
-    gbp: {
-      symbol: 'GBP/JPY',
-      currentPrice: 0,
-      assumedPrice: 0
-    },
-    aud: {
-      symbol: 'AUD/JPY',
-      currentPrice: 0,
-      assumedPrice: 0
-    }
+  {
+    symbol: 'EUR/USD',
+    pair: ['EUR', 'USD'],
+    currentPrice: 0,
+    assumedPrice: 0
+  },
+  {
+    symbol: 'GBP/USD',
+    pair: ['GBP', 'USD'],
+    currentPrice: 0,
+    assumedPrice: 0
+  },
+  {
+    symbol: 'AUD/USD',
+    pair: ['AUD', 'USD'],
+    currentPrice: 0,
+    assumedPrice: 0
+  },
+  {
+    symbol: 'EUR/JPY',
+    pair: ['EUR', 'JPY'],
+    currentPrice: 0,
+    assumedPrice: 0
+  },
+  {
+    symbol: 'GBP/JPY',
+    pair: ['GBP', 'JPY'],
+    currentPrice: 0,
+    assumedPrice: 0
+  },
+  {
+    symbol: 'AUD/JPY',
+    pair: ['AUD', 'JPY'],
+    currentPrice: 0,
+    assumedPrice: 0
   }
-}
+]
 
 export const state = () => ({
   title: '無題',
@@ -108,7 +111,9 @@ export const getters = {
     )
   },
   marginUsdJpy(state) {
-    const usdJpy = state.currencyPairs.jpy.usd
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === usdJpy.symbol
     )
@@ -123,8 +128,12 @@ export const getters = {
     return Math.round(total)
   },
   marginEurUsd(state) {
-    const eurUsd = state.currencyPairs.usd.eur
-    const usdJpy = state.currencyPairs.jpy.usd
+    const eurUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurUsd.symbol
     )
@@ -140,8 +149,12 @@ export const getters = {
     return Math.round(total)
   },
   marginGbpUsd(state) {
-    const gbpUsd = state.currencyPairs.usd.gbp
-    const usdJpy = state.currencyPairs.jpy.usd
+    const gbpUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpUsd.symbol
     )
@@ -157,8 +170,12 @@ export const getters = {
     return Math.round(total)
   },
   marginAudUsd(state) {
-    const audUsd = state.currencyPairs.usd.aud
-    const usdJpy = state.currencyPairs.jpy.usd
+    const audUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audUsd.symbol
     )
@@ -174,7 +191,9 @@ export const getters = {
     return Math.round(total)
   },
   marginEurJpy(state) {
-    const eurJpy = state.currencyPairs.jpy.eur
+    const eurJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurJpy.symbol
     )
@@ -189,7 +208,9 @@ export const getters = {
     return Math.round(total)
   },
   marginGbpJpy(state) {
-    const gbpJpy = state.currencyPairs.jpy.gbp
+    const gbpJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpJpy.symbol
     )
@@ -204,7 +225,9 @@ export const getters = {
     return Math.round(total)
   },
   marginAudJpy(state) {
-    const audJpy = state.currencyPairs.jpy.aud
+    const audJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audJpy.symbol
     )
@@ -231,7 +254,9 @@ export const getters = {
     )
   },
   floatingPlUsdJpy(state) {
-    const usdJpy = state.currencyPairs.jpy.usd
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === usdJpy.symbol
     )
@@ -251,8 +276,12 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlEurUsd(state) {
-    const eurUsd = state.currencyPairs.usd.eur
-    const usdJpy = state.currencyPairs.jpy.usd
+    const eurUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurUsd.symbol
     )
@@ -272,8 +301,12 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlGbpUsd(state) {
-    const gbpUsd = state.currencyPairs.usd.gbp
-    const usdJpy = state.currencyPairs.jpy.usd
+    const gbpUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpUsd.symbol
     )
@@ -293,8 +326,12 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlAudUsd(state) {
-    const audUsd = state.currencyPairs.usd.aud
-    const usdJpy = state.currencyPairs.jpy.usd
+    const audUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/USD'
+    )
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audUsd.symbol
     )
@@ -314,7 +351,9 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlEurJpy(state) {
-    const eurJpy = state.currencyPairs.jpy.eur
+    const eurJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurJpy.symbol
     )
@@ -334,7 +373,9 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlGbpJpy(state) {
-    const gbpJpy = state.currencyPairs.jpy.gbp
+    const gbpJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpJpy.symbol
     )
@@ -354,7 +395,9 @@ export const getters = {
     return Math.round(total)
   },
   floatingPlAudJpy(state) {
-    const audJpy = state.currencyPairs.jpy.aud
+    const audJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audJpy.symbol
     )
@@ -386,7 +429,9 @@ export const getters = {
     )
   },
   floatingPipsUsdJpy(state) {
-    const usdJpy = state.currencyPairs.jpy.usd
+    const usdJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'USD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === usdJpy.symbol
     )
@@ -405,7 +450,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsEurUsd(state) {
-    const eurUsd = state.currencyPairs.usd.eur
+    const eurUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/USD'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurUsd.symbol
     )
@@ -424,7 +471,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsGbpUsd(state) {
-    const gbpUsd = state.currencyPairs.usd.gbp
+    const gbpUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/USD'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpUsd.symbol
     )
@@ -443,7 +492,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsAudUsd(state) {
-    const audUsd = state.currencyPairs.usd.aud
+    const audUsd = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/USD'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audUsd.symbol
     )
@@ -462,7 +513,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsEurJpy(state) {
-    const eurJpy = state.currencyPairs.jpy.eur
+    const eurJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'EUR/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === eurJpy.symbol
     )
@@ -481,7 +534,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsGbpJpy(state) {
-    const gbpJpy = state.currencyPairs.jpy.gbp
+    const gbpJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'GBP/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === gbpJpy.symbol
     )
@@ -500,7 +555,9 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
   floatingPipsAudJpy(state) {
-    const audJpy = state.currencyPairs.jpy.aud
+    const audJpy = state.currencyPairs.find(
+      currencyPair => currencyPair.symbol === 'AUD/JPY'
+    )
     const openTrades = state.openTrades.filter(
       openTrade => openTrade.symbol === audJpy.symbol
     )
@@ -549,87 +606,80 @@ export const mutations = {
   },
 
   updateAssumedPriceUsdJpy(state, assumedPriceUsdJpy) {
-    state.currencyPairs.jpy.usd.assumedPrice = assumedPriceUsdJpy
+    state.currencyPairs[0].assumedPrice = assumedPriceUsdJpy
   },
   updateAssumedPriceEurUsd(state, assumedPriceEurUsd) {
-    state.currencyPairs.usd.eur.assumedPrice = assumedPriceEurUsd
+    state.currencyPairs[1].assumedPrice = assumedPriceEurUsd
   },
   updateAssumedPriceGbpUsd(state, assumedPriceGbpUsd) {
-    state.currencyPairs.usd.gbp.assumedPrice = assumedPriceGbpUsd
+    state.currencyPairs[2].assumedPrice = assumedPriceGbpUsd
   },
   updateAssumedPriceAudUsd(state, assumedPriceAudUsd) {
-    state.currencyPairs.usd.aud.assumedPrice = assumedPriceAudUsd
+    state.currencyPairs[3].assumedPrice = assumedPriceAudUsd
   },
   updateAssumedPriceEurJpy(state, assumedPriceEurJpy) {
-    state.currencyPairs.jpy.eur.assumedPrice = assumedPriceEurJpy
+    state.currencyPairs[4].assumedPrice = assumedPriceEurJpy
   },
   updateAssumedPriceGbpJpy(state, assumedPriceGbpJpy) {
-    state.currencyPairs.jpy.gbp.assumedPrice = assumedPriceGbpJpy
+    state.currencyPairs[5].assumedPrice = assumedPriceGbpJpy
   },
   updateAssumedPriceAudJpy(state, assumedPriceAudJpy) {
-    state.currencyPairs.jpy.aud.assumedPrice = assumedPriceAudJpy
+    state.currencyPairs[6].assumedPrice = assumedPriceAudJpy
   },
   setCurrentPriceUsdJpy(state) {
-    state.currencyPairs.jpy.usd.assumedPrice =
-      state.currencyPairs.jpy.usd.currentPrice
+    state.currencyPairs[0].assumedPrice = state.currencyPairs[0].currentPrice
   },
   setCurrentPriceEurUsd(state) {
-    state.currencyPairs.usd.eur.assumedPrice =
-      state.currencyPairs.usd.eur.currentPrice
+    state.currencyPairs[1].assumedPrice = state.currencyPairs[1].currentPrice
   },
   setCurrentPriceGbpUsd(state) {
-    state.currencyPairs.usd.gbp.assumedPrice =
-      state.currencyPairs.usd.gbp.currentPrice
+    state.currencyPairs[2].assumedPrice = state.currencyPairs[2].currentPrice
   },
   setCurrentPriceAudUsd(state) {
-    state.currencyPairs.usd.aud.assumedPrice =
-      state.currencyPairs.usd.aud.currentPrice
+    state.currencyPairs[3].assumedPrice = state.currencyPairs[3].currentPrice
   },
   setCurrentPriceEurJpy(state) {
-    state.currencyPairs.jpy.eur.assumedPrice =
-      state.currencyPairs.jpy.eur.currentPrice
+    state.currencyPairs[4].assumedPrice = state.currencyPairs[4].currentPrice
   },
   setCurrentPriceGbpJpy(state) {
-    state.currencyPairs.jpy.gbp.assumedPrice =
-      state.currencyPairs.jpy.gbp.currentPrice
+    state.currencyPairs[5].assumedPrice = state.currencyPairs[5].currentPrice
   },
   setCurrentPriceAudJpy(state) {
-    state.currencyPairs.jpy.aud.assumedPrice =
-      state.currencyPairs.jpy.aud.currentPrice
+    state.currencyPairs[6].assumedPrice = state.currencyPairs[6].currentPrice
   },
   getCurrentPriceUsdJpy(state, currentPriceUsdJpy) {
     const result = Math.round(currentPriceUsdJpy * 1000) / 1000
-    state.currencyPairs.jpy.usd.currentPrice = result
-    state.currencyPairs.jpy.usd.assumedPrice = result
+    state.currencyPairs[0].currentPrice = result
+    state.currencyPairs[0].assumedPrice = result
   },
   getCurrentPriceEurUsd(state, currentPriceEurUsd) {
     const result = Math.round((1 / currentPriceEurUsd) * 100000) / 100000
-    state.currencyPairs.usd.eur.currentPrice = result
-    state.currencyPairs.usd.eur.assumedPrice = result
+    state.currencyPairs[1].currentPrice = result
+    state.currencyPairs[1].assumedPrice = result
   },
   getCurrentPriceGbpUsd(state, currentPriceGbpUsd) {
     const result = Math.round((1 / currentPriceGbpUsd) * 100000) / 100000
-    state.currencyPairs.usd.gbp.currentPrice = result
-    state.currencyPairs.usd.gbp.assumedPrice = result
+    state.currencyPairs[2].currentPrice = result
+    state.currencyPairs[2].assumedPrice = result
   },
   getCurrentPriceAudUsd(state, currentPriceAudUsd) {
     const result = Math.round((1 / currentPriceAudUsd) * 100000) / 100000
-    state.currencyPairs.usd.aud.currentPrice = result
-    state.currencyPairs.usd.aud.assumedPrice = result
+    state.currencyPairs[3].currentPrice = result
+    state.currencyPairs[3].assumedPrice = result
   },
   getCurrentPriceEurJpy(state, currentPriceEurJpy) {
     const result = Math.round((1 / currentPriceEurJpy) * 1000) / 1000
-    state.currencyPairs.jpy.eur.currentPrice = result
-    state.currencyPairs.jpy.eur.assumedPrice = result
+    state.currencyPairs[4].currentPrice = result
+    state.currencyPairs[4].assumedPrice = result
   },
   getCurrentPriceGbpJpy(state, currentPriceGbpJpy) {
     const result = Math.round((1 / currentPriceGbpJpy) * 1000) / 1000
-    state.currencyPairs.jpy.gbp.currentPrice = result
-    state.currencyPairs.jpy.gbp.assumedPrice = result
+    state.currencyPairs[5].currentPrice = result
+    state.currencyPairs[5].assumedPrice = result
   },
   getCurrentPriceAudJpy(state, currentPriceAudJpy) {
     const result = Math.round((1 / currentPriceAudJpy) * 1000) / 1000
-    state.currencyPairs.jpy.aud.currentPrice = result
-    state.currencyPairs.jpy.aud.assumedPrice = result
+    state.currencyPairs[6].currentPrice = result
+    state.currencyPairs[6].assumedPrice = result
   }
 }

@@ -5,7 +5,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Usd-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.jpy.usd.symbol
+          $store.state.currencyPairs[0].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -25,7 +25,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Eur-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.usd.eur.symbol
+          $store.state.currencyPairs[1].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -45,7 +45,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Gbp-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.usd.gbp.symbol
+          $store.state.currencyPairs[2].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -65,7 +65,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Aud-Usd">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.usd.aud.symbol
+          $store.state.currencyPairs[3].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -85,7 +85,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Eur-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.jpy.eur.symbol
+          $store.state.currencyPairs[4].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -105,7 +105,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Gbp-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.jpy.gbp.symbol
+          $store.state.currencyPairs[5].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -125,7 +125,7 @@
     <p class="calculating-form-assumed-prices__item">
       <label for="Aud-Jpy">
         <CalculatingFormSubHeading>{{
-          $store.state.currencyPairs.jpy.aud.symbol
+          $store.state.currencyPairs[6].symbol
         }}</CalculatingFormSubHeading>
       </label>
       <span class="form-separate">
@@ -158,7 +158,7 @@ export default {
   computed: {
     assumedPriceUsdJpy: {
       get() {
-        return this.$store.state.currencyPairs.jpy.usd.assumedPrice
+        return this.$store.state.currencyPairs[0].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceUsdJpy', value)
@@ -166,7 +166,7 @@ export default {
     },
     assumedPriceEurUsd: {
       get() {
-        return this.$store.state.currencyPairs.usd.eur.assumedPrice
+        return this.$store.state.currencyPairs[1].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceEurUsd', value)
@@ -174,7 +174,7 @@ export default {
     },
     assumedPriceGbpUsd: {
       get() {
-        return this.$store.state.currencyPairs.usd.gbp.assumedPrice
+        return this.$store.state.currencyPairs[2].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceGbpUsd', value)
@@ -182,7 +182,7 @@ export default {
     },
     assumedPriceAudUsd: {
       get() {
-        return this.$store.state.currencyPairs.usd.aud.assumedPrice
+        return this.$store.state.currencyPairs[3].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceAudUsd', value)
@@ -190,7 +190,7 @@ export default {
     },
     assumedPriceEurJpy: {
       get() {
-        return this.$store.state.currencyPairs.jpy.eur.assumedPrice
+        return this.$store.state.currencyPairs[4].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceEurJpy', value)
@@ -198,7 +198,7 @@ export default {
     },
     assumedPriceGbpJpy: {
       get() {
-        return this.$store.state.currencyPairs.jpy.gbp.assumedPrice
+        return this.$store.state.currencyPairs[5].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceGbpJpy', value)
@@ -206,7 +206,7 @@ export default {
     },
     assumedPriceAudJpy: {
       get() {
-        return this.$store.state.currencyPairs.jpy.aud.assumedPrice
+        return this.$store.state.currencyPairs[6].assumedPrice
       },
       set(value) {
         this.$store.commit('updateAssumedPriceAudJpy', value)

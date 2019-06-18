@@ -3,64 +3,65 @@
     <tbody>
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇯🇵 {{ $store.state.currencyPairs.jpy.usd.symbol }}
+          🇯🇵 {{ $store.state.currencyPairs[0].symbol }}
         </template>
+
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.jpy.usd.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[0].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇪🇺 {{ $store.state.currencyPairs.usd.eur.symbol }}
+          🇪🇺 {{ $store.state.currencyPairs[1].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.usd.eur.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[1].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇬🇧 {{ $store.state.currencyPairs.usd.gbp.symbol }}
+          🇬🇧 {{ $store.state.currencyPairs[2].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.usd.gbp.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[2].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇦🇺 {{ $store.state.currencyPairs.usd.aud.symbol }}
+          🇦🇺 {{ $store.state.currencyPairs[3].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.usd.aud.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[3].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇪🇺 {{ $store.state.currencyPairs.jpy.eur.symbol }}
+          🇪🇺 {{ $store.state.currencyPairs[4].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.jpy.eur.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[4].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇬🇧 {{ $store.state.currencyPairs.jpy.gbp.symbol }}
+          🇬🇧 {{ $store.state.currencyPairs[5].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.jpy.gbp.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[5].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
 
       <CalculatedResultAssumedPricesItem>
         <template v-slot:pair>
-          🇦🇺 {{ $store.state.currencyPairs.jpy.aud.symbol }}
+          🇦🇺 {{ $store.state.currencyPairs[6].symbol }}
         </template>
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs.jpy.aud.assumedPrice | digitSeparator }}
+          {{ $store.state.currencyPairs[6].assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
     </tbody>
