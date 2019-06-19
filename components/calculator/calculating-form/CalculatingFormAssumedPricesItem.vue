@@ -1,36 +1,16 @@
 <template>
   <p class="calculating-form-assumed-prices-item">
-    <label
-      :for="
-        currencyPairSnakeCase(
-          currencyPair.currencies[0],
-          currencyPair.currencies[1]
-        )
-      "
-    >
+    <label :for="currencyPairSnakeCase">
       <CalculatingFormSubHeading>{{
         currencyPair.symbol
       }}</CalculatingFormSubHeading>
     </label>
     <span class="form-separate">
-      <button
-        class="button"
-        @click="
-          setCurrentPrice(
-            currencyPair.currencies[0],
-            currencyPair.currencies[1]
-          )
-        "
-      >
+      <button class="button" @click="setCurrentPrice()">
         現在値
       </button>
       <CalculatingFormInput
-        :id="
-          currencyPairSnakeCase(
-            currencyPair.currencies[0],
-            currencyPair.currencies[1]
-          )
-        "
+        :id="currencyPairSnakeCase"
         :value="currencyPair.assumedPrice"
         class="input"
         type="number"
@@ -64,9 +44,10 @@ export default {
     }
   },
   computed: {
-    currencyPairSnakeCase: () => (baseCurrency, quoteCurrency) =>
-      `${baseCurrency.toLowerCase()}-
-      ${quoteCurrency.toLowerCase()}`
+    currencyPairSnakeCase() {
+      return `${this.currencyPair.currencies[0].toLowerCase()}-
+      ${this.currencyPair.currencies[1].toLowerCase()}`
+    }
   },
   methods: {
     updateAssumedPrice(baseCurrency, quoteCurrency) {
