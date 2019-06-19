@@ -64,32 +64,23 @@ export default {
     }
   },
   computed: {
-    currencyPairPascalCase: () => (baseCurrency, quoteCurrency) =>
-      baseCurrency.charAt(0) +
-      baseCurrency.substring(1).toLowerCase() +
-      quoteCurrency.charAt(0) +
-      quoteCurrency.substring(1).toLowerCase(),
     currencyPairSnakeCase: () => (baseCurrency, quoteCurrency) =>
       `${baseCurrency.toLowerCase()}-
       ${quoteCurrency.toLowerCase()}`
   },
   methods: {
     updateAssumedPrice(baseCurrency, quoteCurrency) {
-      this.$store.commit(
-        `updateAssumedPrice${this.currencyPairPascalCase(
-          baseCurrency,
-          quoteCurrency
-        )}`,
-        Number(event.target.value)
-      )
+      this.$store.commit('updateAssumedPrice', {
+        baseCurrency,
+        quoteCurrency,
+        assumedPrice: Number(event.target.value)
+      })
     },
     setCurrentPrice(baseCurrency, quoteCurrency) {
-      this.$store.commit(
-        `setCurrentPrice${this.currencyPairPascalCase(
-          baseCurrency,
-          quoteCurrency
-        )}`
-      )
+      this.$store.commit('setCurrentPrice', {
+        baseCurrency,
+        quoteCurrency
+      })
     }
   }
 }

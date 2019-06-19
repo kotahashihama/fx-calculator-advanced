@@ -32,25 +32,22 @@ export default {
   methods: {
     getCurrentPrices() {
       const self = this
-      const currencyPairs = this.$store.state.currencyPairs
 
       this.$axios
         .get('https://api.ratesapi.io/api/latest?base=JPY')
         .then(function(response) {
           const currentPrices = response.data.rates
+          const currencyPairs = self.$store.state.currencyPairs.filter(
+            currencyPair => currencyPair.currencies[1] === 'JPY'
+          )
           currencyPairs.forEach(currencyPair => {
             const currencies = currencyPair.currencies
-            if (currencies[1] === 'JPY') {
-              const currencyPairPascalCase = self.currencyPairPascalCase(
-                currencies[0],
-                currencies[1]
-              )
 
-              self.$store.commit(
-                `getCurrentPrice${currencyPairPascalCase}`,
-                currentPrices[currencies[0]]
-              )
-            }
+            self.$store.commit('getCurrentPrice', {
+              baseCurrency: currencies[0],
+              quoteCurrency: currencies[1],
+              currentPrice: currentPrices[currencies[0]]
+            })
           })
         })
 
@@ -58,19 +55,17 @@ export default {
         .get('https://api.ratesapi.io/api/latest?base=USD')
         .then(function(response) {
           const currentPrices = response.data.rates
+          const currencyPairs = self.$store.state.currencyPairs.filter(
+            currencyPair => currencyPair.currencies[1] === 'USD'
+          )
           currencyPairs.forEach(currencyPair => {
             const currencies = currencyPair.currencies
-            if (currencies[1] === 'USD') {
-              const currencyPairPascalCase = self.currencyPairPascalCase(
-                currencies[0],
-                currencies[1]
-              )
 
-              self.$store.commit(
-                `getCurrentPrice${currencyPairPascalCase}`,
-                currentPrices[currencies[0]]
-              )
-            }
+            self.$store.commit('getCurrentPrice', {
+              baseCurrency: currencies[0],
+              quoteCurrency: currencies[1],
+              currentPrice: currentPrices[currencies[0]]
+            })
           })
         })
     }

@@ -265,84 +265,35 @@ export const mutations = {
   updateLeverage(state, leverage) {
     state.leverage[state.broker] = leverage
   },
-
-  updateAssumedPriceUsdJpy(state, assumedPriceUsdJpy) {
-    state.currencyPairs[0].assumedPrice = assumedPriceUsdJpy
+  updateAssumedPrice(state, payload) {
+    state.currencyPairs.find(
+      currencyPair =>
+        currencyPair.currencies[0] === payload.baseCurrency &&
+        currencyPair.currencies[1] === payload.quoteCurrency
+    ).assumedPrice = payload.assumedPrice
   },
-  updateAssumedPriceEurUsd(state, assumedPriceEurUsd) {
-    state.currencyPairs[1].assumedPrice = assumedPriceEurUsd
+  setCurrentPrice(state, payload) {
+    const currencyPair = state.currencyPairs.find(
+      currencyPair =>
+        currencyPair.currencies[0] === payload.baseCurrency &&
+        currencyPair.currencies[1] === payload.quoteCurrency
+    )
+    currencyPair.assumedPrice = currencyPair.currentPrice
   },
-  updateAssumedPriceGbpUsd(state, assumedPriceGbpUsd) {
-    state.currencyPairs[2].assumedPrice = assumedPriceGbpUsd
-  },
-  updateAssumedPriceAudUsd(state, assumedPriceAudUsd) {
-    state.currencyPairs[3].assumedPrice = assumedPriceAudUsd
-  },
-  updateAssumedPriceEurJpy(state, assumedPriceEurJpy) {
-    state.currencyPairs[4].assumedPrice = assumedPriceEurJpy
-  },
-  updateAssumedPriceGbpJpy(state, assumedPriceGbpJpy) {
-    state.currencyPairs[5].assumedPrice = assumedPriceGbpJpy
-  },
-  updateAssumedPriceAudJpy(state, assumedPriceAudJpy) {
-    state.currencyPairs[6].assumedPrice = assumedPriceAudJpy
-  },
-
-  setCurrentPriceUsdJpy(state) {
-    state.currencyPairs[0].assumedPrice = state.currencyPairs[0].currentPrice
-  },
-  setCurrentPriceEurUsd(state) {
-    state.currencyPairs[1].assumedPrice = state.currencyPairs[1].currentPrice
-  },
-  setCurrentPriceGbpUsd(state) {
-    state.currencyPairs[2].assumedPrice = state.currencyPairs[2].currentPrice
-  },
-  setCurrentPriceAudUsd(state) {
-    state.currencyPairs[3].assumedPrice = state.currencyPairs[3].currentPrice
-  },
-  setCurrentPriceEurJpy(state) {
-    state.currencyPairs[4].assumedPrice = state.currencyPairs[4].currentPrice
-  },
-  setCurrentPriceGbpJpy(state) {
-    state.currencyPairs[5].assumedPrice = state.currencyPairs[5].currentPrice
-  },
-  setCurrentPriceAudJpy(state) {
-    state.currencyPairs[6].assumedPrice = state.currencyPairs[6].currentPrice
-  },
-
-  getCurrentPriceUsdJpy(state, currentPriceUsdJpy) {
-    const result = Math.round((1 / currentPriceUsdJpy) * 1000) / 1000
-    state.currencyPairs[0].currentPrice = result
-    state.currencyPairs[0].assumedPrice = result
-  },
-  getCurrentPriceEurUsd(state, currentPriceEurUsd) {
-    const result = Math.round((1 / currentPriceEurUsd) * 100000) / 100000
-    state.currencyPairs[1].currentPrice = result
-    state.currencyPairs[1].assumedPrice = result
-  },
-  getCurrentPriceGbpUsd(state, currentPriceGbpUsd) {
-    const result = Math.round((1 / currentPriceGbpUsd) * 100000) / 100000
-    state.currencyPairs[2].currentPrice = result
-    state.currencyPairs[2].assumedPrice = result
-  },
-  getCurrentPriceAudUsd(state, currentPriceAudUsd) {
-    const result = Math.round((1 / currentPriceAudUsd) * 100000) / 100000
-    state.currencyPairs[3].currentPrice = result
-    state.currencyPairs[3].assumedPrice = result
-  },
-  getCurrentPriceEurJpy(state, currentPriceEurJpy) {
-    const result = Math.round((1 / currentPriceEurJpy) * 1000) / 1000
-    state.currencyPairs[4].currentPrice = result
-    state.currencyPairs[4].assumedPrice = result
-  },
-  getCurrentPriceGbpJpy(state, currentPriceGbpJpy) {
-    const result = Math.round((1 / currentPriceGbpJpy) * 1000) / 1000
-    state.currencyPairs[5].currentPrice = result
-    state.currencyPairs[5].assumedPrice = result
-  },
-  getCurrentPriceAudJpy(state, currentPriceAudJpy) {
-    const result = Math.round((1 / currentPriceAudJpy) * 1000) / 1000
-    state.currencyPairs[6].currentPrice = result
-    state.currencyPairs[6].assumedPrice = result
+  getCurrentPrice(state, payload) {
+    const currencyPair = state.currencyPairs.find(
+      currencyPair =>
+        currencyPair.currencies[0] === payload.baseCurrency &&
+        currencyPair.currencies[1] === payload.quoteCurrency
+    )
+    if (payload.quoteCurrency === 'JPY') {
+      const result = Math.round((1 / payload.currentPrice) * 1000) / 1000
+      currencyPair.currentPrice = result
+      currencyPair.assumedPrice = result
+    } else {
+      const result = Math.round((1 / payload.currentPrice) * 100000) / 100000
+      currencyPair.currentPrice = result
+      currencyPair.assumedPrice = result
+    }
   }
 }
