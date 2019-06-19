@@ -19,6 +19,14 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: emoji;
+  unicode-range: U+1F1E6-1F1FF, U+1F1E8-1F1FC;
+  src: local('Apple Color Emoji'), local('Zapf Dingbats'),
+    local('Android Emoji'), local('Segoe UI'), local(EmojiSymbols),
+    local(Symbola);
+}
+
 *,
 *::before,
 *::after {
@@ -28,7 +36,7 @@ export default {
 }
 
 html {
-  font-family: '游ゴシック Medium', YuGothic, YuGothicM,
+  font-family: emoji, '游ゴシック Medium', YuGothic, YuGothicM,
     'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo,
     sans-serif;
   font-size: 16px;

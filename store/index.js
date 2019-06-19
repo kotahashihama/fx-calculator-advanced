@@ -2,6 +2,7 @@ const currencyPairs = [
   {
     symbol: 'USD/JPY',
     currencies: ['USD', 'JPY'],
+    emoji: '&#x1f1ef;&#x1f1f5;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -9,6 +10,7 @@ const currencyPairs = [
   {
     symbol: 'EUR/USD',
     currencies: ['EUR', 'USD'],
+    emoji: '&#x1f1ea;&#x1f1fa;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -16,6 +18,7 @@ const currencyPairs = [
   {
     symbol: 'GBP/USD',
     currencies: ['GBP', 'USD'],
+    emoji: '&#x1f1ec;&#x1f1e7;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -23,6 +26,7 @@ const currencyPairs = [
   {
     symbol: 'AUD/USD',
     currencies: ['AUD', 'USD'],
+    emoji: '&#x1f1e6;&#x1f1fa;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -30,6 +34,7 @@ const currencyPairs = [
   {
     symbol: 'EUR/JPY',
     currencies: ['EUR', 'JPY'],
+    emoji: '&#x1f1ea;&#x1f1fa;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -37,6 +42,7 @@ const currencyPairs = [
   {
     symbol: 'GBP/JPY',
     currencies: ['GBP', 'JPY'],
+    emoji: '&#x1f1ec;&#x1f1e7;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -44,6 +50,7 @@ const currencyPairs = [
   {
     symbol: 'AUD/JPY',
     currencies: ['AUD', 'JPY'],
+    emoji: '&#x1f1e6;&#x1f1fa;',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -301,6 +308,7 @@ export const mutations = {
   setCurrentPriceAudJpy(state) {
     state.currencyPairs[6].assumedPrice = state.currencyPairs[6].currentPrice
   },
+
   getCurrentPriceUsdJpy(state, currentPriceUsdJpy) {
     const result = Math.round(currentPriceUsdJpy * 1000) / 1000
     state.currencyPairs[0].currentPrice = result

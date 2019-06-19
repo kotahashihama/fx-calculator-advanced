@@ -1,67 +1,18 @@
 <template>
   <table class="calculated-result-assumed-prices">
     <tbody>
-      <CalculatedResultAssumedPricesItem>
+      <CalculatedResultAssumedPricesItem
+        v-for="currencyPair in $store.state.currencyPairs"
+        :key="currencyPair.symbol"
+      >
         <template v-slot:pair>
-          🇯🇵 {{ $store.state.currencyPairs[0].symbol }}
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <span v-html="currencyPair.emoji"></span>
+          {{ currencyPair.symbol }}
         </template>
 
         <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[0].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇪🇺 {{ $store.state.currencyPairs[1].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[1].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇬🇧 {{ $store.state.currencyPairs[2].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[2].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇦🇺 {{ $store.state.currencyPairs[3].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[3].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇪🇺 {{ $store.state.currencyPairs[4].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[4].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇬🇧 {{ $store.state.currencyPairs[5].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[5].assumedPrice | digitSeparator }}
-        </template>
-      </CalculatedResultAssumedPricesItem>
-
-      <CalculatedResultAssumedPricesItem>
-        <template v-slot:pair>
-          🇦🇺 {{ $store.state.currencyPairs[6].symbol }}
-        </template>
-        <template v-slot:assumed-price>
-          {{ $store.state.currencyPairs[6].assumedPrice | digitSeparator }}
+          {{ currencyPair.assumedPrice | digitSeparator }}
         </template>
       </CalculatedResultAssumedPricesItem>
     </tbody>
