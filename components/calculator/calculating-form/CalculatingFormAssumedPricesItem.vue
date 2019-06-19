@@ -2,9 +2,10 @@
   <p class="calculating-form-assumed-prices-item">
     <label
       :for="
-        currencyPair.currencies[0].toLowerCase() +
-          '-' +
-          currencyPair.currencies[1].toLowerCase()
+        currencyPairSnakeCase(
+          currencyPair.currencies[0],
+          currencyPair.currencies[1]
+        )
       "
     >
       <CalculatingFormSubHeading>{{
@@ -25,9 +26,10 @@
       </button>
       <CalculatingFormInput
         :id="
-          currencyPair.currencies[0].toLowerCase() +
-            '-' +
-            currencyPair.currencies[1].toLowerCase()
+          currencyPairSnakeCase(
+            currencyPair.currencies[0],
+            currencyPair.currencies[1]
+          )
         "
         :value="currencyPair.assumedPrice"
         class="input"
@@ -61,20 +63,32 @@ export default {
       default: () => {}
     }
   },
+  computed: {
+    currencyPairPascalCase: () => (baseCurrency, quoteCurrency) =>
+      baseCurrency.charAt(0) +
+      baseCurrency.substring(1).toLowerCase() +
+      quoteCurrency.charAt(0) +
+      quoteCurrency.substring(1).toLowerCase(),
+    currencyPairSnakeCase: () => (baseCurrency, quoteCurrency) =>
+      `${baseCurrency.toLowerCase()}-
+      ${quoteCurrency.toLowerCase()}`
+  },
   methods: {
     updateAssumedPrice(baseCurrency, quoteCurrency) {
       this.$store.commit(
-        `updateAssumedPrice${baseCurrency.charAt(0) +
-          baseCurrency.substring(1).toLowerCase()}${quoteCurrency.charAt(0) +
-          quoteCurrency.substring(1).toLowerCase()}`,
+        `updateAssumedPrice${this.currencyPairPascalCase(
+          baseCurrency,
+          quoteCurrency
+        )}`,
         Number(event.target.value)
       )
     },
     setCurrentPrice(baseCurrency, quoteCurrency) {
       this.$store.commit(
-        `setCurrentPrice${baseCurrency.charAt(0) +
-          baseCurrency.substring(1).toLowerCase()}${quoteCurrency.charAt(0) +
-          quoteCurrency.substring(1).toLowerCase()}`
+        `setCurrentPrice${this.currencyPairPascalCase(
+          baseCurrency,
+          quoteCurrency
+        )}`
       )
     }
   }

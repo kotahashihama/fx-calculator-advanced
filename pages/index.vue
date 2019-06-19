@@ -19,6 +19,13 @@ export default {
     CalculatedResult,
     CalculationProcessor
   },
+  computed: {
+    currencyPairPascalCase: () => (baseCurrency, quoteCurrency) =>
+      baseCurrency.charAt(0) +
+      baseCurrency.substring(1).toLowerCase() +
+      quoteCurrency.charAt(0) +
+      quoteCurrency.substring(1).toLowerCase()
+  },
   mounted() {
     this.getCurrentPrices()
   },
@@ -33,13 +40,14 @@ export default {
           const currentPrices = response.data.rates
           currencyPairs.forEach(currencyPair => {
             const currencies = currencyPair.currencies
-            if (currencyPair.currencies[1] === 'JPY') {
+            if (currencies[1] === 'JPY') {
+              const currencyPairPascalCase = self.currencyPairPascalCase(
+                currencies[0],
+                currencies[1]
+              )
+
               self.$store.commit(
-                `getCurrentPrice${currencies[0].charAt(0) +
-                  currencies[0]
-                    .substring(1)
-                    .toLowerCase()}${currencies[1].charAt(0) +
-                  currencies[1].substring(1).toLowerCase()}`,
+                `getCurrentPrice${currencyPairPascalCase}`,
                 currentPrices[currencies[0]]
               )
             }
@@ -52,13 +60,14 @@ export default {
           const currentPrices = response.data.rates
           currencyPairs.forEach(currencyPair => {
             const currencies = currencyPair.currencies
-            if (currencyPair.currencies[1] === 'USD') {
+            if (currencies[1] === 'USD') {
+              const currencyPairPascalCase = self.currencyPairPascalCase(
+                currencies[0],
+                currencies[1]
+              )
+
               self.$store.commit(
-                `getCurrentPrice${currencies[0].charAt(0) +
-                  currencies[0]
-                    .substring(1)
-                    .toLowerCase()}${currencies[1].charAt(0) +
-                  currencies[1].substring(1).toLowerCase()}`,
+                `getCurrentPrice${currencyPairPascalCase}`,
                 currentPrices[currencies[0]]
               )
             }
