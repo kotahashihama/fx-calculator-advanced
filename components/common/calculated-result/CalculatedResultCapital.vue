@@ -33,7 +33,7 @@
           必要証拠金
         </template>
         <template v-slot:content>
-          {{ $store.getters.margin | digitSeparator }} 円
+          {{ $store.getters.marginTotal | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 

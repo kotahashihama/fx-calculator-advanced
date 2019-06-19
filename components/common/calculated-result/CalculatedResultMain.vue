@@ -6,7 +6,7 @@
         ><span v-else>損</span>
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPl | digitSeparator }}
+        {{ $store.getters.floatingPlTotal | digitSeparator }}
       </template>
       <template v-slot:unit>
         円
@@ -18,7 +18,7 @@
         含みピップス
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPips | digitSeparator }}
+        {{ $store.getters.floatingPipsTotal | digitSeparator }}
       </template>
       <template v-slot:unit>
         pips
