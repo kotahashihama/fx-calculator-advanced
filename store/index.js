@@ -1,43 +1,43 @@
 const currencyPairs = [
   {
     symbol: 'USD/JPY',
-    pair: ['USD', 'JPY'],
+    currencies: ['USD', 'JPY'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'EUR/USD',
-    pair: ['EUR', 'USD'],
+    currencies: ['EUR', 'USD'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'GBP/USD',
-    pair: ['GBP', 'USD'],
+    currencies: ['GBP', 'USD'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'AUD/USD',
-    pair: ['AUD', 'USD'],
+    currencies: ['AUD', 'USD'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'EUR/JPY',
-    pair: ['EUR', 'JPY'],
+    currencies: ['EUR', 'JPY'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'GBP/JPY',
-    pair: ['GBP', 'JPY'],
+    currencies: ['GBP', 'JPY'],
     currentPrice: 0,
     assumedPrice: 0
   },
   {
     symbol: 'AUD/JPY',
-    pair: ['AUD', 'JPY'],
+    currencies: ['AUD', 'JPY'],
     currentPrice: 0,
     assumedPrice: 0
   }
@@ -101,9 +101,9 @@ export const getters = {
 
   marginTotal(state, getters) {
     return state.currencyPairs
-      .map(currencyPair => currencyPair.pair)
-      .reduce((sum, pair) => {
-        const result = getters.margin(pair[0], pair[1])
+      .map(currencyPair => currencyPair.currencies)
+      .reduce((sum, currencies) => {
+        const result = getters.margin(currencies[0], currencies[1])
         return sum + result
       }, 0)
   },
@@ -137,9 +137,9 @@ export const getters = {
 
   floatingPlTotal(state, getters) {
     return state.currencyPairs
-      .map(currencyPair => currencyPair.pair)
-      .reduce((sum, pair) => {
-        const result = getters.floatingPl(pair[0], pair[1])
+      .map(currencyPair => currencyPair.currencies)
+      .reduce((sum, currencies) => {
+        const result = getters.floatingPl(currencies[0], currencies[1])
         return sum + result
       }, 0)
   },
@@ -183,32 +183,11 @@ export const getters = {
 
   floatingPipsTotal(state, getters) {
     return state.currencyPairs
-      .map(currencyPair => currencyPair.pair)
-      .reduce((sum, pair) => {
-        const result = getters.floatingPips(pair[0], pair[1])
+      .map(currencyPair => currencyPair.currencies)
+      .reduce((sum, currencies) => {
+        const result = getters.floatingPips(currencies[0], currencies[1])
         return sum + result
       }, 0)
-  },
-  floatingPipsUsdJpy(state) {
-    const usdJpy = state.currencyPairs.find(
-      currencyPair => currencyPair.symbol === 'USD/JPY'
-    )
-    const openTrades = state.openTrades.filter(
-      openTrade => openTrade.symbol === usdJpy.symbol
-    )
-    const total = openTrades.reduce((sum, openTrade) => {
-      const gap = usdJpy.assumedPrice - openTrade.openPrice
-      const resultBuy = gap * 100
-      const resultSell = -gap * 100
-
-      if (openTrade.action === '買') {
-        return sum + resultBuy
-      } else {
-        return sum + resultSell
-      }
-    }, 0)
-
-    return Math.round(total * 10) / 10
   },
   floatingPips: state => (baseCurrency, quoteCurrency) => {
     const currencyPair = state.currencyPairs.find(
