@@ -2,7 +2,7 @@
   <div class="calculated-result-main">
     <CalculatedResultMainItem>
       <template v-slot:heading>
-        含み<span v-if="$store.getters.floatingPl >= 0">益</span
+        含み<span v-if="$store.getters.floatingPlTotal >= 0">益</span
         ><span v-else>損</span>
       </template>
       <template v-slot:value>
