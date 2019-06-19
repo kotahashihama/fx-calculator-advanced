@@ -287,6 +287,7 @@ export const mutations = {
   updateAssumedPriceAudJpy(state, assumedPriceAudJpy) {
     state.currencyPairs[6].assumedPrice = assumedPriceAudJpy
   },
+
   setCurrentPriceUsdJpy(state) {
     state.currencyPairs[0].assumedPrice = state.currencyPairs[0].currentPrice
   },
@@ -310,7 +311,7 @@ export const mutations = {
   },
 
   getCurrentPriceUsdJpy(state, currentPriceUsdJpy) {
-    const result = Math.round(currentPriceUsdJpy * 1000) / 1000
+    const result = Math.round((1 / currentPriceUsdJpy) * 1000) / 1000
     state.currencyPairs[0].currentPrice = result
     state.currencyPairs[0].assumedPrice = result
   },

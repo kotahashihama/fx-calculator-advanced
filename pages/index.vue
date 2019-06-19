@@ -25,24 +25,44 @@ export default {
   methods: {
     getCurrentPrices() {
       const self = this
-
-      this.$axios
-        .get('https://api.ratesapi.io/api/latest?base=USD')
-        .then(function(response) {
-          const currentPrices = response.data.rates
-          self.$store.commit('getCurrentPriceUsdJpy', currentPrices.JPY)
-          self.$store.commit('getCurrentPriceEurUsd', currentPrices.EUR)
-          self.$store.commit('getCurrentPriceGbpUsd', currentPrices.GBP)
-          self.$store.commit('getCurrentPriceAudUsd', currentPrices.AUD)
-        })
+      const currencyPairs = this.$store.state.currencyPairs
 
       this.$axios
         .get('https://api.ratesapi.io/api/latest?base=JPY')
         .then(function(response) {
           const currentPrices = response.data.rates
-          self.$store.commit('getCurrentPriceEurJpy', currentPrices.EUR)
-          self.$store.commit('getCurrentPriceGbpJpy', currentPrices.GBP)
-          self.$store.commit('getCurrentPriceAudJpy', currentPrices.AUD)
+          for (let i = 0; i < currencyPairs.length; i++) {
+            const currencies = currencyPairs[i].currencies
+            if (currencyPairs[i].currencies[1] === 'JPY') {
+              self.$store.commit(
+                `getCurrentPrice${currencies[0].charAt(0) +
+                  currencies[0]
+                    .substring(1)
+                    .toLowerCase()}${currencies[1].charAt(0) +
+                  currencies[1].substring(1).toLowerCase()}`,
+                currentPrices[currencies[0]]
+              )
+            }
+          }
+        })
+
+      this.$axios
+        .get('https://api.ratesapi.io/api/latest?base=USD')
+        .then(function(response) {
+          const currentPrices = response.data.rates
+          for (let i = 0; i < currencyPairs.length; i++) {
+            const currencies = currencyPairs[i].currencies
+            if (currencyPairs[i].currencies[1] === 'USD') {
+              self.$store.commit(
+                `getCurrentPrice${currencies[0].charAt(0) +
+                  currencies[0]
+                    .substring(1)
+                    .toLowerCase()}${currencies[1].charAt(0) +
+                  currencies[1].substring(1).toLowerCase()}`,
+                currentPrices[currencies[0]]
+              )
+            }
+          }
         })
     }
   }
