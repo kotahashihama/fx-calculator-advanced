@@ -1,6 +1,6 @@
 <template>
   <p class="calculating-form-assumed-prices-item">
-    <label :for="currencyPairSnakeCase">
+    <label :for="currencyPairKebabCase">
       <CalculatingFormSubHeading>{{
         currencyPair.symbol
       }}</CalculatingFormSubHeading>
@@ -10,7 +10,7 @@
         現在値
       </button>
       <CalculatingFormInput
-        :id="currencyPairSnakeCase"
+        :id="currencyPairKebabCase"
         :value="currencyPair.assumedPrice"
         class="input"
         type="number"
@@ -44,9 +44,10 @@ export default {
     }
   },
   computed: {
-    currencyPairSnakeCase() {
-      return `${this.currencyPair.currencies[0].toLowerCase()}-
-      ${this.currencyPair.currencies[1].toLowerCase()}`
+    currencyPairKebabCase() {
+      return this.currencyPair.currencies
+        .map(currency => currency.toLowerCase())
+        .join('-')
     }
   },
   methods: {
