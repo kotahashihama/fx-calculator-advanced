@@ -31,9 +31,9 @@ export default {
         .get('https://api.ratesapi.io/api/latest?base=JPY')
         .then(function(response) {
           const currentPrices = response.data.rates
-          for (let i = 0; i < currencyPairs.length; i++) {
-            const currencies = currencyPairs[i].currencies
-            if (currencyPairs[i].currencies[1] === 'JPY') {
+          currencyPairs.forEach(currencyPair => {
+            const currencies = currencyPair.currencies
+            if (currencyPair.currencies[1] === 'JPY') {
               self.$store.commit(
                 `getCurrentPrice${currencies[0].charAt(0) +
                   currencies[0]
@@ -43,16 +43,16 @@ export default {
                 currentPrices[currencies[0]]
               )
             }
-          }
+          })
         })
 
       this.$axios
         .get('https://api.ratesapi.io/api/latest?base=USD')
         .then(function(response) {
           const currentPrices = response.data.rates
-          for (let i = 0; i < currencyPairs.length; i++) {
-            const currencies = currencyPairs[i].currencies
-            if (currencyPairs[i].currencies[1] === 'USD') {
+          currencyPairs.forEach(currencyPair => {
+            const currencies = currencyPair.currencies
+            if (currencyPair.currencies[1] === 'USD') {
               self.$store.commit(
                 `getCurrentPrice${currencies[0].charAt(0) +
                   currencies[0]
@@ -62,7 +62,7 @@ export default {
                 currentPrices[currencies[0]]
               )
             }
-          }
+          })
         })
     }
   }
