@@ -3,43 +3,50 @@ const currencyPairs = [
     symbol: 'USD/JPY',
     currencies: ['USD', 'JPY'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.001
   },
   {
     symbol: 'EUR/USD',
     currencies: ['EUR', 'USD'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.00001
   },
   {
     symbol: 'GBP/USD',
     currencies: ['GBP', 'USD'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.00001
   },
   {
     symbol: 'AUD/USD',
     currencies: ['AUD', 'USD'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.00001
   },
   {
     symbol: 'EUR/JPY',
     currencies: ['EUR', 'JPY'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.001
   },
   {
     symbol: 'GBP/JPY',
     currencies: ['GBP', 'JPY'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.001
   },
   {
     symbol: 'AUD/JPY',
     currencies: ['AUD', 'JPY'],
     currentPrice: 0,
-    assumedPrice: 0
+    assumedPrice: 0,
+    step: 0.001
   }
 ]
 
