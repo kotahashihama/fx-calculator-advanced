@@ -58,6 +58,9 @@ const currencyPairs = [
 ]
 
 export const state = () => ({
+  showsModal: false,
+  currentModal: '',
+
   title: '無題',
   currencyPairs,
   openTrades: [
@@ -247,6 +250,15 @@ export const getters = {
 }
 
 export const mutations = {
+  showModal(state, currentModal) {
+    state.showsModal = true
+    state.currentModal = currentModal
+  },
+  hideModal(state) {
+    state.showsModal = false
+    state.currentModal = ''
+  },
+
   updateTitle(state, title) {
     state.title = title
   },

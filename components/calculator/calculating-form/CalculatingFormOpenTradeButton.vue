@@ -1,5 +1,7 @@
 <template>
-  <button class="calculating-form-open-trade-button"><slot /></button>
+  <button class="calculating-form-open-trade-button" @click="$emit('click')">
+    <slot />
+  </button>
 </template>
 
 <style lang="scss" scoped>
