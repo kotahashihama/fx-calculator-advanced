@@ -12,7 +12,7 @@
     <transition-group name="items" tag="tbody">
       <CalculatedResultOpenTradesItem
         v-for="openTrade in $store.state.openTrades"
-        :key="openTrade.id"
+        :key="openTrade.id || 0"
         :open-trade="openTrade"
       >
         <template v-slot:currency-pair>
