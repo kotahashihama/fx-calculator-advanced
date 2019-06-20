@@ -20,6 +20,14 @@ export default {
     Modal,
     TheHeader,
     TheFooter
+  },
+  mounted() {
+    document.body.addEventListener('keydown', event => {
+      const esc = 27
+      if (event.keyCode === esc) {
+        this.$store.commit('hideModal')
+      }
+    })
   }
 }
 </script>
