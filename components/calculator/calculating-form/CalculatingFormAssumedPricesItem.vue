@@ -6,7 +6,15 @@
       }}</CalculatingFormSubHeading>
     </label>
     <span class="form-separate">
-      <button class="button" @click="setCurrentPrice()">
+      <button
+        class="button"
+        @click="
+          setCurrentPrice(
+            currencyPair.currencies[0],
+            currencyPair.currencies[1]
+          )
+        "
+      >
         現在値
       </button>
       <CalculatingFormInput
