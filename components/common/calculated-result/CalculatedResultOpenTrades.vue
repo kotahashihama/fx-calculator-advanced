@@ -13,6 +13,7 @@
       <CalculatedResultOpenTradesItem
         v-for="openTrade in $store.state.openTrades"
         :key="openTrade.id"
+        :open-trade="openTrade"
       >
         <template v-slot:currency-pair>
           {{ openTrade.symbol }}

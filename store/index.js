@@ -349,5 +349,8 @@ export const mutations = {
   },
   saveOpenTrade(state) {
     state.openTrades.push(JSON.parse(JSON.stringify(state.openTradeEdited)))
+  },
+  deleteOpenTrade(state, index) {
+    state.openTrades.splice(index, 1)
   }
 }

@@ -14,10 +14,29 @@
     </td>
     <td class="calculated-result-open-trades-item__item">
       <button class="button">編集</button>
-      <button class="button">削除</button>
+      <button class="button" @click="deleteOpenTrade()">削除</button>
     </td>
   </tr>
 </template>
+
+<script>
+export default {
+  props: {
+    openTrade: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    deleteOpenTrade() {
+      const openTrade = this.$store.state.openTrades.findIndex(
+        openTrade => openTrade.id === this.openTrade.id
+      )
+      this.$store.commit('deleteOpenTrade', openTrade)
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .calculated-result-open-trades-item {
