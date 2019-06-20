@@ -348,6 +348,6 @@ export const mutations = {
     state.openTradeEdited.id = openTradeEditedId
   },
   saveOpenTrade(state) {
-    state.openTrades.push(state.openTradeEdited)
+    state.openTrades.push(JSON.parse(JSON.stringify(state.openTradeEdited)))
   }
 }
