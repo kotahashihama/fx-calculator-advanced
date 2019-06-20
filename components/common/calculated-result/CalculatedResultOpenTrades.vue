@@ -9,7 +9,7 @@
         <th class="heading">操作</th>
       </tr>
     </thead>
-    <tbody>
+    <transition-group name="items" tag="tbody">
       <CalculatedResultOpenTradesItem
         v-for="openTrade in $store.state.openTrades"
         :key="openTrade.id"
@@ -28,7 +28,7 @@
           {{ openTrade.openPrice }}
         </template>
       </CalculatedResultOpenTradesItem>
-    </tbody>
+    </transition-group>
   </table>
 </template>
 
@@ -53,5 +53,22 @@ export default {
   padding: 0.5em;
   background: #f5f5f5;
   font-weight: normal;
+}
+
+.items-leave-active,
+.items-enter-active {
+  transition: opacity 0.5s, transform 0.5s ease;
+}
+.items-leave-to,
+.items-enter {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.items-leave,
+.items-enter-to {
+  opacity: 1;
+}
+.items-move {
+  transition: transform 0.5s;
 }
 </style>
