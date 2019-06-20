@@ -142,6 +142,7 @@ export default {
         ) + 1
       this.$store.commit('updateOpenTradeEditedId', id)
       this.$store.commit('saveOpenTrade')
+      this.$store.commit('hideModal')
     }
   }
 }
