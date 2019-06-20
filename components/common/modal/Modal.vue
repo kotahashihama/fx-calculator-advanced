@@ -59,7 +59,7 @@ export default {
 }
 
 .content {
-  margin: 18px;
-  margin-top: 44px;
+  margin: 0 42px 32px;
+  margin-top: 46px;
 }
 </style>

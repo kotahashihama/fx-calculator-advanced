@@ -65,18 +65,21 @@ export const state = () => ({
   currencyPairs,
   openTrades: [
     {
+      id: 1,
       symbol: 'USD/JPY',
       action: '買',
       lot: 0.02,
       openPrice: 108.598
     },
     {
+      id: 2,
       symbol: 'USD/JPY',
       action: '売',
       lot: 0.02,
       openPrice: 108.598
     },
     {
+      id: 3,
       symbol: 'EUR/USD',
       action: '売',
       lot: 0.02,
@@ -105,6 +108,21 @@ export const state = () => ({
   leverages: {
     international: [1000, 888, 500, 200],
     domestic: [25, 20, 10, 5]
+  },
+
+  openTradeDefault: {
+    id: 0,
+    symbol: 'USD/JPY',
+    action: '買',
+    lot: 0.01,
+    openPrice: 0
+  },
+  openTradeEdited: {
+    id: 0,
+    symbol: 'USD/JPY',
+    action: '買',
+    lot: 0.01,
+    openPrice: 0
   }
 })
 
@@ -302,10 +320,34 @@ export const mutations = {
       const result = Math.round((1 / payload.currentPrice) * 1000) / 1000
       currencyPair.currentPrice = result
       currencyPair.assumedPrice = result
+
+      if (payload.baseCurrency === 'USD') {
+        state.openTradeDefault.openPrice = result
+        state.openTradeEdited.openPrice = result
+      }
     } else {
       const result = Math.round((1 / payload.currentPrice) * 100000) / 100000
       currencyPair.currentPrice = result
       currencyPair.assumedPrice = result
     }
+  },
+
+  updateOpenTradeEditedSymbol(state, openTradeEditedSymbol) {
+    state.openTradeEdited.symbol = openTradeEditedSymbol
+  },
+  updateOpenTradeEditedAction(state, openTradeEditedAction) {
+    state.openTradeEdited.action = openTradeEditedAction
+  },
+  updateOpenTradeEditedLot(state, openTradeEditedLot) {
+    state.openTradeEdited.lot = openTradeEditedLot
+  },
+  updateOpenTradeEditedOpenPrice(state, openTradeEditedOpenPrice) {
+    state.openTradeEdited.openPrice = openTradeEditedOpenPrice
+  },
+  updateOpenTradeEditedId(state, openTradeEditedId) {
+    state.openTradeEdited.id = openTradeEditedId
+  },
+  saveOpenTrade(state) {
+    state.openTrades.push(state.openTradeEdited)
   }
 }
