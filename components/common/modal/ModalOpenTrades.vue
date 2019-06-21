@@ -177,7 +177,7 @@ export default {
 .title {
   margin-bottom: 37px;
   text-align: center;
-  font-size: 23px;
+  font-size: 24px;
 }
 
 .form {

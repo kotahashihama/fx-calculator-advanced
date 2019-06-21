@@ -9,7 +9,7 @@
         <th class="heading">操作</th>
       </tr>
     </thead>
-    <transition-group name="items" tag="tbody">
+    <transition-group name="open-trade-items" tag="tbody">
       <CalculatedResultOpenTradesItem
         v-for="openTrade in $store.state.openTrades"
         :key="openTrade.id || 0"
@@ -55,20 +55,20 @@ export default {
   font-weight: normal;
 }
 
-.items-leave-active,
-.items-enter-active {
-  transition: opacity 0.5s, transform 0.5s ease;
+.open-trade-items-leave-active,
+.open-trade-items-enter-active {
+  transition: opacity 0.3s, transform 0.3s ease;
 }
-.items-leave-to,
-.items-enter {
+.open-trade-items-leave-to,
+.open-trade-items-enter {
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(10px);
 }
-.items-leave,
-.items-enter-to {
+.open-trade-items-leave,
+.open-trade-items-enter-to {
   opacity: 1;
 }
-.items-move {
-  transition: transform 0.5s;
+.open-trade-items-move {
+  transition: transform 0.3s;
 }
 </style>

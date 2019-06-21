@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="fade">
+    <transition name="modal">
       <Modal v-if="$store.state.showsModal" />
     </transition>
 
@@ -93,12 +93,12 @@ button {
   font-feature-settings: 'liga';
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s;
 }
-.fade-enter,
-.fade-leave-to {
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
 }
 </style>
