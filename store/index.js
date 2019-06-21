@@ -368,8 +368,6 @@ export const mutations = {
     const index = state.openTrades.findIndex(
       openTrade => openTrade.id === state.openTradeEdited.id
     )
-    // alert(state.openTrades[index].id)
-    // alert(state.openTradeEdited.id)
     state.openTrades.splice(
       index,
       1,
