@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import ModalAddsOpenTrades from '@/components/common/modal/ModalAddsOpenTrades.vue'
+import ModalOpenTrades from '@/components/common/modal/ModalOpenTrades.vue'
 import ModalGetsCurrentPrices from '@/components/common/modal/ModalGetsCurrentPrices.vue'
 
 export default {
   components: {
-    ModalAddsOpenTrades,
+    ModalOpenTrades,
     ModalGetsCurrentPrices
   },
   methods: {

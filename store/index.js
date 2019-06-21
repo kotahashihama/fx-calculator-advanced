@@ -110,6 +110,7 @@ export const state = () => ({
     domestic: [25, 20, 10, 5]
   },
 
+  editsOpenTrade: false,
   openTradeDefault: {
     id: 0,
     symbol: 'USD/JPY',
@@ -275,6 +276,7 @@ export const mutations = {
   hideModal(state) {
     state.showsModal = false
     state.currentModal = ''
+    state.editsOpenTrade = false
   },
 
   updateTitle(state, title) {
@@ -332,6 +334,18 @@ export const mutations = {
     }
   },
 
+  enableEditOpenTrade(state) {
+    state.editsOpenTrade = true
+  },
+  disableEditOpenTrade(state) {
+    state.editsOpenTrade = false
+  },
+  setOpenTradeDefault(state) {
+    state.openTradeEdited = JSON.parse(JSON.stringify(state.openTradeDefault))
+  },
+  setOpenTradeEdited(state, openTrade) {
+    state.openTradeEdited = JSON.parse(JSON.stringify(openTrade))
+  },
   updateOpenTradeEditedSymbol(state, openTradeEditedSymbol) {
     state.openTradeEdited.symbol = openTradeEditedSymbol
   },
@@ -349,6 +363,18 @@ export const mutations = {
   },
   saveOpenTrade(state) {
     state.openTrades.push(JSON.parse(JSON.stringify(state.openTradeEdited)))
+  },
+  updateOpenTrade(state) {
+    const index = state.openTrades.findIndex(
+      openTrade => openTrade.id === state.openTradeEdited.id
+    )
+    // alert(state.openTrades[index].id)
+    // alert(state.openTradeEdited.id)
+    state.openTrades.splice(
+      index,
+      1,
+      JSON.parse(JSON.stringify(state.openTradeEdited))
+    )
   },
   deleteOpenTrade(state, index) {
     state.openTrades.splice(index, 1)

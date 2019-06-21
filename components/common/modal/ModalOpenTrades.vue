@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="title">ポジションの追加</div>
+    <div v-if="$store.state.editsOpenTrade" class="title">
+      保有ポジションの編集
+    </div>
+    <div v-else class="title">ポジションの追加</div>
 
     <p>
       <label for="currency-pair">
@@ -43,7 +46,11 @@
       <label for="lot">
         <span>ロット</span>
       </label>
-      <CalculatingFormInput id="lot" v-model="openTradeEditedLot" step="0.01" />
+      <CalculatingFormInput
+        id="lot"
+        v-model.number="openTradeEditedLot"
+        step="0.01"
+      />
     </p>
 
     <p>
@@ -54,19 +61,27 @@
       <CalculatingFormInput
         v-if="isJpyDenominated"
         id="open-price"
-        v-model="openTradeEditedOpenPrice"
+        v-model.number="openTradeEditedOpenPrice"
         step="0.001"
       />
       <CalculatingFormInput
         v-else
         id="open-price"
-        v-model="openTradeEditedOpenPrice"
+        v-model.number="openTradeEditedOpenPrice"
         step="0.00001"
       />
     </p>
 
     <div class="buttons">
-      <ModalButton class="button" @click="saveOpenTrade()">追加</ModalButton>
+      <ModalButton
+        v-if="$store.state.editsOpenTrade"
+        class="button"
+        @click="updateOpenTrade()"
+        >保存</ModalButton
+      >
+      <ModalButton v-else class="button" @click="saveOpenTrade()"
+        >追加</ModalButton
+      >
     </div>
   </div>
 </template>
@@ -142,6 +157,10 @@ export default {
         ) + 1
       this.$store.commit('updateOpenTradeEditedId', id)
       this.$store.commit('saveOpenTrade')
+      this.$store.commit('hideModal')
+    },
+    updateOpenTrade() {
+      this.$store.commit('updateOpenTrade')
       this.$store.commit('hideModal')
     }
   }

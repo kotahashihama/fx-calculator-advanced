@@ -13,7 +13,7 @@
       <slot name="order-price" />
     </td>
     <td class="calculated-result-open-trades-item__item">
-      <button class="button">編集</button>
+      <button class="button" @click="showModalEditsOpenTrades()">編集</button>
       <button class="button" @click="deleteOpenTrade()">削除</button>
     </td>
   </tr>
@@ -28,6 +28,11 @@ export default {
     }
   },
   methods: {
+    showModalEditsOpenTrades() {
+      this.$store.commit('enableEditOpenTrade')
+      this.$store.commit('setOpenTradeEdited', this.openTrade)
+      this.$store.commit('showModal', 'ModalOpenTrades')
+    },
     deleteOpenTrade() {
       const openTrade = this.$store.state.openTrades.findIndex(
         openTrade => openTrade.id === this.openTrade.id

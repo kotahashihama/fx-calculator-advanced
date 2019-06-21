@@ -2,7 +2,7 @@
   <div class="calculating-form-open-trade">
     <CalculatingFormHeading>ポジション</CalculatingFormHeading>
     <div class="open-trade-processor">
-      <CalculatingFormOpenTradeButton @click="showModalAddsOpenTrades()"
+      <CalculatingFormOpenTradeButton @click="showModalCreatesOpenTrades()"
         >追加</CalculatingFormOpenTradeButton
       >
       <CalculatingFormOpenTradeButton @click="showModalGetsCurrentPrices()"
@@ -22,8 +22,9 @@ export default {
     CalculatingFormOpenTradeButton
   },
   methods: {
-    showModalAddsOpenTrades() {
-      this.$store.commit('showModal', 'ModalAddsOpenTrades')
+    showModalCreatesOpenTrades() {
+      this.$store.commit('setOpenTradeDefault')
+      this.$store.commit('showModal', 'ModalOpenTrades')
     },
     showModalGetsCurrentPrices() {
       this.$store.commit('showModal', 'ModalGetsCurrentPrices')
