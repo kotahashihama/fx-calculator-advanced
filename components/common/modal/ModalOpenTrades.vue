@@ -5,72 +5,78 @@
     </div>
     <div v-else class="title">ポジションの追加</div>
 
-    <p>
-      <label for="currency-pair">
-        <span>通貨ペア</span>
-      </label>
-      <ModalSelectString
-        id="currency-pair"
-        v-model="openTradeEditedSymbol"
-        @input="setCurrentPrice()"
-      >
-        <option
-          v-for="currencyPair in $store.state.currencyPairs"
-          :key="currencyPair.symbol"
-          >{{ currencyPair.symbol }}</option
-        >
-      </ModalSelectString>
-    </p>
+    <div class="form">
+      <div class="form__left">
+        <p class="form-item">
+          <label for="currency-pair">
+            <span class="form-item__title">通貨ペア</span>
+          </label>
+          <ModalSelectString
+            id="currency-pair"
+            v-model="openTradeEditedSymbol"
+            @input="setCurrentPrice()"
+          >
+            <option
+              v-for="currencyPair in $store.state.currencyPairs"
+              :key="currencyPair.symbol"
+              >{{ currencyPair.symbol }}</option
+            >
+          </ModalSelectString>
+        </p>
 
-    <p>
-      <span>売買</span>
-      <label for="action-buy">
-        <input
-          id="action"
-          v-model="openTradeEditedAction"
-          value="買"
-          type="radio"
-        />買
-      </label>
-      <label for="action-sell">
-        <input
-          id="action"
-          v-model="openTradeEditedAction"
-          value="売"
-          type="radio"
-        />売
-      </label>
-    </p>
+        <p class="form-item">
+          <span class="form-item__title">売買</span>
+          <label for="action-buy">
+            <input
+              id="action-buy"
+              v-model="openTradeEditedAction"
+              value="買"
+              type="radio"
+            />買
+          </label>
+          <label for="action-sell">
+            <input
+              id="action-sell"
+              v-model="openTradeEditedAction"
+              value="売"
+              type="radio"
+            />売
+          </label>
+        </p>
+      </div>
 
-    <p>
-      <label for="lot">
-        <span>ロット</span>
-      </label>
-      <CalculatingFormInput
-        id="lot"
-        v-model.number="openTradeEditedLot"
-        step="0.01"
-      />
-    </p>
+      <div class="form__right">
+        <p class="form-item">
+          <label for="lot">
+            <span class="form-item__title">ロット</span>
+          </label>
+          <CalculatingFormInput
+            id="lot"
+            v-model.number="openTradeEditedLot"
+            step="0.01"
+          />
+        </p>
 
-    <p>
-      <label for="open-price">
-        <span>注文レート</span>
-      </label>
+        <p class="form-item">
+          <label for="open-price">
+            <span class="form-item__title">注文レート</span>
+          </label>
 
-      <CalculatingFormInput
-        v-if="isJpyDenominated"
-        id="open-price"
-        v-model.number="openTradeEditedOpenPrice"
-        step="0.001"
-      />
-      <CalculatingFormInput
-        v-else
-        id="open-price"
-        v-model.number="openTradeEditedOpenPrice"
-        step="0.00001"
-      />
-    </p>
+          <CalculatingFormInput
+            v-if="isJpyDenominated"
+            id="open-price"
+            v-model.number="openTradeEditedOpenPrice"
+            step="0.001"
+          />
+          <CalculatingFormInput
+            v-else
+            id="open-price"
+            v-model.number="openTradeEditedOpenPrice"
+            step="0.00001"
+          />
+        </p>
+      </div>
+    </div>
 
     <div class="buttons">
       <ModalButton
@@ -169,7 +175,32 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-  font-size: 20px;
+  margin-bottom: 37px;
+  text-align: center;
+  font-size: 23px;
+}
+
+.form {
+  display: flex;
+  align-items: flex-start;
+
+  &__left {
+    margin-right: 26px;
+    width: 230px;
+  }
+
+  &__right {
+    width: 230px;
+  }
+
+  &-item {
+    margin-bottom: 20px;
+
+    &__title {
+      display: block;
+      margin-bottom: 0.4em;
+    }
+  }
 }
 
 .buttons {

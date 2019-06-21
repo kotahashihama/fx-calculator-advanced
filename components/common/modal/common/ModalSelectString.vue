@@ -30,8 +30,9 @@ export default {
   display: block;
   border: solid 1px #dadada;
   border-radius: 3px;
-  padding: 0.2em 0.4em;
+  padding: 0 0.4em;
   width: 100%;
+  height: 37px;
   background: #fff;
   font-size: 1.3rem;
 }
