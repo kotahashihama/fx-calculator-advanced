@@ -124,6 +124,12 @@ export const state = () => ({
     action: '買',
     lot: 0.01,
     openPrice: 0
+  },
+
+  myfxbook: {
+    email: '',
+    password: '',
+    session: ''
   }
 })
 

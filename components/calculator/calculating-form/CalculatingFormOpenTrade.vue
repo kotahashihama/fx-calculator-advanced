@@ -5,7 +5,7 @@
       <CalculatingFormOpenTradeButton @click="showModalCreatesOpenTrades()"
         >追加</CalculatingFormOpenTradeButton
       >
-      <CalculatingFormOpenTradeButton @click="showModalGetsCurrentPrices()"
+      <CalculatingFormOpenTradeButton @click="showModalMyfxbook()"
         >取得</CalculatingFormOpenTradeButton
       >
     </div>
@@ -26,8 +26,8 @@ export default {
       this.$store.commit('setOpenTradeDefault')
       this.$store.commit('showModal', 'ModalOpenTrades')
     },
-    showModalGetsCurrentPrices() {
-      this.$store.commit('showModal', 'ModalGetsCurrentPrices')
+    showModalMyfxbook() {
+      this.$store.commit('showModal', 'ModalMyfxbook')
     }
   }
 }

@@ -184,6 +184,10 @@ export default {
   &-item {
     margin-bottom: 20px;
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     &__title {
       display: block;
       margin-bottom: 0.4em;
@@ -194,6 +198,6 @@ export default {
 .buttons {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 43px;
 }
 </style>

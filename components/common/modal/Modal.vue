@@ -16,12 +16,12 @@
 
 <script>
 import ModalOpenTrades from '@/components/common/modal/ModalOpenTrades.vue'
-import ModalGetsCurrentPrices from '@/components/common/modal/ModalGetsCurrentPrices.vue'
+import ModalMyfxbook from '@/components/common/modal/ModalMyfxbook.vue'
 
 export default {
   components: {
     ModalOpenTrades,
-    ModalGetsCurrentPrices
+    ModalMyfxbook
   },
   methods: {
     hideModal() {
