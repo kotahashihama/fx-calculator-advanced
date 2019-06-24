@@ -126,7 +126,9 @@ export default {
     updateOpenTradeEdited(option) {
       this.$store.commit('updateOpenTradeEdited', {
         option,
-        value: isNaN ? event.target.value : Number(event.target.value)
+        value: event.target.value.isNaN
+          ? event.target.value
+          : Number(event.target.value)
       })
     },
     setCurrentPrice() {
@@ -134,10 +136,10 @@ export default {
         currencyPair =>
           currencyPair.symbol === this.$store.state.openTradeEdited.symbol
       )
-      this.$store.commit(
-        'updateOpenTradeEditedOpenPrice',
-        currencyPair.currentPrice
-      )
+      this.$store.commit('updateOpenTradeEdited', {
+        option: 'openPrice',
+        value: currencyPair.currentPrice
+      })
     },
     saveOpenTrade() {
       const id =
