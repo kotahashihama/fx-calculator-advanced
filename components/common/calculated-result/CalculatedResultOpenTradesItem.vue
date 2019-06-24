@@ -15,6 +15,7 @@
     <td class="calculated-result-open-trades-item__item">
       <button class="button" @click="showModalEditsOpenTrades()">編集</button>
       <button class="button" @click="deleteOpenTrade()">削除</button>
+      {{ openTrade.id }}
     </td>
   </tr>
 </template>

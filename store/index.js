@@ -346,20 +346,8 @@ export const mutations = {
   setOpenTradeEdited(state, openTrade) {
     state.openTradeEdited = JSON.parse(JSON.stringify(openTrade))
   },
-  updateOpenTradeEditedSymbol(state, openTradeEditedSymbol) {
-    state.openTradeEdited.symbol = openTradeEditedSymbol
-  },
-  updateOpenTradeEditedAction(state, openTradeEditedAction) {
-    state.openTradeEdited.action = openTradeEditedAction
-  },
-  updateOpenTradeEditedLot(state, openTradeEditedLot) {
-    state.openTradeEdited.lot = openTradeEditedLot
-  },
-  updateOpenTradeEditedOpenPrice(state, openTradeEditedOpenPrice) {
-    state.openTradeEdited.openPrice = openTradeEditedOpenPrice
-  },
-  updateOpenTradeEditedId(state, openTradeEditedId) {
-    state.openTradeEdited.id = openTradeEditedId
+  updateOpenTradeEdited(state, payload) {
+    state.openTradeEdited[payload.option] = payload.value
   },
   saveOpenTrade(state) {
     state.openTrades.push(JSON.parse(JSON.stringify(state.openTradeEdited)))

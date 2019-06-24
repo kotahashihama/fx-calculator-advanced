@@ -13,12 +13,16 @@
           </label>
           <ModalSelectString
             id="currency-pair"
-            v-model="openTradeEditedSymbol"
-            @input="setCurrentPrice()"
+            :value="$store.state.openTradeEdited.symbol"
+            @input="
+              updateOpenTradeEdited('symbol', $event)
+              setCurrentPrice()
+            "
           >
             <option
               v-for="currencyPair in $store.state.currencyPairs"
               :key="currencyPair.symbol"
+              :value="currencyPair.symbol"
               >{{ currencyPair.symbol }}</option
             >
           </ModalSelectString>
@@ -29,17 +33,20 @@
           <label for="action-buy">
             <input
               id="action-buy"
-              v-model="openTradeEditedAction"
               value="買"
+              name="action"
               type="radio"
+              checked
+              @input="updateOpenTradeEdited('action', $event)"
             />買
           </label>
           <label for="action-sell">
             <input
               id="action-sell"
-              v-model="openTradeEditedAction"
               value="売"
+              name="action"
               type="radio"
+              @input="updateOpenTradeEdited('action', $event)"
             />売
           </label>
         </p>
@@ -52,8 +59,9 @@
           </label>
           <CalculatingFormInput
             id="lot"
-            v-model.number="openTradeEditedLot"
+            :value="$store.state.openTradeEdited.lot"
             step="0.01"
+            @input="updateOpenTradeEdited('lot', $event)"
           />
         </p>
 
@@ -65,14 +73,16 @@
           <CalculatingFormInput
             v-if="isJpyDenominated"
             id="open-price"
-            v-model.number="openTradeEditedOpenPrice"
+            :value="$store.state.openTradeEdited.openPrice"
             step="0.001"
+            @input="updateOpenTradeEdited('openPrice', $event)"
           />
           <CalculatingFormInput
             v-else
             id="open-price"
-            v-model.number="openTradeEditedOpenPrice"
+            :value="$store.state.openTradeEdited.openPrice"
             step="0.00001"
+            @input="updateOpenTradeEdited('openPrice', $event)"
           />
         </p>
       </div>
@@ -110,42 +120,15 @@ export default {
           currencyPair.symbol === this.$store.state.openTradeEdited.symbol
       )
       return currencyPair.currencies[1] === 'JPY'
-    },
-
-    openTradeEditedSymbol: {
-      get() {
-        return this.$store.state.openTradeEdited.symbol
-      },
-      set(value) {
-        this.$store.commit('updateOpenTradeEditedSymbol', value)
-      }
-    },
-    openTradeEditedAction: {
-      get() {
-        return this.$store.state.openTradeEdited.action
-      },
-      set(value) {
-        this.$store.commit('updateOpenTradeEditedAction', value)
-      }
-    },
-    openTradeEditedLot: {
-      get() {
-        return this.$store.state.openTradeEdited.lot
-      },
-      set(value) {
-        this.$store.commit('updateOpenTradeEditedLot', value)
-      }
-    },
-    openTradeEditedOpenPrice: {
-      get() {
-        return this.$store.state.openTradeEdited.openPrice
-      },
-      set(value) {
-        this.$store.commit('updateOpenTradeEditedOpenPrice', value)
-      }
     }
   },
   methods: {
+    updateOpenTradeEdited(option) {
+      this.$store.commit('updateOpenTradeEdited', {
+        option,
+        value: isNaN ? event.target.value : Number(event.target.value)
+      })
+    },
     setCurrentPrice() {
       const currencyPair = this.$store.state.currencyPairs.find(
         currencyPair =>
@@ -161,7 +144,10 @@ export default {
         Math.max(
           ...this.$store.state.openTrades.map(openTrade => openTrade.id)
         ) + 1
-      this.$store.commit('updateOpenTradeEditedId', id)
+      this.$store.commit('updateOpenTradeEdited', {
+        option: 'id',
+        value: Number(id)
+      })
       this.$store.commit('saveOpenTrade')
       this.$store.commit('hideModal')
     },
