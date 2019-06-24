@@ -126,7 +126,7 @@ export default {
     updateOpenTradeEdited(option) {
       this.$store.commit('updateOpenTradeEdited', {
         option,
-        value: event.target.value.isNaN
+        value: isNaN(event.target.value)
           ? event.target.value
           : Number(event.target.value)
       })
