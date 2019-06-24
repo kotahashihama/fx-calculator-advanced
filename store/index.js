@@ -341,26 +341,22 @@ export const mutations = {
     state.editsOpenTrade = false
   },
   setOpenTradeDefault(state) {
-    state.openTradeEdited = JSON.parse(JSON.stringify(state.openTradeDefault))
+    state.openTradeEdited = { ...state.openTradeDefault }
   },
   setOpenTradeEdited(state, openTrade) {
-    state.openTradeEdited = JSON.parse(JSON.stringify(openTrade))
+    state.openTradeEdited = { ...openTrade }
   },
   updateOpenTradeEdited(state, payload) {
     state.openTradeEdited[payload.option] = payload.value
   },
   saveOpenTrade(state) {
-    state.openTrades.push(JSON.parse(JSON.stringify(state.openTradeEdited)))
+    state.openTrades.push({ ...state.openTradeEdited })
   },
   updateOpenTrade(state) {
     const index = state.openTrades.findIndex(
       openTrade => openTrade.id === state.openTradeEdited.id
     )
-    state.openTrades.splice(
-      index,
-      1,
-      JSON.parse(JSON.stringify(state.openTradeEdited))
-    )
+    state.openTrades.splice(index, 1, { ...state.openTradeEdited })
   },
   deleteOpenTrade(state, index) {
     state.openTrades.splice(index, 1)
