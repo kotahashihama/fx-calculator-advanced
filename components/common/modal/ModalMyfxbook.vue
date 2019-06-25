@@ -2,9 +2,13 @@
   <div class="modal-myfxbook">
     <ModalTitle>Myfxbookにログイン</ModalTitle>
 
-    <template v-if="$store.state.myfxbook.session">
-      <div class="form">
-        <p class="form-item">
+    <form
+      v-if="$store.state.myfxbook.session"
+      class="form"
+      @submit.prevent="getOpenTrades()"
+    >
+      <div class="form-content">
+        <p class="form-content__item">
           <label for="account-number">
             <ModalFormHeading>口座番号</ModalFormHeading>
           </label>
@@ -17,21 +21,19 @@
       </div>
 
       <div class="buttons">
-        <ModalFormButton class="button" @click="getOpenTrades()"
-          >取得</ModalFormButton
-        >
+        <ModalFormButton class="button" type="submit">取得</ModalFormButton>
       </div>
-    </template>
-    <template v-else>
-      <div class="form">
-        <p class="form-item">
+    </form>
+    <form v-else class="form" @submit.prevent="loginMyfxbook()">
+      <div class="form-content">
+        <p class="form-content__item">
           <label for="email">
             <ModalFormHeading>メールアドレス</ModalFormHeading>
           </label>
           <ModalFormInput id="email" v-model="email" type="text" />
         </p>
 
-        <p class="form-item">
+        <p class="form-content__item">
           <label for="password">
             <ModalFormHeading>パスワード</ModalFormHeading>
           </label>
@@ -40,11 +42,9 @@
       </div>
 
       <div class="buttons">
-        <ModalFormButton class="button" @click="loginMyfxbook()"
-          >ログイン</ModalFormButton
-        >
+        <ModalFormButton class="button" type="submit">ログイン</ModalFormButton>
       </div>
-    </template>
+    </form>
   </div>
 </template>
 
@@ -138,11 +138,13 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  &-item {
-    margin-bottom: 20px;
+  &-content {
+    &__item {
+      margin-bottom: 20px;
 
-    &:last-child {
-      margin-bottom: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }

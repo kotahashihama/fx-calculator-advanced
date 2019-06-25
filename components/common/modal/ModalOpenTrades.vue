@@ -5,100 +5,107 @@
     >
     <ModalTitle v-else>ポジションの追加</ModalTitle>
 
-    <div class="form">
-      <div class="form__left">
-        <p class="form-item">
-          <label for="currency-pair">
-            <span class="form-item__title">通貨ペア</span>
-          </label>
-          <ModalFormSelect
-            id="currency-pair"
-            :value="$store.state.openTradeEdited.symbol"
-            @input="
-              updateOpenTradeEdited('symbol', $event)
-              setCurrentPrice()
-            "
-          >
-            <option
-              v-for="currencyPair in $store.state.currencyPairs"
-              :key="currencyPair.symbol"
-              :value="currencyPair.symbol"
-              >{{ currencyPair.symbol }}</option
+    <form
+      class="form"
+      @submit.prevent="
+        $store.state.editsOpenTrade ? updateOpenTrade() : saveOpenTrade()
+      "
+    >
+      <div class="form-content">
+        <div class="form-content__left">
+          <p class="form-item">
+            <label for="currency-pair">
+              <span class="form-item__title">通貨ペア</span>
+            </label>
+            <ModalFormSelect
+              id="currency-pair"
+              :value="$store.state.openTradeEdited.symbol"
+              @input="
+                updateOpenTradeEdited('symbol', $event)
+                setCurrentPrice()
+              "
             >
-          </ModalFormSelect>
-        </p>
+              <option
+                v-for="currencyPair in $store.state.currencyPairs"
+                :key="currencyPair.symbol"
+                :value="currencyPair.symbol"
+                >{{ currencyPair.symbol }}</option
+              >
+            </ModalFormSelect>
+          </p>
 
-        <p class="form-item">
-          <span class="form-item__title">売買</span>
-          <label for="action-buy">
-            <input
-              id="action-buy"
-              value="買"
-              name="action"
-              type="radio"
-              checked
-              @input="updateOpenTradeEdited('action', $event)"
-            />買
-          </label>
-          <label for="action-sell">
-            <input
-              id="action-sell"
-              value="売"
-              name="action"
-              type="radio"
-              @input="updateOpenTradeEdited('action', $event)"
-            />売
-          </label>
-        </p>
+          <p class="form-item">
+            <span class="form-item__title">売買</span>
+            <label for="action-buy">
+              <input
+                id="action-buy"
+                value="買"
+                name="action"
+                type="radio"
+                checked
+                @input="updateOpenTradeEdited('action', $event)"
+              />買
+            </label>
+            <label for="action-sell">
+              <input
+                id="action-sell"
+                value="売"
+                name="action"
+                type="radio"
+                @input="updateOpenTradeEdited('action', $event)"
+              />売
+            </label>
+          </p>
+        </div>
+
+        <div class="form-content__right">
+          <p class="form-item">
+            <label for="lot">
+              <span class="form-item__title">ロット</span>
+            </label>
+            <ModalFormInputNumber
+              id="lot"
+              :value="$store.state.openTradeEdited.lot"
+              step="0.01"
+              @input="updateOpenTradeEdited('lot', $event)"
+            />
+          </p>
+
+          <p class="form-item">
+            <label for="open-price">
+              <span class="form-item__title">注文レート</span>
+            </label>
+
+            <ModalFormInputNumber
+              v-if="isJpyDenominated"
+              id="open-price"
+              :value="$store.state.openTradeEdited.openPrice"
+              step="0.001"
+              @input="updateOpenTradeEdited('openPrice', $event)"
+            />
+            <ModalFormInputNumber
+              v-else
+              id="open-price"
+              :value="$store.state.openTradeEdited.openPrice"
+              step="0.00001"
+              @input="updateOpenTradeEdited('openPrice', $event)"
+            />
+          </p>
+        </div>
       </div>
 
-      <div class="form__right">
-        <p class="form-item">
-          <label for="lot">
-            <span class="form-item__title">ロット</span>
-          </label>
-          <ModalFormInputNumber
-            id="lot"
-            :value="$store.state.openTradeEdited.lot"
-            step="0.01"
-            @input="updateOpenTradeEdited('lot', $event)"
-          />
-        </p>
-
-        <p class="form-item">
-          <label for="open-price">
-            <span class="form-item__title">注文レート</span>
-          </label>
-
-          <ModalFormInputNumber
-            v-if="isJpyDenominated"
-            id="open-price"
-            :value="$store.state.openTradeEdited.openPrice"
-            step="0.001"
-            @input="updateOpenTradeEdited('openPrice', $event)"
-          />
-          <ModalFormInputNumber
-            v-else
-            id="open-price"
-            :value="$store.state.openTradeEdited.openPrice"
-            step="0.00001"
-            @input="updateOpenTradeEdited('openPrice', $event)"
-          />
-        </p>
+      <div class="buttons">
+        <ModalFormButton
+          v-if="$store.state.editsOpenTrade"
+          class="button"
+          type="submit"
+          >保存</ModalFormButton
+        >
+        <ModalFormButton v-else class="button" type="submit"
+          >追加</ModalFormButton
+        >
       </div>
-    </div>
-
-    <div class="buttons">
-      <ModalFormButton
-        v-if="$store.state.editsOpenTrade"
-        class="button"
-        @click="updateOpenTrade()"
-        >保存</ModalFormButton
-      >
-      <ModalFormButton v-else class="button" @click="saveOpenTrade()"
-        >追加</ModalFormButton
-      >
-    </div>
+    </form>
   </div>
 </template>
 
@@ -165,16 +172,18 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  display: flex;
-  align-items: flex-start;
+  &-content {
+    display: flex;
+    align-items: flex-start;
 
-  &__left {
-    margin-right: 26px;
-    width: 230px;
-  }
+    &__left {
+      margin-right: 26px;
+      width: 230px;
+    }
 
-  &__right {
-    width: 230px;
+    &__right {
+      width: 230px;
+    }
   }
 
   &-item {
