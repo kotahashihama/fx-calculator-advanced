@@ -374,18 +374,18 @@ export const mutations = {
   },
   getOpenTrades(state, openTrades) {
     state.openTrades = []
-
-    for (let i = 0; i < openTrades.length; i++) {
+    openTrades.forEach(openTrade => {
       const max = Math.max(...state.openTrades.map(openTrade => openTrade.id))
-
       state.openTrades.push({
         id: isFinite(max) ? max + 1 : 1,
-        symbol: `${openTrades[i].symbol.substr(0, 3)}/
-          ${openTrades[i].symbol.substr(3, 3)}`,
-        action: openTrades[i].action === 'Buy' ? '買' : '売',
-        lot: openTrades[i].sizing.value,
-        openPrice: openTrades[i].openPrice
+        symbol: `${openTrade.symbol.substr(0, 3)}/${openTrade.symbol.substr(
+          3,
+          3
+        )}`,
+        action: openTrade.action === 'Buy' ? '買' : '売',
+        lot: openTrade.sizing.value,
+        openPrice: openTrade.openPrice
       })
-    }
+    })
   }
 }
