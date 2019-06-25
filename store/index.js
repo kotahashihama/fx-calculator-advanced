@@ -129,7 +129,8 @@ export const state = () => ({
   myfxbook: {
     email: '',
     password: '',
-    session: ''
+    session: '',
+    accountNumber: 0
   }
 })
 
@@ -366,5 +367,34 @@ export const mutations = {
   },
   deleteOpenTrade(state, index) {
     state.openTrades.splice(index, 1)
+  },
+
+  updateMyfxbookEmail(state, email) {
+    state.myfxbook.email = email
+  },
+  updateMyfxbookPassword(state, password) {
+    state.myfxbook.password = password
+  },
+  updateMyfxbookSession(state, session) {
+    state.myfxbook.session = session
+  },
+  updateMyfxbookAccountNumber(state, accountNumber) {
+    state.myfxbook.accountNumber = accountNumber
+  },
+  getOpenTrades(state, openTrades) {
+    state.openTrades = []
+
+    for (let i = 0; i < openTrades.length; i++) {
+      const max = Math.max(...state.openTrades.map(openTrade => openTrade.id))
+
+      state.openTrades.push({
+        id: isFinite(max) ? max + 1 : 1,
+        symbol: `${openTrades[i].symbol.substr(0, 3)}/
+          ${openTrades[i].symbol.substr(3, 3)}`,
+        action: openTrades[i].action === 'Buy' ? '買' : '売',
+        lot: openTrades[i].sizing.value,
+        openPrice: openTrades[i].openPrice
+      })
+    }
   }
 }

@@ -142,10 +142,10 @@ export default {
       })
     },
     saveOpenTrade() {
-      const id =
-        Math.max(
-          ...this.$store.state.openTrades.map(openTrade => openTrade.id)
-        ) + 1
+      const max = Math.max(
+        ...this.$store.state.openTrades.map(openTrade => openTrade.id)
+      )
+      const id = isFinite(max) ? max + 1 : 1
       this.$store.commit('updateOpenTradeEdited', {
         option: 'id',
         value: Number(id)
