@@ -43,12 +43,7 @@
           <label for="password">
             <ModalFormHeading>パスワード</ModalFormHeading>
           </label>
-          <ModalFormInput
-            id="password"
-            :value="$store.state.myfxbook.password"
-            type="password"
-            @input="updateMyfxbook('password', $event)"
-          />
+          <ModalFormInput id="password" v-model="password" type="password" />
         </p>
       </div>
 
@@ -72,6 +67,11 @@ export default {
     ModalFormInput,
     ModalFormButton
   },
+  data() {
+    return {
+      password: ''
+    }
+  },
   methods: {
     updateMyfxbook(option) {
       this.$store.commit('updateMyfxbook', {
@@ -83,7 +83,7 @@ export default {
       const self = this
       const params = {
         email: this.$store.state.myfxbook.email,
-        password: this.$store.state.myfxbook.password
+        password: this.password
       }
 
       this.$axios

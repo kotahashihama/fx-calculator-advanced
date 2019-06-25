@@ -128,7 +128,6 @@ export const state = () => ({
 
   myfxbook: {
     email: '',
-    password: '',
     session: '',
     accountNumber: ''
   }
