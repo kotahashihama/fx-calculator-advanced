@@ -1,51 +1,47 @@
 <template>
-  <div>
-    <div class="title">Myfxbookにログイン</div>
+  <div class="modal-myfxbook">
+    <ModalTitle>Myfxbookにログイン</ModalTitle>
 
     <template v-if="$store.state.myfxbook.session">
       <div class="form">
         <p class="form-item">
           <label for="account-number">
-            <span class="form-item__title">口座番号</span>
+            <ModalFormHeading>口座番号</ModalFormHeading>
           </label>
-          <input
+          <ModalFormInput
             id="account-number"
             v-model="accountNumber"
             type="text"
-            class="input"
           />
         </p>
       </div>
 
       <div class="buttons">
-        <ModalButton class="button" @click="getOpenTrades()">取得</ModalButton>
+        <ModalFormButton class="button" @click="getOpenTrades()"
+          >取得</ModalFormButton
+        >
       </div>
     </template>
     <template v-else>
       <div class="form">
         <p class="form-item">
           <label for="email">
-            <span class="form-item__title">メールアドレス</span>
+            <ModalFormHeading>メールアドレス</ModalFormHeading>
           </label>
-          <input id="email" v-model="email" type="text" class="input" />
+          <ModalFormInput id="email" v-model="email" type="text" />
         </p>
 
         <p class="form-item">
           <label for="password">
-            <span class="form-item__title">パスワード</span>
+            <ModalFormHeading>パスワード</ModalFormHeading>
           </label>
-          <input
-            id="password"
-            v-model="password"
-            type="password"
-            class="input"
-          />
+          <ModalFormInput id="password" v-model="password" type="password" />
         </p>
       </div>
 
       <div class="buttons">
-        <ModalButton class="button" @click="loginMyfxbook()"
-          >ログイン</ModalButton
+        <ModalFormButton class="button" @click="loginMyfxbook()"
+          >ログイン</ModalFormButton
         >
       </div>
     </template>
@@ -53,11 +49,17 @@
 </template>
 
 <script>
-import ModalButton from '@/components/common/modal/common/ModalButton.vue'
+import ModalTitle from '@/components/common/modal/common/ModalTitle.vue'
+import ModalFormHeading from '@/components/common/modal/common/ModalFormHeading.vue'
+import ModalFormInput from '@/components/common/modal/common/ModalFormInput.vue'
+import ModalFormButton from '@/components/common/modal/common/ModalFormButton.vue'
 
 export default {
   components: {
-    ModalButton
+    ModalTitle,
+    ModalFormHeading,
+    ModalFormInput,
+    ModalFormButton
   },
   computed: {
     email: {
@@ -102,7 +104,7 @@ export default {
             self.$store.commit('updateMyfxbookSession', response.data.session)
           } else {
             alert(
-              'ログインできませんでした。メールアドレスとパスワードをもう一度お試しください'
+              'ログインできませんでした。時間をおくか、メールアドレスとパスワードをもう一度ご確認ください'
             )
           }
         })
@@ -135,12 +137,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-bottom: 37px;
-  text-align: center;
-  font-size: 24px;
-}
-
 .form {
   &-item {
     margin-bottom: 20px;
@@ -148,23 +144,7 @@ export default {
     &:last-child {
       margin-bottom: 0;
     }
-
-    &__title {
-      display: block;
-      margin-bottom: 0.4em;
-    }
   }
-}
-
-.input {
-  display: block;
-  border: solid 1px #dadada;
-  border-radius: 3px;
-  padding: 0 0.4em;
-  width: 100%;
-  height: 37px;
-  background: #fff;
-  font-size: 1.3rem;
 }
 
 .buttons {

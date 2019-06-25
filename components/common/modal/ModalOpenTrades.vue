@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div v-if="$store.state.editsOpenTrade" class="title">
-      保有ポジションの編集
-    </div>
-    <div v-else class="title">ポジションの追加</div>
+  <div class="modal-open-trades">
+    <ModalTitle v-if="$store.state.editsOpenTrade"
+      >保有ポジションの編集</ModalTitle
+    >
+    <ModalTitle v-else>ポジションの追加</ModalTitle>
 
     <div class="form">
       <div class="form__left">
@@ -11,7 +11,7 @@
           <label for="currency-pair">
             <span class="form-item__title">通貨ペア</span>
           </label>
-          <ModalSelectString
+          <ModalFormSelect
             id="currency-pair"
             :value="$store.state.openTradeEdited.symbol"
             @input="
@@ -25,7 +25,7 @@
               :value="currencyPair.symbol"
               >{{ currencyPair.symbol }}</option
             >
-          </ModalSelectString>
+          </ModalFormSelect>
         </p>
 
         <p class="form-item">
@@ -57,7 +57,7 @@
           <label for="lot">
             <span class="form-item__title">ロット</span>
           </label>
-          <CalculatingFormInput
+          <ModalFormInputNumber
             id="lot"
             :value="$store.state.openTradeEdited.lot"
             step="0.01"
@@ -70,14 +70,14 @@
             <span class="form-item__title">注文レート</span>
           </label>
 
-          <CalculatingFormInput
+          <ModalFormInputNumber
             v-if="isJpyDenominated"
             id="open-price"
             :value="$store.state.openTradeEdited.openPrice"
             step="0.001"
             @input="updateOpenTradeEdited('openPrice', $event)"
           />
-          <CalculatingFormInput
+          <ModalFormInputNumber
             v-else
             id="open-price"
             :value="$store.state.openTradeEdited.openPrice"
@@ -89,29 +89,31 @@
     </div>
 
     <div class="buttons">
-      <ModalButton
+      <ModalFormButton
         v-if="$store.state.editsOpenTrade"
         class="button"
         @click="updateOpenTrade()"
-        >保存</ModalButton
+        >保存</ModalFormButton
       >
-      <ModalButton v-else class="button" @click="saveOpenTrade()"
-        >追加</ModalButton
+      <ModalFormButton v-else class="button" @click="saveOpenTrade()"
+        >追加</ModalFormButton
       >
     </div>
   </div>
 </template>
 
 <script>
-import ModalSelectString from '@/components/common/modal/common/ModalSelectString.vue'
-import CalculatingFormInput from '@/components/calculator/calculating-form/common/CalculatingFormInput.vue'
-import ModalButton from '@/components/common/modal/common/ModalButton.vue'
+import ModalTitle from '@/components/common/modal/common/ModalTitle.vue'
+import ModalFormSelect from '@/components/common/modal/common/ModalFormSelect.vue'
+import ModalFormInputNumber from '@/components/common/modal/common/ModalFormInputNumber.vue'
+import ModalFormButton from '@/components/common/modal/common/ModalFormButton.vue'
 
 export default {
   components: {
-    ModalSelectString,
-    CalculatingFormInput,
-    ModalButton
+    ModalTitle,
+    ModalFormSelect,
+    ModalFormInputNumber,
+    ModalFormButton
   },
   computed: {
     isJpyDenominated() {
@@ -162,12 +164,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-bottom: 37px;
-  text-align: center;
-  font-size: 24px;
-}
-
 .form {
   display: flex;
   align-items: flex-start;
@@ -186,11 +182,6 @@ export default {
 
     &:last-child {
       margin-bottom: 0;
-    }
-
-    &__title {
-      display: block;
-      margin-bottom: 0.4em;
     }
   }
 }

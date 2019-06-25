@@ -1,9 +1,9 @@
 <template>
   <p class="calculating-form-assumed-prices-item">
     <label :for="currencyPairKebabCase">
-      <CalculatingFormSubHeading>{{
+      <CalculatingFormSubheading>{{
         currencyPair.symbol
-      }}</CalculatingFormSubHeading>
+      }}</CalculatingFormSubheading>
     </label>
     <span class="form-separate">
       <button
@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import CalculatingFormSubHeading from '@/components/calculator/calculating-form/common/CalculatingFormSubHeading.vue'
+import CalculatingFormSubheading from '@/components/calculator/calculating-form/common/CalculatingFormSubheading.vue'
 import CalculatingFormInput from '@/components/calculator/calculating-form/common/CalculatingFormInput.vue'
 
 export default {
   components: {
-    CalculatingFormSubHeading,
+    CalculatingFormSubheading,
     CalculatingFormInput
   },
   props: {

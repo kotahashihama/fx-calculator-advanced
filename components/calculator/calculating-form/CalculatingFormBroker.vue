@@ -12,9 +12,9 @@
 
     <p class="calculating-form-broker__item">
       <label for="trading-unit">
-        <CalculatingFormSubHeading>
+        <CalculatingFormSubheading>
           取引単位（通貨）
-        </CalculatingFormSubHeading>
+        </CalculatingFormSubheading>
       </label>
       <CalculatingFormSelect id="trading-unit" v-model="tradingUnit">
         <option
@@ -30,9 +30,9 @@
 
     <p class="calculating-form-broker__item">
       <label for="leverage">
-        <CalculatingFormSubHeading>
+        <CalculatingFormSubheading>
           レバレッジ（倍）
-        </CalculatingFormSubHeading>
+        </CalculatingFormSubheading>
       </label>
       <CalculatingFormSelect id="leverage" v-model="leverage">
         <option
@@ -48,13 +48,13 @@
 
 <script>
 import CalculatingFormHeading from '@/components/calculator/calculating-form/common/CalculatingFormHeading.vue'
-import CalculatingFormSubHeading from '@/components/calculator/calculating-form/common/CalculatingFormSubHeading.vue'
+import CalculatingFormSubheading from '@/components/calculator/calculating-form/common/CalculatingFormSubheading.vue'
 import CalculatingFormSelect from '@/components/calculator/calculating-form/common/CalculatingFormSelect.vue'
 
 export default {
   components: {
     CalculatingFormHeading,
-    CalculatingFormSubHeading,
+    CalculatingFormSubheading,
     CalculatingFormSelect
   },
   computed: {

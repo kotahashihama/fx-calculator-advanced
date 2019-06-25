@@ -130,7 +130,7 @@ export const state = () => ({
     email: '',
     password: '',
     session: '',
-    accountNumber: 0
+    accountNumber: ''
   }
 })
 

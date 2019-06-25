@@ -1,5 +1,5 @@
 <template>
-  <select v-model="innerValue" class="modal-select-string">
+  <select v-model="innerValue" class="modal-form-select">
     <slot />
   </select>
 </template>
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-select-string {
+.modal-form-select {
   display: block;
   border: solid 1px #dadada;
   border-radius: 3px;
