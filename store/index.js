@@ -369,17 +369,8 @@ export const mutations = {
     state.openTrades.splice(index, 1)
   },
 
-  updateMyfxbookEmail(state, email) {
-    state.myfxbook.email = email
-  },
-  updateMyfxbookPassword(state, password) {
-    state.myfxbook.password = password
-  },
-  updateMyfxbookSession(state, session) {
-    state.myfxbook.session = session
-  },
-  updateMyfxbookAccountNumber(state, accountNumber) {
-    state.myfxbook.accountNumber = accountNumber
+  updateMyfxbook(state, payload) {
+    state.myfxbook[payload.option] = payload.value
   },
   getOpenTrades(state, openTrades) {
     state.openTrades = []

@@ -14,8 +14,9 @@
           </label>
           <ModalFormInput
             id="account-number"
-            v-model="accountNumber"
+            :value="$store.state.myfxbook.accountNumber"
             type="text"
+            @input="updateMyfxbook('accountNumber', $event)"
           />
         </p>
       </div>
@@ -30,14 +31,24 @@
           <label for="email">
             <ModalFormHeading>メールアドレス</ModalFormHeading>
           </label>
-          <ModalFormInput id="email" v-model="email" type="text" />
+          <ModalFormInput
+            id="email"
+            :value="$store.state.myfxbook.email"
+            type="text"
+            @input="updateMyfxbook('email', $event)"
+          />
         </p>
 
         <p class="form-content__item">
           <label for="password">
             <ModalFormHeading>パスワード</ModalFormHeading>
           </label>
-          <ModalFormInput id="password" v-model="password" type="password" />
+          <ModalFormInput
+            id="password"
+            :value="$store.state.myfxbook.password"
+            type="password"
+            @input="updateMyfxbook('password', $event)"
+          />
         </p>
       </div>
 
@@ -61,33 +72,13 @@ export default {
     ModalFormInput,
     ModalFormButton
   },
-  computed: {
-    email: {
-      get() {
-        return this.$store.state.myfxbook.email
-      },
-      set(value) {
-        this.$store.commit('updateMyfxbookEmail', value)
-      }
-    },
-    password: {
-      get() {
-        return this.$store.state.myfxbook.password
-      },
-      set(value) {
-        this.$store.commit('updateMyfxbookPassword', value)
-      }
-    },
-    accountNumber: {
-      get() {
-        return this.$store.state.myfxbook.accountNumber
-      },
-      set(value) {
-        this.$store.commit('updateMyfxbookAccountNumber', value)
-      }
-    }
-  },
   methods: {
+    updateMyfxbook(option) {
+      this.$store.commit('updateMyfxbook', {
+        option,
+        value: event.target.value
+      })
+    },
     loginMyfxbook() {
       const self = this
       const params = {
@@ -101,7 +92,10 @@ export default {
         })
         .then(response => {
           if (response.data.error === false) {
-            self.$store.commit('updateMyfxbookSession', response.data.session)
+            self.$store.commit('updateMyfxbook', {
+              option: 'session',
+              value: response.data.session
+            })
           } else {
             alert(
               'ログインできませんでした。時間をおくか、メールアドレスとパスワードをもう一度ご確認ください'
