@@ -14,6 +14,7 @@
         v-for="openTrade in $store.state.openTrades"
         :key="openTrade.id || 0"
         :open-trade="openTrade"
+        class="calculated-result-open-trades__item"
       >
         <template v-slot:currency-pair>
           {{ openTrade.symbol }}
@@ -47,12 +48,27 @@ export default {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
+
+  &__item {
+    &:nth-of-type(even) {
+      background: #f9f9f9;
+    }
+  }
 }
 
 .heading {
-  padding: 0.5em;
-  background: #f5f5f5;
-  font-weight: normal;
+  padding: 0.4em 0.5em;
+  background: #6aa3bf;
+  color: #fff;
+
+  &:first-of-type {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+  &:last-of-type {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
 }
 
 .open-trade-items-leave-active,

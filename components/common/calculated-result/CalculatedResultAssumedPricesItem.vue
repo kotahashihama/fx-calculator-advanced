@@ -1,8 +1,8 @@
 <template>
   <tr class="calculated-result-assumed-prices-item">
-    <td class="heading">
+    <th class="heading">
       <slot name="pair" />
-    </td>
+    </th>
     <td class="content">
       <slot name="assumed-price" />
     </td>
@@ -11,7 +11,7 @@
 
 <style lang="scss" scoped>
 .calculated-result-assumed-prices-item {
-  border-bottom: dotted 1px #b5b5b5;
+  border-bottom: dotted 1px #d6d6d6;
 }
 
 .heading {

@@ -2,7 +2,7 @@ const currencyPairs = [
   {
     symbol: 'USD/JPY',
     currencies: ['USD', 'JPY'],
-    emoji: '&#x1f1ef;&#x1f1f5;',
+    emoji: '&#x1f1fa;&#x1f1f8;',
     chartColor: '#CFB225',
     currentPrice: 0,
     assumedPrice: 0,

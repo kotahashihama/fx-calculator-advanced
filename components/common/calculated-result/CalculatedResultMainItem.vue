@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+.heading {
+  font-size: 0.9rem;
+}
+
 .value {
   font-weight: bold;
   font-size: 1.6rem;

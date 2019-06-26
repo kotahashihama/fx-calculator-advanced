@@ -80,8 +80,8 @@ export default {
 
 <style lang="scss" scoped>
 .calculated-result-capital {
-  margin-bottom: 18px;
-  border: solid 1px #d0d0d0;
+  margin-bottom: 22px;
+  border: solid 1px #d6d6d6;
   padding: 16px;
   width: 100%;
 }

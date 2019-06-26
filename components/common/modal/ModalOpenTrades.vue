@@ -15,7 +15,7 @@
         <div class="form-content__left">
           <p class="form-item">
             <label for="currency-pair">
-              <span class="form-item__title">通貨ペア</span>
+              <ModalFormHeading>通貨ペア</ModalFormHeading>
             </label>
             <ModalFormSelect
               id="currency-pair"
@@ -35,12 +35,13 @@
           </p>
 
           <p class="form-item">
-            <span class="form-item__title">売買</span>
+            <ModalFormHeading>売買</ModalFormHeading>
             <label for="action-buy">
               <input
                 id="action-buy"
                 value="買"
                 name="action"
+                class="radio"
                 type="radio"
                 checked
                 @input="updateOpenTradeEdited('action', $event)"
@@ -51,6 +52,7 @@
                 id="action-sell"
                 value="売"
                 name="action"
+                class="radio"
                 type="radio"
                 @input="updateOpenTradeEdited('action', $event)"
               />売
@@ -61,7 +63,7 @@
         <div class="form-content__right">
           <p class="form-item">
             <label for="lot">
-              <span class="form-item__title">ロット</span>
+              <ModalFormHeading>ロット</ModalFormHeading>
             </label>
             <ModalFormInputNumber
               id="lot"
@@ -73,7 +75,7 @@
 
           <p class="form-item">
             <label for="open-price">
-              <span class="form-item__title">注文レート</span>
+              <ModalFormHeading>注文レート</ModalFormHeading>
             </label>
 
             <ModalFormInputNumber
@@ -111,6 +113,7 @@
 
 <script>
 import ModalTitle from '@/components/common/modal/common/ModalTitle.vue'
+import ModalFormHeading from '@/components/common/modal/common/ModalFormHeading.vue'
 import ModalFormSelect from '@/components/common/modal/common/ModalFormSelect.vue'
 import ModalFormInputNumber from '@/components/common/modal/common/ModalFormInputNumber.vue'
 import ModalFormButton from '@/components/common/modal/common/ModalFormButton.vue'
@@ -118,6 +121,7 @@ import ModalFormButton from '@/components/common/modal/common/ModalFormButton.vu
 export default {
   components: {
     ModalTitle,
+    ModalFormHeading,
     ModalFormSelect,
     ModalFormInputNumber,
     ModalFormButton
@@ -189,10 +193,14 @@ export default {
   &-item {
     margin-bottom: 20px;
 
-    &:last-child {
+    &:last-of-type {
       margin-bottom: 0;
     }
   }
+}
+
+.radio {
+  margin-right: 0.5em;
 }
 
 .buttons {

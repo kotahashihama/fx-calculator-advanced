@@ -21,6 +21,7 @@ export default {
 .calculation-processor {
   display: flex;
   padding: 0 13px;
+  border-top: solid 1px #d0d0d0;
   height: 50px;
 }
 </style>

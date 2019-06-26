@@ -7,5 +7,6 @@
   display: block;
   margin-bottom: 0.4em;
   text-align: center;
+  font-weight: bold;
 }
 </style>

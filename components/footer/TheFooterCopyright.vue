@@ -6,6 +6,7 @@
 
 <style lang="scss" scoped>
 .footer-copyright {
+  color: #757575;
   text-align: center;
 }
 </style>

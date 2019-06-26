@@ -25,11 +25,18 @@
     align-items: center;
 
     &__item {
-      margin-right: 1em;
-
       &-link {
-        color: #333;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        padding: 0.8em;
+        height: $header-height;
+        color: #fff;
         text-decoration: none;
+
+        &:hover {
+          background: #3b3c40;
+        }
       }
     }
   }

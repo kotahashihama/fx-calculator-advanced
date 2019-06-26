@@ -42,11 +42,11 @@ export default {
 
   &__left {
     margin-right: 17px;
-    width: 33%;
+    width: 380px;
   }
 
   &__right {
-    width: 67%;
+    width: calc(100% - 397px);
   }
 }
 </style>

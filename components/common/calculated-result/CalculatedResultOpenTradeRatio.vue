@@ -79,7 +79,7 @@ export default {
 .calculated-result-open-trade-ratio {
   display: flex;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 
   &__chart {
     height: 250px;

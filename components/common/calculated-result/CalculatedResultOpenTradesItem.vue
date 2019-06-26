@@ -13,8 +13,12 @@
       <slot name="order-price" />
     </td>
     <td class="calculated-result-open-trades-item__item">
-      <button class="button" @click="showModalEditsOpenTrades()">編集</button>
-      <button class="button" @click="deleteOpenTrade()">削除</button>
+      <button class="button" @click="showModalEditsOpenTrades()">
+        編集
+      </button>
+      <button class="button button--danger" @click="deleteOpenTrade()">
+        削除
+      </button>
     </td>
   </tr>
 </template>
@@ -47,16 +51,34 @@ export default {
 .calculated-result-open-trades-item {
   &__item {
     padding: 0.6em;
+    text-align: center;
   }
 }
 
 .button {
+  transition: all 0.3s;
   padding: 0.1em;
-  border: none;
+  border: solid 1px #2b7194;
   border-radius: 3px;
-  background: #4ac361;
-  color: #fff;
-  font-size: 0.9rem;
   width: 45%;
+  background: #fff;
+  color: #2b7194;
+  text-align: center;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: #2b7194;
+    color: #fff;
+  }
+
+  &--danger {
+    border-color: #e54058;
+    color: #e54058;
+
+    &:hover {
+      background: #e54058;
+      color: #fff;
+    }
+  }
 }
 </style>

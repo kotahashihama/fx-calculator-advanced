@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .calculating-form {
   &__item {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 }
 </style>

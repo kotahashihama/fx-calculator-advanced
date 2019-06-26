@@ -7,7 +7,7 @@
 
     <div class="header__right">
       <TheHeaderUser />
-      <TheHeaderButton>新規計算</TheHeaderButton>
+      <TheHeaderButton class="button">新規計算</TheHeaderButton>
     </div>
   </header>
 </template>
@@ -35,7 +35,8 @@ export default {
   align-items: center;
   padding: 0 27px;
   height: $header-height;
-  background: #f1f1f1;
+  background: #2f3034;
+  color: #fff;
 
   &__left {
     display: flex;
@@ -48,5 +49,10 @@ export default {
     justify-content: center;
     align-items: center;
   }
+}
+
+.button {
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -59,14 +59,15 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   padding: 16px;
-  border: solid 2px #007aff;
-  background: #d6e9ff;
+  border: solid 2px #0090d8;
+  border-radius: 50px;
+  background: #f3fbff;
 
   &--red {
-    border-color: #f84444;
-    background: #ffeaea;
+    border-color: #e8475f;
+    background: #fff7f8;
   }
 }
 </style>

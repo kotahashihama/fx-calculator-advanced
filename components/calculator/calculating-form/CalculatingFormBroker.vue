@@ -3,10 +3,18 @@
     <CalculatingFormHeading>取引所</CalculatingFormHeading>
 
     <p class="calculating-form-broker__item">
-      <label v-for="(value, key) in $store.state.brokers" :key="key" :for="key">
-        <input :id="key" v-model="broker" :value="key" type="radio" />{{
-          value
-        }}
+      <label
+        v-for="(value, key) in $store.state.brokers"
+        :key="key"
+        :for="`broker-${key}`"
+      >
+        <input
+          :id="`broker-${key}`"
+          v-model="broker"
+          :value="key"
+          class="radio"
+          type="radio"
+        />{{ value }}
       </label>
     </p>
 
@@ -16,7 +24,11 @@
           取引単位（通貨）
         </CalculatingFormSubheading>
       </label>
-      <CalculatingFormSelect id="trading-unit" v-model="tradingUnit">
+      <CalculatingFormSelect
+        id="trading-unit"
+        v-model="tradingUnit"
+        class="select"
+      >
         <option
           v-for="(value, index) in $store.state.tradingUnits[
             $store.state.broker
@@ -34,7 +46,7 @@
           レバレッジ（倍）
         </CalculatingFormSubheading>
       </label>
-      <CalculatingFormSelect id="leverage" v-model="leverage">
+      <CalculatingFormSelect id="leverage" v-model="leverage" class="select">
         <option
           v-for="(value, index) in $store.state.leverages[$store.state.broker]"
           :key="index"
@@ -92,5 +104,15 @@ export default {
     margin-bottom: 14px;
     text-align: center;
   }
+}
+
+.radio {
+  margin-right: 0.5em;
+}
+
+.select {
+  border-top: none;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 </style>

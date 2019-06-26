@@ -136,7 +136,7 @@ export default {
     &__item {
       margin-bottom: 20px;
 
-      &:last-child {
+      &:last-of-type {
         margin-bottom: 0;
       }
     }

@@ -87,17 +87,21 @@ export default {
 }
 
 .input {
+  border-top: none;
   border-left: none;
-  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .button {
   padding: 0.4em 1.2em;
   border: solid 1px #dadada;
+  border-top: none;
   border-radius: 3px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
   background: #f1f1f1;
   color: #333;
   width: 100px;

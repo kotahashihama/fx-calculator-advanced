@@ -10,7 +10,7 @@
 
   &-link {
     font-size: 1.5rem;
-    color: #333;
+    color: #fff;
     text-decoration: none;
   }
 }
