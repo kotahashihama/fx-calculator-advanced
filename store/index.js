@@ -3,6 +3,7 @@ const currencyPairs = [
     symbol: 'USD/JPY',
     currencies: ['USD', 'JPY'],
     emoji: '&#x1f1ef;&#x1f1f5;',
+    chartColor: '#CFB225',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -11,6 +12,7 @@ const currencyPairs = [
     symbol: 'EUR/USD',
     currencies: ['EUR', 'USD'],
     emoji: '&#x1f1ea;&#x1f1fa;',
+    chartColor: '#F6C118',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -19,6 +21,7 @@ const currencyPairs = [
     symbol: 'GBP/USD',
     currencies: ['GBP', 'USD'],
     emoji: '&#x1f1ec;&#x1f1e7;',
+    chartColor: '#FB6319',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -27,6 +30,7 @@ const currencyPairs = [
     symbol: 'AUD/USD',
     currencies: ['AUD', 'USD'],
     emoji: '&#x1f1e6;&#x1f1fa;',
+    chartColor: '#E61B1C',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.00001
@@ -35,6 +39,7 @@ const currencyPairs = [
     symbol: 'EUR/JPY',
     currencies: ['EUR', 'JPY'],
     emoji: '&#x1f1ea;&#x1f1fa;',
+    chartColor: '#00A450',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -43,6 +48,7 @@ const currencyPairs = [
     symbol: 'GBP/JPY',
     currencies: ['GBP', 'JPY'],
     emoji: '&#x1f1ec;&#x1f1e7;',
+    chartColor: '#BDACEF',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
@@ -51,6 +57,7 @@ const currencyPairs = [
     symbol: 'AUD/JPY',
     currencies: ['AUD', 'JPY'],
     emoji: '&#x1f1e6;&#x1f1fa;',
+    chartColor: '#FCC0EC',
     currentPrice: 0,
     assumedPrice: 0,
     step: 0.001
