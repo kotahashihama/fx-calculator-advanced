@@ -1,9 +1,14 @@
 <template>
-  <div class="calculated-result-main">
+  <div
+    class="calculated-result-main"
+    :class="[
+      $store.getters.floatingPlTotal < 0 ? 'calculated-result-main--red' : ''
+    ]"
+  >
     <CalculatedResultMainItem>
       <template v-slot:heading>
-        含み<span v-if="$store.getters.floatingPlTotal >= 0">益</span
-        ><span v-else>損</span>
+        <span v-if="$store.getters.floatingPlTotal >= 0">含み益</span>
+        <span v-else>含み損</span>
       </template>
       <template v-slot:value>
         {{ $store.getters.floatingPlTotal | digitSeparator }}
@@ -58,5 +63,10 @@ export default {
   padding: 16px;
   border: solid 2px #007aff;
   background: #d6e9ff;
+
+  &--red {
+    border-color: #f84444;
+    background: #ffeaea;
+  }
 }
 </style>
