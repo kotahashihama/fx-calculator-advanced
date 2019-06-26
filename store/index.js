@@ -389,7 +389,7 @@ export const mutations = {
           3
         )}`,
         action: openTrade.action === 'Buy' ? '買' : '売',
-        lot: openTrade.sizing.value,
+        lot: Number(openTrade.sizing.value),
         openPrice: openTrade.openPrice
       })
     })

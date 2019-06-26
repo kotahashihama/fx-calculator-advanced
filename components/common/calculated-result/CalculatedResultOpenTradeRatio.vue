@@ -63,7 +63,11 @@ export default {
         const openTrades = this.$store.state.openTrades.filter(
           openTrade => openTrade.symbol === currencyPair.symbol
         )
-        return openTrades.reduce((sum, openTrade) => sum + openTrade.lot, null)
+        return (
+          Math.round(
+            openTrades.reduce((sum, openTrade) => sum + openTrade.lot, 0) * 100
+          ) / 100
+        )
       })
     }
   },
