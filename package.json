@@ -1,7 +1,7 @@
 {
   "name": "fx-calculator-advanced",
   "version": "1.0.0",
-  "description": "My praiseworthy Nuxt.js project",
+  "description": "FX の含み損益・証拠金維持率等をシュミレートできる計算アプリ",
   "author": "Kota Hashihama",
   "private": true,
   "scripts": {
