@@ -103,6 +103,7 @@ export default {
 }
 
 .chart {
+  z-index: -1;
   position: relative;
   display: flex;
   justify-content: center;
