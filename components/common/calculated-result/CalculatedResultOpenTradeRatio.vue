@@ -1,11 +1,32 @@
 <template>
   <div class="calculated-result-open-trade-ratio">
-    <CalculatedResultOpenTradeRatioChart
-      ref="chart"
-      class="calculated-result-open-trade-ratio__chart"
-      :chart-data="chartData"
-      :chart-options="chartOptions"
-    />
+    <div class="chart">
+      <CalculatedResultOpenTradeRatioChart
+        ref="chart"
+        class="chart__body"
+        :chart-data="chartData"
+        :chart-options="chartOptions"
+      />
+      <div class="chart__text">
+        <span class="value">{{ openTradeLotsTotal }}</span
+        >ロット
+      </div>
+    </div>
+    <div class="chart-legend">
+      <ul class="chart-legend-list">
+        <li
+          v-for="currencyPair in $store.state.currencyPairs"
+          :key="currencyPair.symbol"
+          class="chart-legend-list__item"
+        >
+          <span
+            class="icon"
+            :style="{ background: currencyPair.chartColor }"
+          ></span
+          >{{ currencyPair.symbol }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -23,10 +44,7 @@ export default {
         maintainAspectRatio: false,
         cutoutPercentage: 65,
         legend: {
-          position: 'right',
-          labels: {
-            boxWidth: 30
-          }
+          display: false
         }
       }
     }
@@ -81,12 +99,57 @@ export default {
 
 <style lang="scss" scoped>
 .calculated-result-open-trade-ratio {
+  margin-bottom: 30px;
+}
+
+.chart {
+  position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 22px;
+  align-items: center;
 
-  &__chart {
-    height: 250px;
+  &__body {
+    max-height: 250px;
+    max-width: 250px;
+  }
+
+  &__text {
+    position: absolute;
+    text-align: center;
+
+    .value {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      margin-right: 13px;
+    }
+  }
+
+  .icon {
+    display: block;
+    margin-right: 6px;
+    border-radius: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
   }
 }
 </style>

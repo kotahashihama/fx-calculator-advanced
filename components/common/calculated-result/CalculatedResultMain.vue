@@ -62,7 +62,7 @@ export default {
   margin-bottom: 22px;
   padding: 16px;
   border: solid 2px #0090d8;
-  border-radius: 50px;
+  border-radius: 99px;
   background: #f3fbff;
 
   &--red {
