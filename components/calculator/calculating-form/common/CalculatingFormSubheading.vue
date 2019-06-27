@@ -1,9 +1,9 @@
 <template>
-  <span class="calculating-form-sub-heading"><slot /></span>
+  <span class="calculating-form-subheading"><slot /></span>
 </template>
 
 <style lang="scss" scoped>
-.calculating-form-sub-heading {
+.calculating-form-subheading {
   display: block;
   border: solid 1px #6ba3bf;
   border-top-right-radius: 3px;
