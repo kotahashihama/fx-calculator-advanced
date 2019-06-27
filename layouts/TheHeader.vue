@@ -33,7 +33,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 27px;
+  padding: 0 18px;
   height: $header-height;
   background: #2f3034;
   color: #fff;

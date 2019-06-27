@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
 .header-logo {
-  margin-right: 36px;
+  margin-right: 22px;
 
   &-link {
     font-size: 1.5rem;

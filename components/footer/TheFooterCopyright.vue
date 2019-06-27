@@ -1,6 +1,8 @@
 <template>
   <p class="footer-copyright">
-    <small>&copy; ポジション計算機 developed by Kota Hashihama</small>
+    <small class="footer-copyright__text"
+      >&copy; ポジション計算機 developed by Kota Hashihama</small
+    >
   </p>
 </template>
 
@@ -8,5 +10,9 @@
 .footer-copyright {
   color: #757575;
   text-align: center;
+
+  &__text {
+    font-size: 0.75rem;
+  }
 }
 </style>

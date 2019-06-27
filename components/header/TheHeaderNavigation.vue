@@ -25,6 +25,8 @@
     align-items: center;
 
     &__item {
+      font-size: 0.9rem;
+
       &-link {
         transition: all 0.3s;
         display: flex;

@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 14px;
+  margin-right: 9px;
   padding: 0 1em;
   border: none;
   height: $header-height;

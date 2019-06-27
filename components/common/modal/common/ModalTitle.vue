@@ -6,6 +6,6 @@
 .modal-title {
   margin-bottom: 37px;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 </style>
