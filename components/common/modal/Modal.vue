@@ -35,6 +35,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.modal {
+  position: relative;
+  z-index: 10;
+}
+
 .overlay {
   display: flex;
   justify-content: center;
