@@ -70,29 +70,7 @@ export const state = () => ({
 
   title: '無題',
   currencyPairs,
-  openTrades: [
-    {
-      id: 1,
-      symbol: 'USD/JPY',
-      action: '買',
-      lot: 0.02,
-      openPrice: 108.598
-    },
-    {
-      id: 2,
-      symbol: 'USD/JPY',
-      action: '売',
-      lot: 0.02,
-      openPrice: 108.598
-    },
-    {
-      id: 3,
-      symbol: 'EUR/USD',
-      action: '売',
-      lot: 0.02,
-      openPrice: 1.21
-    }
-  ],
+  openTrades: [],
   balance: 200000,
   targetMarginLevel: 1000,
   broker: 'international',

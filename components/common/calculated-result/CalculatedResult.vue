@@ -9,10 +9,21 @@
         <CalculatedResultAssumedPrices />
       </div>
 
-      <div class="calculation-details__right">
+      <div
+        v-if="$store.state.openTrades.length"
+        class="calculation-details__right"
+      >
         <CalculatedResultOpenTradeRatio />
 
         <CalculatedResultOpenTrades />
+      </div>
+      <div
+        v-else
+        class="calculation-details__right calculation-details__right--no-open-trades"
+      >
+        <p>
+          ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
+        </p>
       </div>
     </div>
   </div>
@@ -47,6 +58,15 @@ export default {
 
   &__right {
     width: calc(100% - 397px);
+
+    &--no-open-trades {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      background: #f7f7f7;
+      font-size: 0.9rem;
+    }
   }
 }
 </style>
