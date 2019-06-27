@@ -48,6 +48,7 @@ export default {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
+  font-size: 0.9rem;
 
   &__item {
     &:nth-of-type(even) {

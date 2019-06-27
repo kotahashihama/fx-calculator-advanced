@@ -31,7 +31,7 @@
         transition: all 0.3s;
         display: flex;
         align-items: center;
-        padding: 0.8em;
+        padding: 0 1em;
         height: $header-height;
         color: #fff;
         text-decoration: none;

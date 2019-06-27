@@ -7,8 +7,8 @@
       >
         <template v-slot:pair>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-html="currencyPair.emoji"></span>
-          {{ currencyPair.symbol }}
+          <span v-html="currencyPair.emoji" class="emoji"></span
+          >{{ currencyPair.symbol }}
         </template>
 
         <template v-slot:assumed-price>
@@ -33,5 +33,9 @@ export default {
 .calculated-result-assumed-prices {
   border-collapse: collapse;
   width: 100%;
+}
+
+.emoji {
+  margin-right: 4px;
 }
 </style>
