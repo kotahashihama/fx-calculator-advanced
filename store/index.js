@@ -274,7 +274,9 @@ export const getters = {
 
   marginLevel(state, getters) {
     if (state.openTrades.length) {
-      return Math.round((getters.equity / getters.marginTotal) * 10000) / 100
+      return (
+        Math.round(((getters.equity / getters.marginTotal) | 0) * 10000) / 100
+      )
     } else {
       return 0
     }
