@@ -22,6 +22,12 @@
       </div>
 
       <div class="buttons">
+        <ModalFormButton
+          class="button button--secondary"
+          type="button"
+          @click="logoutMyfxbook()"
+          >ログアウト</ModalFormButton
+        >
         <ModalFormButton class="button" type="submit">取得</ModalFormButton>
       </div>
     </form>
@@ -103,6 +109,27 @@ export default {
           }
         })
     },
+    logoutMyfxbook() {
+      const self = this
+      const params = {
+        session: this.$store.state.myfxbook.session
+      }
+
+      this.$axios
+        .get('https://kotahashihama.com/fx-calculator/myfxbook-logout.php', {
+          params
+        })
+        .then(response => {
+          if (response.data.error === false) {
+            self.$store.commit('updateMyfxbook', {
+              option: 'session',
+              value: ''
+            })
+          } else {
+            alert('ログアウトできませんでした。時間をおいてお試しください')
+          }
+        })
+    },
     getOpenTrades() {
       const self = this
       const params = {
@@ -111,9 +138,12 @@ export default {
       }
 
       this.$axios
-        .get('https://kotahashihama.com/fx-calculator/myfxbook-trades.php', {
-          params
-        })
+        .get(
+          'https://kotahashihama.com/fx-calculator/myfxbook-get-open-trades.php',
+          {
+            params
+          }
+        )
         .then(response => {
           if (response.data.error === false) {
             self.$store.commit('getOpenTrades', response.data.openTrades)
@@ -147,5 +177,20 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 43px;
+
+  .button {
+    margin-right: 9px;
+
+    &--secondary {
+      border: solid 1px #808080;
+      background: #fff;
+      color: #808080;
+
+      &:hover {
+        background: #808080;
+        color: #fff;
+      }
+    }
+  }
 }
 </style>
