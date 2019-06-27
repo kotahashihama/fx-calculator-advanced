@@ -24,20 +24,22 @@
           取引単位（通貨）
         </CalculatingFormSubheading>
       </label>
-      <CalculatingFormSelect
-        id="trading-unit"
-        v-model="tradingUnit"
-        class="select"
-      >
-        <option
-          v-for="(value, index) in $store.state.tradingUnits[
-            $store.state.broker
-          ]"
-          :key="index"
-          :value="value"
-          >{{ value }}</option
+      <span class="select-wrap">
+        <CalculatingFormSelect
+          id="trading-unit"
+          v-model="tradingUnit"
+          class="select"
         >
-      </CalculatingFormSelect>
+          <option
+            v-for="(value, index) in $store.state.tradingUnits[
+              $store.state.broker
+            ]"
+            :key="index"
+            :value="value"
+            >{{ value }}</option
+          >
+        </CalculatingFormSelect>
+      </span>
     </p>
 
     <p class="calculating-form-broker__item">
@@ -46,14 +48,18 @@
           レバレッジ（倍）
         </CalculatingFormSubheading>
       </label>
-      <CalculatingFormSelect id="leverage" v-model="leverage" class="select">
-        <option
-          v-for="(value, index) in $store.state.leverages[$store.state.broker]"
-          :key="index"
-          :value="value"
-          >{{ value }}</option
-        >
-      </CalculatingFormSelect>
+      <span class="select-wrap">
+        <CalculatingFormSelect id="leverage" v-model="leverage" class="select">
+          <option
+            v-for="(value, index) in $store.state.leverages[
+              $store.state.broker
+            ]"
+            :key="index"
+            :value="value"
+            >{{ value }}</option
+          >
+        </CalculatingFormSelect>
+      </span>
     </p>
   </div>
 </template>
@@ -108,6 +114,22 @@ export default {
 
 .radio {
   margin-right: 0.5em;
+}
+
+.select-wrap {
+  position: relative;
+  display: block;
+
+  &::before {
+    z-index: 1;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    content: 'keyboard_arrow_down';
+    font-size: 1.3rem;
+    font-family: 'Material Icons';
+    pointer-events: none;
+  }
 }
 
 .select {

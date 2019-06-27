@@ -7,7 +7,7 @@
       >
         <template v-slot:pair>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-html="currencyPair.emoji" class="emoji"></span
+          <span class="emoji" v-html="currencyPair.emoji"></span
           >{{ currencyPair.symbol }}
         </template>
 

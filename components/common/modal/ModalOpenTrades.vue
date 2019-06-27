@@ -17,21 +17,23 @@
             <label for="currency-pair">
               <ModalFormHeading>通貨ペア</ModalFormHeading>
             </label>
-            <ModalFormSelect
-              id="currency-pair"
-              :value="$store.state.openTradeEdited.symbol"
-              @input="
-                updateOpenTradeEdited('symbol', $event)
-                setCurrentPrice()
-              "
-            >
-              <option
-                v-for="currencyPair in $store.state.currencyPairs"
-                :key="currencyPair.symbol"
-                :value="currencyPair.symbol"
-                >{{ currencyPair.symbol }}</option
+            <span class="select-wrap">
+              <ModalFormSelect
+                id="currency-pair"
+                :value="$store.state.openTradeEdited.symbol"
+                @input="
+                  updateOpenTradeEdited('symbol', $event)
+                  setCurrentPrice()
+                "
               >
-            </ModalFormSelect>
+                <option
+                  v-for="currencyPair in $store.state.currencyPairs"
+                  :key="currencyPair.symbol"
+                  :value="currencyPair.symbol"
+                  >{{ currencyPair.symbol }}</option
+                >
+              </ModalFormSelect>
+            </span>
           </p>
 
           <p class="form-item">
@@ -196,6 +198,22 @@ export default {
     &:last-of-type {
       margin-bottom: 0;
     }
+  }
+}
+
+.select-wrap {
+  position: relative;
+  display: block;
+
+  &::before {
+    z-index: 1;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    content: 'keyboard_arrow_down';
+    font-size: 1.3rem;
+    font-family: 'Material Icons';
+    pointer-events: none;
   }
 }
 
