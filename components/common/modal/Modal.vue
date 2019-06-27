@@ -56,15 +56,21 @@ export default {
 }
 
 .close-button {
+  transition: all 0.3s;
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
   border: none;
+  background: #fff;
+
+  &:hover {
+    color: #e54058;
+  }
 }
 
 .content {
-  margin: 0 42px 32px;
+  margin: 0 38px 32px;
   margin-top: 46px;
 }
 </style>

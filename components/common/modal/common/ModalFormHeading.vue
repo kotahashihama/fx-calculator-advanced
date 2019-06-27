@@ -6,5 +6,7 @@
 .modal-form-heading {
   display: block;
   margin-bottom: 0.4em;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 </style>

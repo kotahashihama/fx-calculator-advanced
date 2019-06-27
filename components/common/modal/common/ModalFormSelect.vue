@@ -27,6 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal-form-select {
+  -webkit-appearance: none;
   display: block;
   border: solid 1px #dadada;
   border-radius: 3px;
