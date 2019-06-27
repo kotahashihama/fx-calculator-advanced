@@ -12,14 +12,25 @@
 <style lang="scss" scoped>
 .header-user {
   transition: all 0.3s;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 9px;
   padding: 0 1em;
+  padding-right: 31px;
   border: none;
   height: $header-height;
   background: transparent;
+  color: #fff;
+
+  &::before {
+    position: absolute;
+    right: 7px;
+    content: 'arrow_drop_down';
+    font-size: 1.1rem;
+    font-family: 'Material Icons';
+  }
 
   &:hover {
     background: #3b3c40;
