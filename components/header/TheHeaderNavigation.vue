@@ -2,7 +2,7 @@
   <nav class="header-navigation">
     <ul class="header-navigation-list">
       <li class="header-navigation-list__item">
-        <router-link to="/" class="header-navigation-list__item-link"
+        <router-link to="/calculation" class="header-navigation-list__item-link"
           >保存済み</router-link
         >
       </li>
