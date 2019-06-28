@@ -15,11 +15,7 @@
       </template>
       <template v-else>
         <span class="name">ゲスト</span>
-        <img
-          src="https://randomuser.me/api/portraits/men/46.jpg"
-          alt="ゲスト"
-          class="image"
-        />
+        <img src="@/assets/images/user.png" alt="ゲスト" class="image" />
       </template>
     </button>
 
