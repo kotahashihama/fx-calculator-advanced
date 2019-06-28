@@ -2,9 +2,20 @@
   <nav class="header-dropdown">
     <ul class="header-dropdown-list">
       <li class="header-dropdown-list__item">
-        <a class="header-dropdown-list__item-link" @click="twitterLogin()">
+        <button
+          v-if="$store.state.isLogin"
+          class="header-dropdown-list__item-link"
+          @click="logout()"
+        >
+          ログアウト
+        </button>
+        <button
+          v-else
+          class="header-dropdown-list__item-link"
+          @click="twitterLogin()"
+        >
           Twitterでログイン
-        </a>
+        </button>
       </li>
     </ul>
   </nav>
@@ -15,6 +26,9 @@ export default {
   methods: {
     twitterLogin() {
       this.$store.commit('twitterLogin')
+    },
+    logout() {
+      this.$store.commit('logout')
     }
   }
 }
@@ -34,13 +48,15 @@ export default {
     background: #fff;
 
     &__item {
-      font-size: 0.8rem;
-
       &-link {
         transition: all 0.3s;
         display: flex;
         padding: 0.7em 0.9em;
+        border: none;
+        width: 100%;
+        background: #fff;
         color: #333;
+        font-size: 0.8rem;
         text-decoration: none;
 
         &:hover {

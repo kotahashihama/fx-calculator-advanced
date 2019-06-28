@@ -277,6 +277,9 @@ export const mutations = {
   twitterLogin() {
     firebase.auth().signInWithRedirect(new firebase.auth.TwitterAuthProvider())
   },
+  logout() {
+    firebase.auth().signOut()
+  },
 
   showModal(state, currentModal) {
     state.showsModal = true
