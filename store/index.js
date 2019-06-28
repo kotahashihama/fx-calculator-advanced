@@ -68,6 +68,7 @@ const currencyPairs = [
 
 export const state = () => ({
   isLogin: false,
+  user: {},
 
   showsModal: false,
   currentModal: '',
@@ -268,8 +269,10 @@ export const getters = {
 }
 
 export const mutations = {
-  enableLogin(state) {
+  enableLogin(state, user) {
     state.isLogin = true
+    const { uid, displayName, photoURL } = user
+    state.user = { uid, displayName, photoURL }
   },
   disableLogin(state) {
     state.isLogin = false

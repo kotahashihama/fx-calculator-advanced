@@ -1,12 +1,22 @@
 <template>
   <div class="heaader-user">
     <button class="button" @click="showDropdown()">
-      <span class="name">ゲスト</span>
-      <img
-        src="https://randomuser.me/api/portraits/men/46.jpg"
-        alt="ゲスト"
-        class="image"
-      />
+      <template v-if="$store.state.isLogin">
+        <span class="name">{{ $store.state.user.displayName }}</span>
+        <img
+          :src="$store.state.user.photoURL"
+          :alt="$store.state.user.displayName"
+          class="image"
+        />
+      </template>
+      <template v-else>
+        <span class="name">ゲスト</span>
+        <img
+          src="https://randomuser.me/api/portraits/men/46.jpg"
+          alt="ゲスト"
+          class="image"
+        />
+      </template>
     </button>
 
     <TheHeaderUserDropdown v-if="$store.state.showsDropdown" />
@@ -62,7 +72,11 @@ export default {
 }
 
 .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-right: 0.8em;
+  max-width: 140px;
   color: #fff;
   font-size: 0.9rem;
 }
