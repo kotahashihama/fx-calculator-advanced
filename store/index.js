@@ -68,6 +68,8 @@ export const state = () => ({
   showsModal: false,
   currentModal: '',
 
+  showsDropdown: false,
+
   title: '無題',
   currencyPairs,
   openTrades: [],
@@ -270,6 +272,13 @@ export const mutations = {
     state.showsModal = false
     state.currentModal = ''
     state.editsOpenTrade = false
+  },
+
+  showDropdown(state) {
+    state.showsDropdown = true
+  },
+  hideDropdown(state) {
+    state.showsDropdown = false
   },
 
   updateTitle(state, title) {

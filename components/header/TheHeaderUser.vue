@@ -1,16 +1,40 @@
 <template>
-  <button class="header-user">
-    <span class="name">ゲスト</span>
-    <img
-      src="https://randomuser.me/api/portraits/men/46.jpg"
-      alt="ゲスト"
-      class="image"
-    />
-  </button>
+  <div class="heaader-user">
+    <button class="button" @click="showDropdown()">
+      <span class="name">ゲスト</span>
+      <img
+        src="https://randomuser.me/api/portraits/men/46.jpg"
+        alt="ゲスト"
+        class="image"
+      />
+    </button>
+
+    <TheHeaderUserDropdown v-if="$store.state.showsDropdown" />
+  </div>
 </template>
+
+<script>
+import TheHeaderUserDropdown from '@/components/header/TheHeaderUserDropdown.vue'
+
+export default {
+  components: {
+    TheHeaderUserDropdown
+  },
+  methods: {
+    showDropdown() {
+      this.dropdown = true
+      this.$store.commit('showDropdown')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .header-user {
+  position: relative;
+}
+
+.button {
   transition: all 0.3s;
   position: relative;
   display: flex;
