@@ -9,7 +9,12 @@
     </template>
     <template v-else>
       <span class="input input--disabled"
-        >Twitterでログインすると、ここから計算結果を保存することができます。</span
+        >ログインすると、ここから計算結果を保存することができます。<button
+          class="button button--danger"
+          @click="twitterLogin"
+        >
+          Twitterでログイン
+        </button></span
       >
     </template>
   </div>
@@ -30,6 +35,9 @@ export default {
   methods: {
     setUntitled() {
       if (this.title === '') this.$store.commit('updateTitle', '無題')
+    },
+    twitterLogin() {
+      this.$store.commit('twitterLogin')
     }
   }
 }
@@ -69,6 +77,21 @@ export default {
     border-style: dashed;
     background: #f7f7f7;
     font-size: 0.8rem;
+  }
+}
+
+.button {
+  transition: all 0.3s;
+  margin-left: 9px;
+  padding: 0.2em 1.3em;
+  border: none;
+  border-radius: 3px;
+  background: #e54058;
+  color: #fff;
+  font-size: 0.7rem;
+
+  &:hover {
+    background: #c5364b;
   }
 }
 
