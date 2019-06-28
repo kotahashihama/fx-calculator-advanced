@@ -1,0 +1,28 @@
+@mixin skelton-animation {
+  z-index: 0;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: blink normal 1s infinite ease-in-out;
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

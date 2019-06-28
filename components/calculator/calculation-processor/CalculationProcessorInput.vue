@@ -57,8 +57,9 @@ export default {
   font-size: 1rem;
 
   &--skelton {
+    @include skelton-animation;
     display: inline-block;
-    border-color: #c5c6ca;
+    border: none;
     background: #c5c6ca;
   }
 

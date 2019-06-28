@@ -51,7 +51,8 @@
   }
 
   &--skelton {
-    border-color: #c5c6ca;
+    @include skelton-animation;
+    border: none;
     width: 90px;
     background: #c5c6ca;
   }

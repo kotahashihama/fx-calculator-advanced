@@ -85,6 +85,7 @@ export default {
   font-size: 0.9rem;
 
   &--skelton {
+    @include skelton-animation;
     display: inline-block;
     border-radius: 99px;
     width: 110px;
@@ -99,6 +100,7 @@ export default {
   height: 40px;
 
   &--skelton {
+    @include skelton-animation;
     display: inline-block;
     background: #898b90;
   }

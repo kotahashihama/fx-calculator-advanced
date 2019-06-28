@@ -58,6 +58,6 @@ export default {
     extend(config, ctx) {}
   },
   styleResources: {
-    sass: ['@/assets/scss/variables.scss']
+    sass: ['@/assets/scss/variables.scss', '@/assets/scss/mixins.scss']
   }
 }
