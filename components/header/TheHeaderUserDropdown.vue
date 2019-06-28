@@ -2,13 +2,23 @@
   <nav class="header-dropdown">
     <ul class="header-dropdown-list">
       <li class="header-dropdown-list__item">
-        <router-link to="/login" class="header-dropdown-list__item-link"
-          >ログイン</router-link
-        >
+        <a class="header-dropdown-list__item-link" @click="twitterLogin()">
+          Twitterでログイン
+        </a>
       </li>
     </ul>
   </nav>
 </template>
+
+<script>
+export default {
+  methods: {
+    twitterLogin() {
+      this.$store.commit('twitterLogin')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .header-dropdown {

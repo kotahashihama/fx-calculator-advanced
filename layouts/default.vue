@@ -25,6 +25,8 @@ export default {
     TheFooter
   },
   mounted() {
+    this.$store.dispatch('checkAuthentication')
+
     document.body.addEventListener('keydown', event => {
       const esc = 27
       if (event.keyCode === esc) {

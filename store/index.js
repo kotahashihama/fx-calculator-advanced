@@ -1,3 +1,5 @@
+import firebase from '@/plugins/firebase'
+
 const currencyPairs = [
   {
     symbol: 'USD/JPY',
@@ -65,6 +67,8 @@ const currencyPairs = [
 ]
 
 export const state = () => ({
+  isLogin: false,
+
   showsModal: false,
   currentModal: '',
 
@@ -264,6 +268,16 @@ export const getters = {
 }
 
 export const mutations = {
+  enableLogin(state) {
+    state.isLogin = true
+  },
+  disableLogin(state) {
+    state.isLogin = false
+  },
+  twitterLogin() {
+    firebase.auth().signInWithRedirect(new firebase.auth.TwitterAuthProvider())
+  },
+
   showModal(state, currentModal) {
     state.showsModal = true
     state.currentModal = currentModal
@@ -381,6 +395,14 @@ export const mutations = {
         lot: Number(openTrade.sizing.value),
         openPrice: openTrade.openPrice
       })
+    })
+  }
+}
+
+export const actions = {
+  checkAuthentication({ commit }) {
+    firebase.auth().onAuthStateChanged(user => {
+      user ? commit('enableLogin', user) : commit('disableLogin')
     })
   }
 }
