@@ -57,7 +57,7 @@ export default {
   display: block;
   border: solid 1px #dadada;
   border-radius: 3px;
-  padding: 0 0.4em;
+  padding: 0 9px;
   padding-right: 64px;
   width: 100%;
   height: 32px;
@@ -74,6 +74,7 @@ export default {
   &--disabled {
     display: flex;
     align-items: center;
+    padding-right: 9px;
     border-style: dashed;
     background: #f7f7f7;
     font-size: 0.8rem;
