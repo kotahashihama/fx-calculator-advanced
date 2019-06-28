@@ -1,9 +1,9 @@
 <template>
   <div>
+    <DropdownOverlay />
     <transition name="modal">
       <Modal v-if="$store.state.showsModal" />
     </transition>
-    <DropdownOverlay />
 
     <TheHeader />
     <nuxt />
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import DropdownOverlay from '@/components/common/DropdownOverlay.vue'
 import Modal from '@/components/common/modal/Modal.vue'
+import DropdownOverlay from '@/components/common/DropdownOverlay.vue'
 import TheHeader from '@/layouts/TheHeader.vue'
 import TheFooter from '@/layouts/TheFooter.vue'
 
@@ -105,13 +105,5 @@ button {
 .modal-enter,
 .modal-leave-to {
   opacity: 0;
-}
-
-.dropdown-overlay {
-  z-index: 5;
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100vh;
 }
 </style>

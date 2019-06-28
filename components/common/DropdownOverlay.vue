@@ -15,3 +15,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.dropdown-overlay {
+  z-index: 5;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+</style>

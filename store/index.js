@@ -67,6 +67,7 @@ const currencyPairs = [
 ]
 
 export const state = () => ({
+  isLoading: true,
   isLogin: false,
   user: {},
 
@@ -269,6 +270,9 @@ export const getters = {
 }
 
 export const mutations = {
+  disableLoading(state) {
+    state.isLoading = false
+  },
   enableLogin(state, user) {
     state.isLogin = true
     const { uid, displayName, photoURL } = user
@@ -408,6 +412,7 @@ export const mutations = {
 export const actions = {
   checkAuthentication({ commit }) {
     firebase.auth().onAuthStateChanged(user => {
+      commit('disableLoading')
       user ? commit('enableLogin', user) : commit('disableLogin')
     })
   }

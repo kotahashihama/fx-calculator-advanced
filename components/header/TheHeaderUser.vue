@@ -1,6 +1,10 @@
 <template>
   <div class="heaader-user">
-    <button class="button" @click="showDropdown()">
+    <button v-if="$store.state.isLoading" class="button">
+      <span class="name name--skelton"></span>
+      <span class="image image--skelton"></span>
+    </button>
+    <button v-else class="button" @click="showDropdown()">
       <template v-if="$store.state.isLogin">
         <span class="name">{{ $store.state.user.displayName }}</span>
         <img
@@ -79,11 +83,24 @@ export default {
   max-width: 140px;
   color: #fff;
   font-size: 0.9rem;
+
+  &--skelton {
+    display: inline-block;
+    border-radius: 99px;
+    width: 110px;
+    height: 0.9rem;
+    background: #898b90;
+  }
 }
 
 .image {
   border-radius: 50%;
   width: 40px;
   height: 40px;
+
+  &--skelton {
+    display: inline-block;
+    background: #898b90;
+  }
 }
 </style>
