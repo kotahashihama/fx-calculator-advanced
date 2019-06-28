@@ -1,7 +1,17 @@
 <template>
-  <div class="calculation-processor-input">
-    <input v-model="title" class="input" type="text" @blur="setUntitled()" />
-    <div class="label">保存済</div>
+  <div v-if="$store.state.isLoading" class="calculation-processor-input">
+    <span class="input input--skelton"></span>
+  </div>
+  <div v-else class="calculation-processor-input">
+    <template v-if="$store.state.isLoggedin">
+      <input v-model="title" class="input" type="text" @blur="setUntitled()" />
+      <div class="label">未保存</div>
+    </template>
+    <template v-else>
+      <span class="input input--disabled"
+        >Twitterでログインすると、ここから計算結果を保存することができます。</span
+      >
+    </template>
   </div>
 </template>
 
@@ -45,6 +55,20 @@ export default {
   height: 32px;
   background: #fff;
   font-size: 1rem;
+
+  &--skelton {
+    display: inline-block;
+    border-color: #c5c6ca;
+    background: #c5c6ca;
+  }
+
+  &--disabled {
+    display: flex;
+    align-items: center;
+    border-style: dashed;
+    background: #f7f7f7;
+    font-size: 0.8rem;
+  }
 }
 
 .label {

@@ -68,7 +68,7 @@ const currencyPairs = [
 
 export const state = () => ({
   isLoading: true,
-  isLogin: false,
+  isLoggedin: false,
   user: {},
 
   showsModal: false,
@@ -273,19 +273,21 @@ export const mutations = {
   disableLoading(state) {
     state.isLoading = false
   },
-  enableLogin(state, user) {
-    state.isLogin = true
+  enableLoggedin(state, user) {
+    state.isLoggedin = true
     const { uid, displayName, photoURL } = user
     state.user = { uid, displayName, photoURL }
   },
-  disableLogin(state) {
-    state.isLogin = false
+  disableLoggedin(state) {
+    state.isLoggedin = false
   },
-  twitterLogin() {
-    firebase.auth().signInWithRedirect(new firebase.auth.TwitterAuthProvider())
+  twitterLogin(state) {
+    firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider())
+    state.showsDropdown = false
   },
-  logout() {
+  logout(state) {
     firebase.auth().signOut()
+    state.showsDropdown = false
   },
 
   showModal(state, currentModal) {
@@ -413,7 +415,11 @@ export const actions = {
   checkAuthentication({ commit }) {
     firebase.auth().onAuthStateChanged(user => {
       commit('disableLoading')
-      user ? commit('enableLogin', user) : commit('disableLogin')
+      if (user) {
+        commit('enableLoggedin', user)
+      } else {
+        commit('disableLoggedin')
+      }
     })
   }
 }

@@ -19,7 +19,7 @@
       </div>
       <div
         v-else
-        class="calculation-details__right calculation-details__right--no-open-trades"
+        class="calculation-details__right calculation-details__right--disabled"
       >
         <p>
           ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
@@ -59,11 +59,12 @@ export default {
   &__right {
     width: calc(100% - 397px);
 
-    &--no-open-trades {
+    &--disabled {
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 16px;
+      border: dashed 1px #dadada;
       background: #f7f7f7;
       font-size: 0.9rem;
     }

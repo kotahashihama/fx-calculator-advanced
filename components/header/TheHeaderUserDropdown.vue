@@ -3,7 +3,7 @@
     <ul class="header-dropdown-list">
       <li class="header-dropdown-list__item">
         <button
-          v-if="$store.state.isLogin"
+          v-if="$store.state.isLoggedin"
           class="header-dropdown-list__item-link"
           @click="logout()"
         >

@@ -1,8 +1,14 @@
 <template>
-  <div class="calculation-processor-buttons">
-    <button class="button button--danger">新規計算</button>
+  <div v-if="$store.state.isLoading" class="calculation-processor-buttons">
+    <span class="button button--skelton"></span>
+    <span class="button button--skelton"></span>
+  </div>
+  <div v-else class="calculation-processor-buttons">
+    <button v-if="$store.state.isEditing" class="button button--danger">
+      新規計算
+    </button>
     <button class="button button--danger">リセット</button>
-    <button class="button">上書き保存</button>
+    <button v-if="$store.state.isLoggedin" class="button">保存</button>
   </div>
 </template>
 
@@ -42,6 +48,12 @@
       background: #e54058;
       color: #fff;
     }
+  }
+
+  &--skelton {
+    border-color: #c5c6ca;
+    width: 90px;
+    background: #c5c6ca;
   }
 }
 </style>
