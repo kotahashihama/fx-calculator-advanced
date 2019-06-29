@@ -16,11 +16,13 @@
 </template>
 
 <script>
+import FlashMessageRedirectTop from '@/components/common/flash-message/FlashMessageRedirectTop.vue'
 import FlashMessageLoggedIn from '@/components/common/flash-message/FlashMessageLoggedIn.vue'
 import FlashMessageLoggedOut from '@/components/common/flash-message/FlashMessageLoggedOut.vue'
 
 export default {
   components: {
+    FlashMessageRedirectTop,
     FlashMessageLoggedIn,
     FlashMessageLoggedOut
   }
@@ -63,9 +65,15 @@ export default {
   font-size: 0.9rem;
 
   &--info {
-    background: rgba(227, 244, 255, 0.9);
+    background: rgba(227, 244, 255, 0.9); // #e3f4ff
     color: #16598c;
-    border-color: rgba(136, 187, 226, 0.9);
+    border-color: rgba(136, 187, 226, 0.9); // #88bbe2
+  }
+
+  &--danger {
+    background: rgba(255, 230, 222, 0.9); // #ffe6de
+    color: #bf4925;
+    border-color: rgba(230, 119, 85, 0.9); // #e67755
   }
 }
 </style>

@@ -430,6 +430,16 @@ export const actions = {
     })
   },
 
+  redirectTopWithFlashMessage({ commit }) {
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageRedirectTop',
+      flashMessageType: 'danger'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
+
   async twitterLogin({ commit }) {
     await firebase
       .auth()
@@ -448,7 +458,7 @@ export const actions = {
       currentFlashMessage: 'FlashMessageLoggedIn',
       flashMessageType: 'info'
     })
-    setTimeout(function() {
+    setTimeout(() => {
       commit('hideFlashMessage')
     }, 3000)
   },
@@ -459,7 +469,7 @@ export const actions = {
       currentFlashMessage: 'FlashMessageLoggedOut',
       flashMessageType: 'info'
     })
-    setTimeout(function() {
+    setTimeout(() => {
       commit('hideFlashMessage')
     }, 3000)
   }

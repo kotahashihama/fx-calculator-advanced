@@ -10,6 +10,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  middleware: 'authentication'
+}
+</script>
+
 <style lang="scss" scoped>
 .container {
   margin: 0 auto;
