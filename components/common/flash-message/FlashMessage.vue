@@ -1,7 +1,14 @@
 <template>
   <transition name="flash-message">
     <div v-if="$store.state.showsFlashMessage" class="flash-message">
-      <div class="container">
+      <div
+        class="box"
+        :class="[
+          $store.state.flashMessageType
+            ? 'box--' + $store.state.flashMessageType
+            : ''
+        ]"
+      >
         <component :is="$store.state.currentFlashMessage" />
       </div>
     </div>
@@ -22,9 +29,9 @@ export default {
 
 <style lang="scss" scoped>
 .flash-message {
-  z-index: 10;
+  z-index: 25;
   position: fixed;
-  top: calc(#{$header-height} - 6px);
+  top: calc(#{$header-height} - 9px);
   width: 100%;
 
   &-leave-active,
@@ -45,7 +52,7 @@ export default {
   }
 }
 
-.container {
+.box {
   margin: 0 auto;
   padding: 0.9em 1.1em;
   border: solid 1px rgba(0, 0, 0, 0.9);
@@ -54,5 +61,11 @@ export default {
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
   font-size: 0.9rem;
+
+  &--info {
+    background: rgba(227, 244, 255, 0.9);
+    color: #16598c;
+    border-color: rgba(136, 187, 226, 0.9);
+  }
 }
 </style>

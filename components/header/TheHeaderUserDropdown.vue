@@ -38,7 +38,7 @@ export default {
 .header-dropdown {
   &-list {
     list-style: none;
-    z-index: 25;
+    z-index: 20;
     position: absolute;
     top: calc(#{$header-height} - 6px);
     padding: 4px 0;

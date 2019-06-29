@@ -1,7 +1,6 @@
 <template>
   <div>
     <Modal />
-    <DropdownOverlay />
     <FlashMessage />
 
     <TheHeader />
@@ -12,7 +11,6 @@
 
 <script>
 import Modal from '@/components/common/modal/Modal.vue'
-import DropdownOverlay from '@/components/common/DropdownOverlay.vue'
 import FlashMessage from '@/components/common/flash-message/FlashMessage.vue'
 import TheHeader from '@/layouts/TheHeader.vue'
 import TheFooter from '@/layouts/TheFooter.vue'
@@ -20,7 +18,6 @@ import TheFooter from '@/layouts/TheFooter.vue'
 export default {
   components: {
     Modal,
-    DropdownOverlay,
     FlashMessage,
     TheHeader,
     TheFooter

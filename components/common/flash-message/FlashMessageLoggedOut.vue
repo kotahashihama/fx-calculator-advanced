@@ -1,3 +1,3 @@
 <template>
-  <p class="flash-message-logged-in">ログアウトしました。</p>
+  <p class="flash-message-logged-out">ログアウトしました。</p>
 </template>

@@ -78,6 +78,7 @@ export const state = () => ({
 
   showsFlashMessage: false,
   currentFlashMessage: '',
+  flashMessagetType: '',
 
   title: '無題',
   currencyPairs,
@@ -302,13 +303,15 @@ export const mutations = {
     state.showsDropdown = false
   },
 
-  showFlashMessage(state, currentFlashMessage) {
+  showFlashMessage(state, payload) {
     state.showsFlashMessage = true
-    state.currentFlashMessage = currentFlashMessage
+    state.currentFlashMessage = payload.currentFlashMessage
+    state.flashMessageType = payload.flashMessageType
   },
   hideFlashMessage(state) {
     state.showsFlashMessage = false
     state.currentModal = ''
+    state.flashMessageType = ''
   },
 
   updateTitle(state, title) {
@@ -441,7 +444,10 @@ export const actions = {
 
   async twitterLoginWithFlashMessage({ dispatch, commit }) {
     await dispatch('twitterLogin')
-    commit('showFlashMessage', 'FlashMessageLoggedIn')
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageLoggedIn',
+      flashMessageType: 'info'
+    })
     setTimeout(function() {
       commit('hideFlashMessage')
     }, 3000)
@@ -449,7 +455,10 @@ export const actions = {
 
   async logoutWithFlashMessage({ dispatch, commit }) {
     await dispatch('logout')
-    commit('showFlashMessage', 'FlashMessageLoggedOut')
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageLoggedOut',
+      flashMessageType: 'info'
+    })
     setTimeout(function() {
       commit('hideFlashMessage')
     }, 3000)

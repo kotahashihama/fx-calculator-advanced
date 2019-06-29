@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$store.state.showsDropdown"
-    class="dropdown-overlay"
+    class="header-dropdown-overlay"
     @click="hideDropdown()"
   ></div>
 </template>
@@ -17,9 +17,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dropdown-overlay {
-  z-index: 20;
+.header-dropdown-overlay {
+  z-index: 15;
   position: absolute;
+  top: 0;
+  left: 0;
   display: block;
   width: 100%;
   height: 100vh;
