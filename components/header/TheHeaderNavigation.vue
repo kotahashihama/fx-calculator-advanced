@@ -1,7 +1,7 @@
 <template>
   <nav class="header-navigation">
     <ul class="header-navigation-list">
-      <li class="header-navigation-list__item">
+      <li v-if="$store.state.isLoggedIn" class="header-navigation-list__item">
         <router-link to="/calculation" class="header-navigation-list__item-link"
           >保存済み</router-link
         >
