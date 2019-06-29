@@ -1,9 +1,11 @@
 <template>
-  <div v-if="$store.state.showsFlashMessage" class="flash-message">
-    <div class="container">
-      <component :is="$store.state.currentFlashMessage" />
+  <transition name="flash-message">
+    <div v-if="$store.state.showsFlashMessage" class="flash-message">
+      <div class="container">
+        <component :is="$store.state.currentFlashMessage" />
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -24,6 +26,23 @@ export default {
   position: fixed;
   top: calc(#{$header-height} - 6px);
   width: 100%;
+
+  &-leave-active,
+  &-enter-active {
+    transition: opacity 0.3s, transform 0.3s ease;
+  }
+  &-leave-to,
+  &-enter {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  &-leave,
+  &-enter-to {
+    opacity: 1;
+  }
+  &-move {
+    transition: transform 0.3s;
+  }
 }
 
 .container {

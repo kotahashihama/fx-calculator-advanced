@@ -40,15 +40,15 @@ export default {
 .modal {
   position: relative;
   z-index: 99;
-}
 
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s;
-}
-.modal-enter,
-.modal-leave-to {
-  opacity: 0;
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s;
+  }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
 }
 
 .overlay {
