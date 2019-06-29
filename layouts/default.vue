@@ -1,9 +1,8 @@
 <template>
   <div>
+    <Modal />
     <DropdownOverlay />
-    <transition name="modal">
-      <Modal v-if="$store.state.showsModal" />
-    </transition>
+    <FlashMessage />
 
     <TheHeader />
     <nuxt />
@@ -14,13 +13,15 @@
 <script>
 import Modal from '@/components/common/modal/Modal.vue'
 import DropdownOverlay from '@/components/common/DropdownOverlay.vue'
+import FlashMessage from '@/components/common/flash-message/FlashMessage.vue'
 import TheHeader from '@/layouts/TheHeader.vue'
 import TheFooter from '@/layouts/TheFooter.vue'
 
 export default {
   components: {
-    DropdownOverlay,
     Modal,
+    DropdownOverlay,
+    FlashMessage,
     TheHeader,
     TheFooter
   },
@@ -96,14 +97,5 @@ button {
 
   /* Support for IE. */
   font-feature-settings: 'liga';
-}
-
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s;
-}
-.modal-enter,
-.modal-leave-to {
-  opacity: 0;
 }
 </style>

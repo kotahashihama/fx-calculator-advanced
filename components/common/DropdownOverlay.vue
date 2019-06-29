@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .dropdown-overlay {
-  z-index: 5;
+  z-index: 20;
   position: absolute;
   display: block;
   width: 100%;

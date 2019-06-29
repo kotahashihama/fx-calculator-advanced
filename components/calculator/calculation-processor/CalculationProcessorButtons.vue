@@ -8,7 +8,7 @@
       新規計算
     </button>
     <button class="button button--danger">リセット</button>
-    <button v-if="$store.state.isLoggedin" class="button">保存</button>
+    <button v-if="$store.state.isLoggedIn" class="button">保存</button>
   </div>
 </template>
 

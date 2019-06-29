@@ -3,7 +3,7 @@
     <ul class="header-dropdown-list">
       <li class="header-dropdown-list__item">
         <button
-          v-if="$store.state.isLoggedin"
+          v-if="$store.state.isLoggedIn"
           class="header-dropdown-list__item-link"
           @click="logout()"
         >
@@ -25,10 +25,10 @@
 export default {
   methods: {
     twitterLogin() {
-      this.$store.commit('twitterLogin')
+      this.$store.dispatch('twitterLoginWithFlashMessage')
     },
     logout() {
-      this.$store.commit('logout')
+      this.$store.dispatch('logoutWithFlashMessage')
     }
   }
 }
@@ -38,7 +38,7 @@ export default {
 .header-dropdown {
   &-list {
     list-style: none;
-    z-index: 10;
+    z-index: 25;
     position: absolute;
     top: calc(#{$header-height} - 6px);
     padding: 4px 0;

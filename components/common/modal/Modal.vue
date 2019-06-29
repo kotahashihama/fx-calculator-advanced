@@ -1,17 +1,19 @@
 <template>
-  <div class="modal">
-    <div class="overlay" @click="hideModal()">
-      <div class="window" @click="keepModal($event)">
-        <button class="close-button" @click="hideModal()">
-          <i class="material-icons">close</i>
-        </button>
+  <transition name="modal">
+    <div v-if="$store.state.showsModal" class="modal">
+      <div class="overlay" @click="hideModal()">
+        <div class="window" @click="keepModal($event)">
+          <button class="close-button" @click="hideModal()">
+            <i class="material-icons">close</i>
+          </button>
 
-        <div class="content">
-          <component :is="$store.state.currentModal" />
+          <div class="content">
+            <component :is="$store.state.currentModal" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -37,7 +39,16 @@ export default {
 <style lang="scss" scoped>
 .modal {
   position: relative;
-  z-index: 10;
+  z-index: 99;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s;
+}
+.modal-enter,
+.modal-leave-to {
+  opacity: 0;
 }
 
 .overlay {

@@ -3,7 +3,7 @@
     <span class="input input--skelton"></span>
   </div>
   <div v-else class="calculation-processor-input">
-    <template v-if="$store.state.isLoggedin">
+    <template v-if="$store.state.isLoggedIn">
       <input v-model="title" class="input" type="text" @blur="setUntitled()" />
       <div class="label">未保存</div>
     </template>
@@ -37,7 +37,7 @@ export default {
       if (this.title === '') this.$store.commit('updateTitle', '無題')
     },
     twitterLogin() {
-      this.$store.commit('twitterLogin')
+      this.$store.dispatch('twitterLoginWithFlashMessage')
     }
   }
 }

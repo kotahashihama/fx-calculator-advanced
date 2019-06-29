@@ -68,13 +68,16 @@ const currencyPairs = [
 
 export const state = () => ({
   isLoading: true,
-  isLoggedin: false,
+  isLoggedIn: false,
   user: {},
+
+  showsDropdown: false,
 
   showsModal: false,
   currentModal: '',
 
-  showsDropdown: false,
+  showsFlashMessage: false,
+  currentFlashMessage: '',
 
   title: '無題',
   currencyPairs,
@@ -273,21 +276,13 @@ export const mutations = {
   disableLoading(state) {
     state.isLoading = false
   },
-  enableLoggedin(state, user) {
-    state.isLoggedin = true
+  enableLoggedIn(state, user) {
+    state.isLoggedIn = true
     const { uid, displayName, photoURL } = user
     state.user = { uid, displayName, photoURL }
   },
-  disableLoggedin(state) {
-    state.isLoggedin = false
-  },
-  twitterLogin(state) {
-    firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider())
-    state.showsDropdown = false
-  },
-  logout(state) {
-    firebase.auth().signOut()
-    state.showsDropdown = false
+  disableLoggedIn(state) {
+    state.isLoggedIn = false
   },
 
   showModal(state, currentModal) {
@@ -305,6 +300,15 @@ export const mutations = {
   },
   hideDropdown(state) {
     state.showsDropdown = false
+  },
+
+  showFlashMessage(state, currentFlashMessage) {
+    state.showsFlashMessage = true
+    state.currentFlashMessage = currentFlashMessage
+  },
+  hideFlashMessage(state) {
+    state.showsFlashMessage = false
+    state.currentModal = ''
   },
 
   updateTitle(state, title) {
@@ -416,10 +420,38 @@ export const actions = {
     firebase.auth().onAuthStateChanged(user => {
       commit('disableLoading')
       if (user) {
-        commit('enableLoggedin', user)
+        commit('enableLoggedIn', user)
       } else {
-        commit('disableLoggedin')
+        commit('disableLoggedIn')
       }
     })
+  },
+
+  async twitterLogin({ commit }) {
+    await firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.TwitterAuthProvider())
+    commit('hideDropdown')
+  },
+
+  async logout({ commit }) {
+    await firebase.auth().signOut()
+    commit('hideDropdown')
+  },
+
+  async twitterLoginWithFlashMessage({ dispatch, commit }) {
+    await dispatch('twitterLogin')
+    commit('showFlashMessage', 'FlashMessageLoggedIn')
+    setTimeout(function() {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
+
+  async logoutWithFlashMessage({ dispatch, commit }) {
+    await dispatch('logout')
+    commit('showFlashMessage', 'FlashMessageLoggedOut')
+    setTimeout(function() {
+      commit('hideFlashMessage')
+    }, 3000)
   }
 }

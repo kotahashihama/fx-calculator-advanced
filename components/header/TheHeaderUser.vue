@@ -5,7 +5,7 @@
       <span class="image image--skelton"></span>
     </button>
     <button v-else class="button" @click="showDropdown()">
-      <template v-if="$store.state.isLoggedin">
+      <template v-if="$store.state.isLoggedIn">
         <span class="name">{{ $store.state.user.displayName }}</span>
         <img
           :src="$store.state.user.photoURL"
