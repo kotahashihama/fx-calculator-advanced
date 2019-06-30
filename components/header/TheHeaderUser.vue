@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     showDropdown() {
-      this.dropdown = true
       this.$store.commit('showDropdown')
     }
   }
