@@ -388,7 +388,7 @@ export const mutations = {
   updateOpenTradeEdited(state, payload) {
     state.openTradeEdited[payload.option] = payload.value
   },
-  saveOpenTrade(state) {
+  createOpenTrade(state) {
     state.openTrades.push({ ...state.openTradeEdited })
   },
   updateOpenTrade(state) {
@@ -488,5 +488,42 @@ export const actions = {
     setTimeout(() => {
       commit('hideFlashMessage')
     }, 3000)
+  },
+
+  createCalculation({ state, getters }) {
+    const uuid = () => {
+      let characters = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.split('')
+      characters = characters.map(character => {
+        if (character === 'x') {
+          return Math.floor(Math.random() * 16).toString(16)
+        } else if (character === 'y') {
+          return (Math.floor(Math.random() * 4) + 8).toString(16)
+        } else {
+          return character
+        }
+      })
+
+      return characters.join('')
+    }
+
+    firestore.collection('calculations').add({
+      id: uuid(),
+      uid: state.user.uid,
+      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+      title: state.title,
+      balance: state.balance,
+      targetMarginLevel: state.targetMarginLevel,
+      broker: state.broker,
+      tradingUnit: state.tradingUnit,
+      leverage: state.leverage,
+      currencyPairs: state.currencyPairs.map(currencyPair => {
+        const { symbol, assumedPrice } = currencyPair
+        return { symbol, assumedPrice }
+      }),
+      openTrades: state.openTrades,
+      floatingPl: getters.floatingPlTotal,
+      floatingPips: getters.floatingPipsTotal,
+      marginLevel: getters.marginLevel
+    })
   }
 }

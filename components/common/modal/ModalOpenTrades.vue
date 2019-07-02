@@ -8,7 +8,7 @@
     <form
       class="form"
       @submit.prevent="
-        $store.state.editsOpenTrade ? updateOpenTrade() : saveOpenTrade()
+        $store.state.editsOpenTrade ? updateOpenTrade() : createOpenTrade()
       "
     >
       <div class="form-content">
@@ -156,7 +156,7 @@ export default {
         value: currencyPair.currentPrice
       })
     },
-    saveOpenTrade() {
+    createOpenTrade() {
       const max = Math.max(
         ...this.$store.state.openTrades.map(openTrade => openTrade.id)
       )
@@ -165,7 +165,7 @@ export default {
         option: 'id',
         value: Number(id)
       })
-      this.$store.commit('saveOpenTrade')
+      this.$store.commit('createOpenTrade')
       this.$store.commit('hideModal')
     },
     updateOpenTrade() {

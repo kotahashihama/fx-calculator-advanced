@@ -8,9 +8,25 @@
       新規計算
     </button>
     <button class="button button--danger">リセット</button>
-    <button v-if="$store.state.isLoggedIn" class="button">保存</button>
+    <button
+      v-if="$store.state.isLoggedIn"
+      class="button"
+      @click="createCalculation()"
+    >
+      保存
+    </button>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    createCalculation() {
+      this.$store.dispatch('createCalculation')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .calculation-processor-buttons {
@@ -23,7 +39,7 @@
   transition: all 0.3s;
   white-space: nowrap;
   margin-right: 9px;
-  padding: 0 1.3em;
+  pcreateing: 0 1.3em;
   border: solid 1px #2b7194;
   border-radius: 3px;
   height: 32px;
