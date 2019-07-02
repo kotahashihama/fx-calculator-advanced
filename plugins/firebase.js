@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-const firebaseConfig = {
+const config = {
   apiKey: 'AIzaSyAlLED25GNB9JKqeWnXJykkA_7C88NQ0QI',
   authDomain: 'fx-calculator-advanced.firebaseapp.com',
   databaseURL: 'https://fx-calculator-advanced.firebaseio.com',
@@ -11,9 +11,7 @@ const firebaseConfig = {
   messagingSenderId: '519332817494',
   appId: '1:519332817494:web:57ffe8fd412ba3f9'
 }
+firebase.initializeApp(config)
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-}
-
+export const firestore = firebase.firestore()
 export default firebase

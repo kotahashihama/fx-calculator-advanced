@@ -1,4 +1,4 @@
-import firebase from '@/plugins/firebase'
+import firebase, { firestore } from '@/plugins/firebase'
 
 const currencyPairs = [
   {
@@ -70,6 +70,7 @@ export const state = () => ({
   isLoading: true,
   isLoggedIn: false,
   user: {},
+  calculations: [],
 
   showsDropdown: false,
 
@@ -285,6 +286,9 @@ export const mutations = {
   disableLoggedIn(state) {
     state.isLoggedIn = false
   },
+  setCalculations(state, calculations) {
+    state.calculations = calculations
+  },
 
   showModal(state, currentModal) {
     state.showsModal = true
@@ -420,16 +424,18 @@ export const mutations = {
 
 export const actions = {
   checkAuthentication({ commit }) {
-    firebase.auth().onAuthStateChanged(user => {
-      commit('disableLoading')
-      if (user) {
-        commit('enableLoggedIn', user)
-      } else {
-        commit('disableLoggedIn')
-      }
+    return new Promise(resolve => {
+      firebase.auth().onAuthStateChanged(user => {
+        commit('disableLoading')
+        if (user) {
+          commit('enableLoggedIn', user)
+          resolve()
+        } else {
+          commit('disableLoggedIn')
+        }
+      })
     })
   },
-
   redirectTopWithFlashMessage({ commit }) {
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageRedirectTop',
@@ -439,6 +445,19 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
+  async getCalculations({ dispatch, state, commit }) {
+    await dispatch('checkAuthentication')
+    const docRef = firestore
+      .collection('calculations')
+      .where('uid', '==', state.user.uid)
+    docRef.get().then(querySnapshot => {
+      const calculations = []
+      querySnapshot.forEach(doc => {
+        calculations.push(doc.data())
+      })
+      commit('setCalculations', calculations)
+    })
+  },
 
   async twitterLogin({ commit }) {
     await firebase
@@ -446,12 +465,10 @@ export const actions = {
       .signInWithPopup(new firebase.auth.TwitterAuthProvider())
     commit('hideDropdown')
   },
-
   async logout({ commit }) {
     await firebase.auth().signOut()
     commit('hideDropdown')
   },
-
   async twitterLoginWithFlashMessage({ dispatch, commit }) {
     await dispatch('twitterLogin')
     commit('showFlashMessage', {
@@ -462,7 +479,6 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
-
   async logoutWithFlashMessage({ dispatch, commit }) {
     await dispatch('logout')
     commit('showFlashMessage', {

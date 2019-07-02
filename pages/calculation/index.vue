@@ -2,9 +2,12 @@
   <div class="calculation">
     <div class="container">
       <ul>
-        <li>計算結果</li>
-        <li>計算結果</li>
-        <li>計算結果</li>
+        <li
+          v-for="calculation in $store.state.calculations"
+          :key="calculation.id"
+        >
+          {{ calculation.id }}
+        </li>
       </ul>
     </div>
   </div>
@@ -12,7 +15,15 @@
 
 <script>
 export default {
-  middleware: 'authentication'
+  middleware: 'authentication',
+  mounted() {
+    this.getCalculations()
+  },
+  methods: {
+    getCalculations() {
+      this.$store.dispatch('getCalculations')
+    }
+  }
 }
 </script>
 
