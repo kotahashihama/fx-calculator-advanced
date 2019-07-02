@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
 .footer-copyright {
-  color: #757575;
+  color: #fff;
   text-align: center;
 
   &__text {
