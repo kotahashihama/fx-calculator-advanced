@@ -91,7 +91,7 @@ export default {
 .calculating-form {
   border-right: solid 1px #d0d0d0;
   padding: 23px;
-  width: 320px;
+  width: $calculating-form-width;
 }
 
 .calculated-result {

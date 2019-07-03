@@ -37,6 +37,12 @@ export default {
   components: {
     CalculatedResultOpenTradeRatioChart
   },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       chartOptions: {

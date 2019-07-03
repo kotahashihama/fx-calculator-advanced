@@ -39,6 +39,12 @@ import CalculatedResultOpenTradesItem from '@/components/common/calculated-resul
 export default {
   components: {
     CalculatedResultOpenTradesItem
+  },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
   }
 }
 </script>

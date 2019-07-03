@@ -50,6 +50,12 @@ import CalculatedResultMainItem from '@/components/common/calculated-result/Calc
 export default {
   components: {
     CalculatedResultMainItem
+  },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
   }
 }
 </script>

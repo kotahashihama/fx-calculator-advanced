@@ -1,21 +1,21 @@
 <template>
   <div class="calculated-result">
-    <CalculatedResultMain />
+    <CalculatedResultMain :calculation-data="calculationData" />
 
     <div class="calculation-details">
       <div class="calculation-details__left">
-        <CalculatedResultCapital />
+        <CalculatedResultCapital :calculation-data="calculationData" />
 
-        <CalculatedResultAssumedPrices />
+        <CalculatedResultAssumedPrices :calculation-data="calculationData" />
       </div>
 
       <div
         v-if="$store.state.openTrades.length"
         class="calculation-details__right"
       >
-        <CalculatedResultOpenTradeRatio />
+        <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
 
-        <CalculatedResultOpenTrades />
+        <CalculatedResultOpenTrades :calculation-data="calculationData" />
       </div>
       <div
         v-else
@@ -26,6 +26,7 @@
         </p>
       </div>
     </div>
+    {{ calculationData }}
   </div>
 </template>
 
@@ -43,6 +44,17 @@ export default {
     CalculatedResultAssumedPrices,
     CalculatedResultOpenTradeRatio,
     CalculatedResultOpenTrades
+  },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      isSaved: false
+    }
   }
 }
 </script>

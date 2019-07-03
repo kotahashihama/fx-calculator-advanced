@@ -71,6 +71,7 @@ export const state = () => ({
   isLoggedIn: false,
   user: {},
   calculations: [],
+  calculation: {},
 
   showsDropdown: false,
 
@@ -289,6 +290,9 @@ export const mutations = {
   setCalculations(state, calculations) {
     state.calculations = calculations
   },
+  setCalculation(state, calculation) {
+    state.calculation = calculation
+  },
 
   showModal(state, currentModal) {
     state.showsModal = true
@@ -459,6 +463,13 @@ export const actions = {
       commit('setCalculations', calculations)
     })
   },
+  async getCalculation({ dispatch, commit }, id) {
+    await dispatch('checkAuthentication')
+    const docRef = firestore.collection('calculations').doc(id)
+    docRef.get().then(doc => {
+      commit('setCalculation', doc.data())
+    })
+  },
 
   async twitterLogin({ commit }) {
     await firebase
@@ -492,7 +503,7 @@ export const actions = {
   },
 
   createCalculation({ state, getters }) {
-    const uuid = () => {
+    const generateUuid = () => {
       let characters = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.split('')
       characters = characters.map(character => {
         if (character === 'x') {
@@ -506,25 +517,29 @@ export const actions = {
 
       return characters.join('')
     }
+    const uuid = generateUuid()
 
-    firestore.collection('calculations').add({
-      id: uuid(),
-      uid: state.user.uid,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      title: state.title,
-      balance: state.balance,
-      targetMarginLevel: state.targetMarginLevel,
-      broker: state.broker,
-      tradingUnit: state.tradingUnit,
-      leverage: state.leverage,
-      currencyPairs: state.currencyPairs.map(currencyPair => {
-        const { symbol, assumedPrice } = currencyPair
-        return { symbol, assumedPrice }
-      }),
-      openTrades: state.openTrades,
-      floatingPl: getters.floatingPlTotal,
-      floatingPips: getters.floatingPipsTotal,
-      marginLevel: getters.marginLevel
-    })
+    firestore
+      .collection('calculations')
+      .doc(uuid)
+      .set({
+        id: uuid,
+        uid: state.user.uid,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        title: state.title,
+        balance: state.balance,
+        targetMarginLevel: state.targetMarginLevel,
+        broker: state.broker,
+        tradingUnit: state.tradingUnit,
+        leverage: state.leverage,
+        currencyPairs: state.currencyPairs.map(currencyPair => {
+          const { symbol, assumedPrice } = currencyPair
+          return { symbol, assumedPrice }
+        }),
+        openTrades: state.openTrades,
+        floatingPl: getters.floatingPlTotal,
+        floatingPips: getters.floatingPipsTotal,
+        marginLevel: getters.marginLevel
+      })
   }
 }

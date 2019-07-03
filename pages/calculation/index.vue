@@ -10,7 +10,10 @@
             :key="calculation.id"
             class="calculations-list__item"
           >
-            <a href="" class="calculations-list__item-link">
+            <router-link
+              :to="'/calculation/' + calculation.id"
+              class="calculations-list__item-link"
+            >
               <article class="box">
                 <div class="box-date">
                   {{ date(calculation.createdAt.seconds) }} 保存
@@ -49,7 +52,7 @@
                   </div>
                 </div>
               </article>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>

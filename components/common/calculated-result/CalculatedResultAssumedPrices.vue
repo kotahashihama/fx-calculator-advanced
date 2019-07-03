@@ -25,6 +25,12 @@ import CalculatedResultAssumedPricesItem from '@/components/common/calculated-re
 export default {
   components: {
     CalculatedResultAssumedPricesItem
+  },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
   }
 }
 </script>

@@ -74,6 +74,12 @@ import CalculatedResultCapitalItem from '@/components/common/calculated-result/C
 export default {
   components: {
     CalculatedResultCapitalItem
+  },
+  props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    }
   }
 }
 </script>
