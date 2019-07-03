@@ -450,6 +450,7 @@ export const actions = {
     const docRef = firestore
       .collection('calculations')
       .where('uid', '==', state.user.uid)
+      .orderBy('createdAt', 'desc')
     docRef.get().then(querySnapshot => {
       const calculations = []
       querySnapshot.forEach(doc => {
@@ -509,7 +510,7 @@ export const actions = {
     firestore.collection('calculations').add({
       id: uuid(),
       uid: state.user.uid,
-      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       title: state.title,
       balance: state.balance,
       targetMarginLevel: state.targetMarginLevel,

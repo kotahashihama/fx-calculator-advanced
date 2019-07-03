@@ -13,7 +13,7 @@
             <a href="" class="calculations-list__item-link">
               <article class="box">
                 <div class="box-date">
-                  {{ date(calculation.created_at.seconds) }} 保存
+                  {{ date(calculation.createdAt.seconds) }} 保存
                 </div>
                 <h1 class="box-title">{{ calculation.title }}</h1>
                 <div
