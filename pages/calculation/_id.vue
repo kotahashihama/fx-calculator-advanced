@@ -36,10 +36,50 @@ export default {
   },
   mounted() {
     this.getCalculation()
+    this.getCurrentPrices()
   },
   methods: {
     getCalculation() {
       this.$store.dispatch('getCalculation', this.$route.params.id)
+    },
+    getCurrentPrices() {
+      const self = this
+
+      this.$axios
+        .get('https://api.ratesapi.io/api/latest?base=JPY')
+        .then(function(response) {
+          const currentPrices = response.data.rates
+          const currencyPairs = self.$store.state.currencyPairs.filter(
+            currencyPair => currencyPair.currencies[1] === 'JPY'
+          )
+          currencyPairs.forEach(currencyPair => {
+            const currencies = currencyPair.currencies
+
+            self.$store.commit('getCurrentPrice', {
+              baseCurrency: currencies[0],
+              quoteCurrency: currencies[1],
+              currentPrice: currentPrices[currencies[0]]
+            })
+          })
+        })
+
+      this.$axios
+        .get('https://api.ratesapi.io/api/latest?base=USD')
+        .then(function(response) {
+          const currentPrices = response.data.rates
+          const currencyPairs = self.$store.state.currencyPairs.filter(
+            currencyPair => currencyPair.currencies[1] === 'USD'
+          )
+          currencyPairs.forEach(currencyPair => {
+            const currencies = currencyPair.currencies
+
+            self.$store.commit('getCurrentPrice', {
+              baseCurrency: currencies[0],
+              quoteCurrency: currencies[1],
+              currentPrice: currentPrices[currencies[0]]
+            })
+          })
+        })
     }
   }
 }

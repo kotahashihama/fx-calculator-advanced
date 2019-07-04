@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="calculationData"
     class="calculated-result-main"
     :class="[
       $store.getters.floatingPlTotal < 0 ? 'calculated-result-main--red' : ''
@@ -11,7 +12,7 @@
         <span v-else>含み損</span>
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPlTotal | digitSeparator }}
+        {{ $store.getters.floatingPlTotal(calculationData) | digitSeparator }}
       </template>
       <template v-slot:unit>
         円
@@ -23,7 +24,7 @@
         含みピップス
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPipsTotal | digitSeparator }}
+        {{ $store.getters.floatingPipsTotal(calculationData) | digitSeparator }}
       </template>
       <template v-slot:unit>
         pips
@@ -35,7 +36,51 @@
         証拠金維持率
       </template>
       <template v-slot:value>
-        {{ $store.getters.marginLevel | digitSeparator }}
+        {{ $store.getters.marginLevel(calculationData) | digitSeparator }}
+      </template>
+      <template v-slot:unit>
+        ％
+      </template>
+    </CalculatedResultMainItem>
+  </div>
+  <div
+    v-else
+    class="calculated-result-main"
+    :class="[
+      $store.getters.floatingPlTotal < 0 ? 'calculated-result-main--red' : ''
+    ]"
+  >
+    <CalculatedResultMainItem>
+      <template v-slot:heading>
+        <span v-if="$store.getters.floatingPlTotal >= 0">含み益</span>
+        <span v-else>含み損</span>
+      </template>
+      <template v-slot:value>
+        {{ $store.getters.floatingPlTotal() | digitSeparator }}
+      </template>
+      <template v-slot:unit>
+        円
+      </template>
+    </CalculatedResultMainItem>
+
+    <CalculatedResultMainItem>
+      <template v-slot:heading>
+        含みピップス
+      </template>
+      <template v-slot:value>
+        {{ $store.getters.floatingPipsTotal() | digitSeparator }}
+      </template>
+      <template v-slot:unit>
+        pips
+      </template>
+    </CalculatedResultMainItem>
+
+    <CalculatedResultMainItem>
+      <template v-slot:heading>
+        証拠金維持率
+      </template>
+      <template v-slot:value>
+        {{ $store.getters.marginLevel() | digitSeparator }}
       </template>
       <template v-slot:unit>
         ％

@@ -1,14 +1,43 @@
 <template>
-  <div class="calculated-result-open-trade-ratio">
+  <div v-if="calculationData" class="calculated-result-open-trade-ratio">
     <div class="chart">
       <CalculatedResultOpenTradeRatioChart
         ref="chart"
         class="chart__body"
-        :chart-data="chartData"
+        :chart-data="chartData(calculationData)"
         :chart-options="chartOptions"
       />
       <div class="chart__text">
-        <span class="value">{{ openTradeLotsTotal }}</span
+        <span class="value">{{ openTradeLotsTotal(calculationData) }}</span
+        >ロット
+      </div>
+    </div>
+    <div class="chart-legend">
+      <ul class="chart-legend-list">
+        <li
+          v-for="currencyPair in $store.state.currencyPairs"
+          :key="currencyPair.symbol"
+          class="chart-legend-list__item"
+        >
+          <span
+            class="icon"
+            :style="{ background: currencyPair.chartColor }"
+          ></span
+          >{{ currencyPair.symbol }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div v-else class="calculated-result-open-trade-ratio">
+    <div class="chart">
+      <CalculatedResultOpenTradeRatioChart
+        ref="chart"
+        class="chart__body"
+        :chart-data="chartData()"
+        :chart-options="chartOptions"
+      />
+      <div class="chart__text">
+        <span class="value">{{ openTradeLotsTotal() }}</span
         >ロット
       </div>
     </div>
@@ -57,46 +86,75 @@ export default {
   },
   computed: {
     chartData() {
-      return {
-        labels: this.$store.state.currencyPairs.map(
-          currencyPair => currencyPair.symbol
-        ),
-        datasets: [
-          {
-            data: this.openTradeLots,
-            backgroundColor: this.$store.state.currencyPairs.map(
-              currencyPair => currencyPair.chartColor
+      return calculationData => {
+        const currencyPairs = calculationData
+          ? this.calculationData.currencyPairs
+          : this.$store.state.currencyPairs
+        const openTradeLots = calculationData
+          ? this.openTradeLots(this.calculationData)
+          : this.openTradeLots()
+        const chartColorsMatched = calculationData
+          ? this.calculationData.currencyPairs.map(
+              savedCurrencyPair =>
+                this.$store.state.currencyPairs.find(
+                  storeCurrencyPair =>
+                    storeCurrencyPair.symbol === savedCurrencyPair.symbol
+                ).chartColor
             )
-          }
-        ]
+          : currencyPairs.map(currencyPair => currencyPair.chartColor)
+        return {
+          labels: currencyPairs.map(currencyPair => currencyPair.symbol),
+          datasets: [
+            {
+              data: openTradeLots,
+              backgroundColor: chartColorsMatched
+            }
+          ]
+        }
       }
     },
     openTrades() {
       return this.$store.state.openTrades
     },
     openTradeLotsTotal() {
-      return (
-        Math.round(
-          this.openTradeLots.reduce((sum, openTradeLot) => sum + openTradeLot) *
-            100
-        ) / 100
-      )
-    },
-    openTradeLots() {
-      return this.$store.state.currencyPairs.map(currencyPair => {
-        const openTrades = this.$store.state.openTrades.filter(
-          openTrade => openTrade.symbol === currencyPair.symbol
-        )
+      return calculationData => {
+        const openTradeLots = calculationData
+          ? this.openTradeLots(calculationData)
+          : this.openTradeLots()
         return (
           Math.round(
-            openTrades.reduce((sum, openTrade) => sum + openTrade.lot, 0) * 100
+            openTradeLots.reduce((sum, openTradeLot) => sum + openTradeLot) *
+              100
           ) / 100
         )
-      })
+      }
+    },
+    openTradeLots() {
+      return calculationData => {
+        const currencyPairs = calculationData
+          ? calculationData.currencyPairs
+          : this.$store.state.currencyPairs
+        return currencyPairs.map(currencyPair => {
+          const openTrades = calculationData
+            ? calculationData.openTrades
+            : this.$store.state.openTrades
+          const openTradesMatched = openTrades.filter(
+            openTrade => openTrade.symbol === currencyPair.symbol
+          )
+          return (
+            Math.round(
+              openTradesMatched.reduce(
+                (sum, openTrade) => sum + openTrade.lot,
+                0
+              ) * 100
+            ) / 100
+          )
+        })
+      }
     }
   },
   watch: {
-    openTradeLots() {
+    openTrades() {
       this.$refs.chart.reRenderChart()
     }
   }

@@ -133,34 +133,62 @@ export const state = () => ({
 })
 
 export const getters = {
-  equity(state, getters) {
-    return state.balance + getters.floatingPlTotal
+  equity: (state, getters) => calculationData => {
+    const balance = calculationData ? calculationData.balance : state.balance
+    const floatingPlTotal = calculationData
+      ? getters.floatingPlTotal(calculationData)
+      : getters.floatingPlTotal()
+
+    return balance + floatingPlTotal
   },
-  freeMargin(state, getters) {
-    return getters.equity - getters.marginTotal
+  freeMargin: (state, getters) => calculationData => {
+    const equity = calculationData
+      ? getters.equity(calculationData)
+      : getters.equity()
+    const marginTotal = calculationData
+      ? getters.marginTotal(calculationData)
+      : getters.marginTotal()
+
+    return equity - marginTotal
   },
 
-  marginTotal(state, getters) {
-    return state.currencyPairs
+  marginTotal: (state, getters) => calculationData => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+
+    return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = getters.margin(currencies[0], currencies[1])
+        const result = calculationData
+          ? getters.margin(currencies[0], currencies[1], calculationData)
+          : getters.margin(currencies[0], currencies[1])
         return sum + result
       }, 0)
   },
-  margin: state => (baseCurrency, quoteCurrency) => {
-    const currencyPair = state.currencyPairs.find(
+  margin: state => (baseCurrency, quoteCurrency, calculationData) => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+    const currencyPair = currencyPairs.find(
       currencyPair => currencyPair.symbol === `${baseCurrency}/${quoteCurrency}`
     )
-    const usdJpy = state.currencyPairs.find(
+    const usdJpy = currencyPairs.find(
       currencyPair => currencyPair.symbol === 'USD/JPY'
     )
-    const openTrades = state.openTrades.filter(
+    const openTrades = calculationData
+      ? calculationData.openTrades
+      : state.openTrades
+    const openTradesMatched = openTrades.filter(
       openTrade => openTrade.symbol === currencyPair.symbol
     )
-    const leverage = state.leverage[state.broker]
-    const total = openTrades.reduce((sum, openTrade) => {
-      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+    const leverage = calculationData
+      ? calculationData.leverage
+      : state.leverage[state.broker]
+    const total = openTradesMatched.reduce((sum, openTrade) => {
+      const tradingSize = calculationData
+        ? calculationData.tradingUnit * openTrade.lot
+        : state.tradingUnit[state.broker] * openTrade.lot
 
       if (quoteCurrency === 'JPY') {
         const result = (tradingSize * currencyPair.assumedPrice) / leverage
@@ -176,24 +204,38 @@ export const getters = {
     return Math.round(total)
   },
 
-  floatingPlTotal(state, getters) {
-    return state.currencyPairs
+  floatingPlTotal: (state, getters) => calculationData => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+
+    return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = getters.floatingPl(currencies[0], currencies[1])
+        const result = calculationData
+          ? getters.floatingPl(currencies[0], currencies[1], calculationData)
+          : getters.floatingPl(currencies[0], currencies[1])
         return sum + result
       }, 0)
   },
-  floatingPl: state => (baseCurrency, quoteCurrency) => {
-    const currencyPair = state.currencyPairs.find(
+  floatingPl: state => (baseCurrency, quoteCurrency, calculationData) => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+    const currencyPair = currencyPairs.find(
       currencyPair => currencyPair.symbol === `${baseCurrency}/${quoteCurrency}`
     )
-    const openTrades = state.openTrades.filter(
+    const openTrades = calculationData
+      ? calculationData.openTrades
+      : state.openTrades
+    const openTradesMatched = openTrades.filter(
       openTrade => openTrade.symbol === currencyPair.symbol
     )
-    const total = openTrades.reduce((sum, openTrade) => {
+    const total = openTradesMatched.reduce((sum, openTrade) => {
       const gap = currencyPair.assumedPrice - openTrade.openPrice
-      const tradingSize = state.tradingUnit[state.broker] * openTrade.lot
+      const tradingSize = calculationData
+        ? calculationData.tradingUnit * openTrade.lot
+        : state.tradingUnit[state.broker] * openTrade.lot
 
       if (quoteCurrency === 'JPY') {
         const resultBuy = gap * tradingSize
@@ -222,22 +264,34 @@ export const getters = {
     return Math.round(total)
   },
 
-  floatingPipsTotal(state, getters) {
-    return state.currencyPairs
+  floatingPipsTotal: (state, getters) => calculationData => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+
+    return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = getters.floatingPips(currencies[0], currencies[1])
+        const result = calculationData
+          ? getters.floatingPips(currencies[0], currencies[1], calculationData)
+          : getters.floatingPips(currencies[0], currencies[1])
         return sum + result
       }, 0)
   },
-  floatingPips: state => (baseCurrency, quoteCurrency) => {
-    const currencyPair = state.currencyPairs.find(
+  floatingPips: state => (baseCurrency, quoteCurrency, calculationData) => {
+    const currencyPairs = calculationData
+      ? calculationData.currencyPairs
+      : state.currencyPairs
+    const currencyPair = currencyPairs.find(
       currencyPair => currencyPair.symbol === `${baseCurrency}/${quoteCurrency}`
     )
-    const openTrades = state.openTrades.filter(
+    const openTrades = calculationData
+      ? calculationData.openTrades
+      : state.openTrades
+    const openTradesMatched = openTrades.filter(
       openTrade => openTrade.symbol === currencyPair.symbol
     )
-    const total = openTrades.reduce((sum, openTrade) => {
+    const total = openTradesMatched.reduce((sum, openTrade) => {
       const gap = currencyPair.assumedPrice - openTrade.openPrice
 
       if (quoteCurrency === 'JPY') {
@@ -264,11 +318,21 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
 
-  marginLevel(state, getters) {
-    if (state.openTrades.length) {
-      return (
-        Math.round(((getters.equity / getters.marginTotal) | 0) * 10000) / 100
-      )
+  marginLevel: (state, getters) => calculationData => {
+    const openTrades = calculationData
+      ? calculationData.openTrades
+      : state.openTrades
+
+    if ((openTrades || []).length) {
+      return calculationData
+        ? Math.round(
+            ((getters.equity(calculationData) /
+              getters.marginTotal(calculationData)) |
+              0) *
+              10000
+          ) / 100
+        : Math.round(((getters.equity() / getters.marginTotal()) | 0) * 10000) /
+            100
     } else {
       return 0
     }
@@ -526,20 +590,18 @@ export const actions = {
         id: uuid,
         uid: state.user.uid,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+
         title: state.title,
         balance: state.balance,
         targetMarginLevel: state.targetMarginLevel,
         broker: state.broker,
-        tradingUnit: state.tradingUnit,
-        leverage: state.leverage,
+        tradingUnit: state.tradingUnit[state.broker],
+        leverage: state.leverage[state.broker],
         currencyPairs: state.currencyPairs.map(currencyPair => {
-          const { symbol, assumedPrice } = currencyPair
-          return { symbol, assumedPrice }
+          const { symbol, currencies, assumedPrice } = currencyPair
+          return { symbol, currencies, assumedPrice }
         }),
-        openTrades: state.openTrades,
-        floatingPl: getters.floatingPlTotal,
-        floatingPips: getters.floatingPipsTotal,
-        marginLevel: getters.marginLevel
+        openTrades: state.openTrades
       })
   }
 }

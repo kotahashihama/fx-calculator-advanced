@@ -9,24 +9,40 @@
         <CalculatedResultAssumedPrices :calculation-data="calculationData" />
       </div>
 
-      <div
-        v-if="$store.state.openTrades.length"
-        class="calculation-details__right"
-      >
-        <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
+      <template v-if="calculationData">
+        <div v-if="savedOpenTradesLength" class="calculation-details__right">
+          <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
 
-        <CalculatedResultOpenTrades :calculation-data="calculationData" />
-      </div>
-      <div
-        v-else
-        class="calculation-details__right calculation-details__right--disabled"
-      >
-        <p>
-          ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
-        </p>
-      </div>
+          <CalculatedResultOpenTrades :calculation-data="calculationData" />
+        </div>
+        <div
+          v-else
+          class="calculation-details__right calculation-details__right--disabled"
+        >
+          <p>
+            ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
+          </p>
+        </div>
+      </template>
+      <template v-else>
+        <div
+          v-if="$store.state.openTrades.length"
+          class="calculation-details__right"
+        >
+          <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
+
+          <CalculatedResultOpenTrades :calculation-data="calculationData" />
+        </div>
+        <div
+          v-else
+          class="calculation-details__right calculation-details__right--disabled"
+        >
+          <p>
+            ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
+          </p>
+        </div>
+      </template>
     </div>
-    {{ calculationData }}
   </div>
 </template>
 
@@ -53,7 +69,21 @@ export default {
   },
   data() {
     return {
-      isSaved: false
+      savedOpenTradesLength: 0
+    }
+  },
+  computed: {
+    savedOpenTrades() {
+      if (this.calculationData) {
+        return this.calculationData.openTrades
+      } else {
+        return 0
+      }
+    }
+  },
+  watch: {
+    savedOpenTrades() {
+      this.savedOpenTradesLength = this.savedOpenTrades.length
     }
   }
 }

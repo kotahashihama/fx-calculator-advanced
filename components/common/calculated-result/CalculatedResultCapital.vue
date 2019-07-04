@@ -1,5 +1,73 @@
 <template>
-  <table class="calculated-result-capital">
+  <table v-if="calculationData" class="calculated-result-capital">
+    <tbody>
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          残高
+        </template>
+        <template v-slot:content>
+          {{ calculationData.balance | digitSeparator }} 円
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          有効証拠金
+        </template>
+        <template v-slot:content>
+          {{ $store.getters.equity(calculationData) | digitSeparator }} 円
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          余剰証拠金
+        </template>
+        <template v-slot:content>
+          {{ $store.getters.freeMargin(calculationData) | digitSeparator }} 円
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          必要証拠金
+        </template>
+        <template v-slot:content>
+          {{ $store.getters.marginTotal(calculationData) | digitSeparator }} 円
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          取引所
+        </template>
+        <template v-slot:content>
+          {{ $store.state.brokers[calculationData.broker] }}
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          取引単位
+        </template>
+        <template v-slot:content>
+          {{ calculationData.tradingUnit | digitSeparator }}
+          通貨
+        </template>
+      </CalculatedResultCapitalItem>
+
+      <CalculatedResultCapitalItem>
+        <template v-slot:heading>
+          レバレッジ
+        </template>
+        <template v-slot:content>
+          {{ calculationData.leverage | digitSeparator }}
+          ％
+        </template>
+      </CalculatedResultCapitalItem>
+    </tbody>
+  </table>
+  <table v-else class="calculated-result-capital">
     <tbody>
       <CalculatedResultCapitalItem>
         <template v-slot:heading>
@@ -15,7 +83,7 @@
           有効証拠金
         </template>
         <template v-slot:content>
-          {{ $store.getters.equity | digitSeparator }} 円
+          {{ $store.getters.equity() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -24,7 +92,7 @@
           余剰証拠金
         </template>
         <template v-slot:content>
-          {{ $store.getters.freeMargin | digitSeparator }} 円
+          {{ $store.getters.freeMargin() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -33,7 +101,7 @@
           必要証拠金
         </template>
         <template v-slot:content>
-          {{ $store.getters.marginTotal | digitSeparator }} 円
+          {{ $store.getters.marginTotal() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
 

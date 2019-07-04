@@ -1,5 +1,37 @@
 <template>
-  <table class="calculated-result-open-trades">
+  <table v-if="calculationData" class="calculated-result-open-trades">
+    <thead>
+      <tr>
+        <th class="heading">通貨ペア</th>
+        <th class="heading">売買</th>
+        <th class="heading">ロット</th>
+        <th class="heading">注文レート</th>
+      </tr>
+    </thead>
+    <transition-group name="calculated-result-open-trades__item" tag="tbody">
+      <CalculatedResultOpenTradesItem
+        v-for="openTrade in calculationData.openTrades"
+        :key="openTrade.id || 0"
+        :calculation-data="calculationData"
+        :open-trade="openTrade"
+        class="calculated-result-open-trades__item"
+      >
+        <template v-slot:currency-pair>
+          {{ openTrade.symbol }}
+        </template>
+        <template v-slot:action>
+          {{ openTrade.action }}
+        </template>
+        <template v-slot:lot>
+          {{ openTrade.lot }}
+        </template>
+        <template v-slot:order-price>
+          {{ openTrade.openPrice }}
+        </template>
+      </CalculatedResultOpenTradesItem>
+    </transition-group>
+  </table>
+  <table v-else class="calculated-result-open-trades">
     <thead>
       <tr>
         <th class="heading">通貨ペア</th>

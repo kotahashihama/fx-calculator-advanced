@@ -1,5 +1,5 @@
 import Vue from 'vue'
 
 Vue.filter('digitSeparator', value =>
-  value.toLocaleString('ja', { maximumFractionDigits: 5 })
+  (value || 0).toLocaleString('ja', { maximumFractionDigits: 5 })
 )

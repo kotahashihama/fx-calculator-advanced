@@ -1,5 +1,26 @@
 <template>
-  <table class="calculated-result-assumed-prices">
+  <table v-if="calculationData" class="calculated-result-assumed-prices">
+    <tbody>
+      <CalculatedResultAssumedPricesItem
+        v-for="currencyPair in $store.state.currencyPairs"
+        :key="currencyPair.symbol"
+      >
+        <template v-slot:pair>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <span
+            class="emoji"
+            v-html="currencyPairInfo('emoji', currencyPair)"
+          ></span
+          >{{ currencyPairInfo('symbol', currencyPair) }}
+        </template>
+
+        <template v-slot:assumed-price>
+          {{ currencyPairInfo('assumedPrice', currencyPair) | digitSeparator }}
+        </template>
+      </CalculatedResultAssumedPricesItem>
+    </tbody>
+  </table>
+  <table v-else class="calculated-result-assumed-prices">
     <tbody>
       <CalculatedResultAssumedPricesItem
         v-for="currencyPair in $store.state.currencyPairs"
@@ -30,6 +51,15 @@ export default {
     calculationData: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    currencyPairInfo(property, storeCurrencyPair) {
+      return (
+        ((this.calculationData.currencyPairs || []).find(
+          currencyPair => currencyPair.symbol === storeCurrencyPair.symbol
+        ) || {})[property] || storeCurrencyPair[property]
+      )
     }
   }
 }

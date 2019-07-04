@@ -12,7 +12,10 @@
     <td class="calculated-result-open-trades-item__item">
       <slot name="order-price" />
     </td>
-    <td class="calculated-result-open-trades-item__item">
+    <td
+      v-if="!calculationData"
+      class="calculated-result-open-trades-item__item"
+    >
       <button class="button" @click="showModalEditsOpenTrades()">
         編集
       </button>
@@ -26,6 +29,10 @@
 <script>
 export default {
   props: {
+    calculationData: {
+      type: Object,
+      default: () => {}
+    },
     openTrade: {
       type: Object,
       default: () => {}
