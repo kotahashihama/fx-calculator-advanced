@@ -6,12 +6,13 @@
         :key="currencyPair.symbol"
       >
         <template v-slot:pair>
-          <!-- eslint-disable-next-line vue/no-v-html -->
+          <!-- eslint-disable vue/no-v-html -->
           <span
             class="emoji"
             v-html="currencyPairInfo('emoji', currencyPair)"
           ></span
           >{{ currencyPairInfo('symbol', currencyPair) }}
+          <!-- eslint-enable vue/no-v-html -->
         </template>
 
         <template v-slot:assumed-price>

@@ -133,26 +133,20 @@ export const state = () => ({
 })
 
 export const getters = {
-  equity: (state, getters) => calculationData => {
+  equity: (state, getters) => (calculationData = null) => {
     const balance = calculationData ? calculationData.balance : state.balance
-    const floatingPlTotal = calculationData
-      ? getters.floatingPlTotal(calculationData)
-      : getters.floatingPlTotal()
+    const floatingPlTotal = getters.floatingPlTotal(calculationData)
 
     return balance + floatingPlTotal
   },
-  freeMargin: (state, getters) => calculationData => {
-    const equity = calculationData
-      ? getters.equity(calculationData)
-      : getters.equity()
-    const marginTotal = calculationData
-      ? getters.marginTotal(calculationData)
-      : getters.marginTotal()
+  freeMargin: (state, getters) => (calculationData = null) => {
+    const equity = getters.equity(calculationData)
+    const marginTotal = getters.marginTotal(calculationData)
 
     return equity - marginTotal
   },
 
-  marginTotal: (state, getters) => calculationData => {
+  marginTotal: (state, getters) => (calculationData = null) => {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
@@ -160,9 +154,11 @@ export const getters = {
     return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = calculationData
-          ? getters.margin(currencies[0], currencies[1], calculationData)
-          : getters.margin(currencies[0], currencies[1])
+        const result = getters.margin(
+          currencies[0],
+          currencies[1],
+          calculationData
+        )
         return sum + result
       }, 0)
   },
@@ -204,7 +200,7 @@ export const getters = {
     return Math.round(total)
   },
 
-  floatingPlTotal: (state, getters) => calculationData => {
+  floatingPlTotal: (state, getters) => (calculationData = null) => {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
@@ -212,9 +208,11 @@ export const getters = {
     return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = calculationData
-          ? getters.floatingPl(currencies[0], currencies[1], calculationData)
-          : getters.floatingPl(currencies[0], currencies[1])
+        const result = getters.floatingPl(
+          currencies[0],
+          currencies[1],
+          calculationData
+        )
         return sum + result
       }, 0)
   },
@@ -264,7 +262,7 @@ export const getters = {
     return Math.round(total)
   },
 
-  floatingPipsTotal: (state, getters) => calculationData => {
+  floatingPipsTotal: (state, getters) => (calculationData = null) => {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
@@ -272,9 +270,11 @@ export const getters = {
     return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = calculationData
-          ? getters.floatingPips(currencies[0], currencies[1], calculationData)
-          : getters.floatingPips(currencies[0], currencies[1])
+        const result = getters.floatingPips(
+          currencies[0],
+          currencies[1],
+          calculationData
+        )
         return sum + result
       }, 0)
   },
@@ -318,21 +318,20 @@ export const getters = {
     return Math.round(total * 10) / 10
   },
 
-  marginLevel: (state, getters) => calculationData => {
+  marginLevel: (state, getters) => (calculationData = null) => {
     const openTrades = calculationData
       ? calculationData.openTrades
       : state.openTrades
 
     if ((openTrades || []).length) {
-      return calculationData
-        ? Math.round(
-            ((getters.equity(calculationData) /
-              getters.marginTotal(calculationData)) |
-              0) *
-              10000
-          ) / 100
-        : Math.round(((getters.equity() / getters.marginTotal()) | 0) * 10000) /
-            100
+      return (
+        Math.round(
+          ((getters.equity(calculationData) /
+            getters.marginTotal(calculationData)) |
+            0) *
+            10000
+        ) / 100
+      )
     } else {
       return 0
     }
@@ -566,7 +565,7 @@ export const actions = {
     }, 3000)
   },
 
-  createCalculation({ state, getters }) {
+  createCalculation({ state }) {
     const generateUuid = () => {
       let characters = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.split('')
       characters = characters.map(character => {
