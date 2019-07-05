@@ -35,9 +35,9 @@ export default {
 
 <style lang="scss" scoped>
 .flash-message {
-  z-index: 25;
+  z-index: 10;
   position: fixed;
-  top: calc(#{$header-height} - 9px);
+  top: calc(#{$header-height} + 11px);
   width: 100%;
 
   &-leave-active,

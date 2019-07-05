@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  z-index: 10;
+  z-index: 15;
   position: sticky;
   top: 0;
   display: flex;
