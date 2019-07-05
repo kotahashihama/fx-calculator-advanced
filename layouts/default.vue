@@ -69,6 +69,7 @@ html {
 button {
   outline: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .material-icons {

@@ -108,7 +108,7 @@ export default {
 
 <style lang="scss" scoped>
 .calculation-id {
-  background: #f9f9f9;
+  background: #fff9f5;
 }
 
 .container {
@@ -118,7 +118,7 @@ export default {
 }
 
 .box {
-  padding: 33px;
+  padding: 28px 34px;
   background: #fff;
   border: solid 1px #d0d0d0;
 

@@ -23,6 +23,6 @@ export default {
   padding: 0 13px;
   border-top: solid 1px #d0d0d0;
   height: 50px;
-  background: #f9f9f9;
+  background: #fff9f5;
 }
 </style>

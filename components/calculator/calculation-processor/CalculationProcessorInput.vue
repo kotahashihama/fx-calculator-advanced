@@ -59,7 +59,7 @@ export default {
   border: solid 1px #dadada;
   border-radius: 3px;
   padding: 0 9px;
-  padding-right: 64px;
+  padding-right: 68px;
   width: 100%;
   height: 32px;
   background: #fff;
@@ -77,7 +77,7 @@ export default {
     align-items: center;
     padding-right: 9px;
     border-style: dashed;
-    background: #f7f7f7;
+    background: #fff;
     font-size: 0.8rem;
   }
 }
@@ -100,8 +100,9 @@ export default {
 .label {
   position: absolute;
   right: 9px;
-  padding: 0.15em 0.5em;
+  padding: 0.15em 0.7em;
   border: solid 1px #757575;
+  border-radius: 99px;
   color: #757575;
   font-size: 0.7rem;
 }

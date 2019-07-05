@@ -91,6 +91,10 @@ export default {
     border: none;
     width: 90px;
     background: #c5c6ca;
+
+    &:hover {
+      background: #c5c6ca;
+    }
   }
 }
 </style>

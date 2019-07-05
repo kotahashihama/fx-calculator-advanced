@@ -92,6 +92,7 @@ export default {
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+  width: calc(100% - 82px);
 }
 
 .button {
@@ -104,7 +105,7 @@ export default {
   border-top-left-radius: 0;
   background: #f1f1f1;
   color: #333;
-  width: 100px;
+  width: 82px;
   font-size: 0.9rem;
 }
 </style>
