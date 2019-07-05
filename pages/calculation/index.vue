@@ -21,13 +21,24 @@
                 <h1 class="box-title">{{ calculation.title }}</h1>
                 <div
                   class="box-info"
-                  :class="[calculation.floatingPl < 0 ? 'box-info--red' : '']"
+                  :class="[
+                    $store.getters.floatingPlTotal(calculation) < 0
+                      ? 'box-info--red'
+                      : ''
+                  ]"
                 >
                   <div class="box-info__item">
-                    <div class="heading">含み益</div>
+                    <div
+                      v-if="$store.getters.floatingPlTotal(calculation) >= 0"
+                      class="heading"
+                    >
+                      含み益
+                    </div>
+                    <div v-else class="heading">含み損</div>
                     <div class="content">
                       <span class="value">{{
-                        calculation.floatingPl | digitSeparator
+                        $store.getters.floatingPlTotal(calculation)
+                          | digitSeparator
                       }}</span>
                       円
                     </div>
@@ -36,7 +47,8 @@
                     <div class="heading">含みピップス</div>
                     <div class="content">
                       <span class="value">{{
-                        calculation.floatingPips | digitSeparator
+                        $store.getters.floatingPipsTotal(calculation)
+                          | digitSeparator
                       }}</span>
                       pips
                     </div>
@@ -45,7 +57,7 @@
                     <div class="heading">証拠金維持率</div>
                     <div class="content">
                       <span class="value">{{
-                        calculation.marginLevel | digitSeparator
+                        $store.getters.marginTotal(calculation) | digitSeparator
                       }}</span>
                       ％
                     </div>

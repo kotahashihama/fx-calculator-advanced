@@ -3,12 +3,16 @@
     v-if="calculationData"
     class="calculated-result-main"
     :class="[
-      $store.getters.floatingPlTotal < 0 ? 'calculated-result-main--red' : ''
+      $store.getters.floatingPlTotal(calculationData) < 0
+        ? 'calculated-result-main--red'
+        : ''
     ]"
   >
     <CalculatedResultMainItem>
       <template v-slot:heading>
-        <span v-if="$store.getters.floatingPlTotal >= 0">含み益</span>
+        <span v-if="$store.getters.floatingPlTotal(calculationData) >= 0"
+          >含み益</span
+        >
         <span v-else>含み損</span>
       </template>
       <template v-slot:value>
@@ -47,12 +51,12 @@
     v-else
     class="calculated-result-main"
     :class="[
-      $store.getters.floatingPlTotal < 0 ? 'calculated-result-main--red' : ''
+      $store.getters.floatingPlTotal() < 0 ? 'calculated-result-main--red' : ''
     ]"
   >
     <CalculatedResultMainItem>
       <template v-slot:heading>
-        <span v-if="$store.getters.floatingPlTotal >= 0">含み益</span>
+        <span v-if="$store.getters.floatingPlTotal() >= 0">含み益</span>
         <span v-else>含み損</span>
       </template>
       <template v-slot:value>
