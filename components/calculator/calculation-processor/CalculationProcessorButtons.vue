@@ -8,7 +8,7 @@
       リセット
     </button>
     <template v-if="$store.state.isLoggedIn">
-      <template v-if="$store.state.calculationEdited.id">
+      <template v-if="$store.state.editsCalculation">
         <button class="button button--outline" @click="createCalculation()">
           新規保存
         </button>
@@ -17,7 +17,7 @@
         <button class="button" @click="createCalculation()">保存</button>
       </template>
       <button
-        v-if="$store.state.calculationEdited.id"
+        v-if="$store.state.editsCalculation"
         class="button"
         @click="updateCalculation()"
       >

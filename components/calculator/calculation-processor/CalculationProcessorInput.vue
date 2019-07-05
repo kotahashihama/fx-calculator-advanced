@@ -5,7 +5,7 @@
   <div v-else class="calculation-processor-input">
     <template v-if="$store.state.isLoggedIn">
       <input v-model="title" class="input" type="text" @blur="setUntitled()" />
-      <div v-if="$store.state.calculationEdited.id" class="label">
+      <div v-if="$store.state.editsCalculation" class="label">
         保存済
       </div>
       <div v-else class="label">未保存</div>

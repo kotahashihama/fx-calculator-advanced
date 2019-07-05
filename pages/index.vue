@@ -27,7 +27,7 @@ export default {
       quoteCurrency.substring(1).toLowerCase()
   },
   mounted() {
-    if (!this.$store.state.calculationEdited.id) this.getCurrentPrices()
+    if (!this.$store.state.editsCalculation) this.getCurrentPrices()
   },
   methods: {
     getCurrentPrices() {

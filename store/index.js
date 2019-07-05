@@ -119,9 +119,9 @@ export const state = () => ({
   },
   openTradeEdited: {
     id: 0,
-    symbol: 'USD/JPY',
-    action: '買',
-    lot: 0.01,
+    symbol: '',
+    action: '',
+    lot: 0,
     openPrice: 0
   },
 
@@ -131,12 +131,23 @@ export const state = () => ({
     accountNumber: ''
   },
 
+  editsCalculation: false,
+  calculationDefault: {
+    title: '無題',
+    balance: 200000,
+    targetMarginLevel: 1000,
+    broker: 'international',
+    tradingUnit: 100000,
+    leverage: 1000,
+    currencyPairs: [],
+    openTrades: []
+  },
   calculationEdited: {
     id: '',
     title: '',
     balance: 0,
     targetMarginLevel: 0,
-    broker: 0,
+    broker: '',
     tradingUnit: 0,
     leverage: 0,
     currencyPairs: [],
@@ -500,8 +511,27 @@ export const mutations = {
     })
   },
 
+  setCalculationDefault(state) {
+    const calculationDefault = state.calculationDefault
+    state.id = ''
+    state.title = calculationDefault.title
+    state.balance = calculationDefault.balance
+    state.targetMarginLevel = calculationDefault.targetMarginLevel
+    state.broker = calculationDefault.broker
+    state.tradingUnit[state.broker] = calculationDefault.tradingUnit
+    state.leverage[state.broker] = calculationDefault.leverage
+    calculationDefault.currencyPairs.forEach(savedCurrencyPair => {
+      const currencyPair = state.currencyPairs.find(
+        storeCurrencyPair =>
+          storeCurrencyPair.symbol === savedCurrencyPair.symbol
+      )
+      currencyPair.assumedPrice = savedCurrencyPair.assumedPrice
+    })
+    state.openTrades = [...calculationDefault.openTrades]
+  },
   setCalculationEdited(state, calculation) {
     const calculationEdited = state.calculationEdited
+    state.editsCalculation = true
     calculationEdited.id = calculation.id
     calculationEdited.title = calculation.title
     calculationEdited.balance = calculation.balance
@@ -710,8 +740,12 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
-  resetCalculationWithFlashMessage({ commit }) {
-    commit('getCalculationEdited')
+  resetCalculationWithFlashMessage({ state, commit }) {
+    if (state.editsCalculation) {
+      commit('getCalculationEdited')
+    } else {
+      commit('setCalculationDefault')
+    }
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageResetCalculation',
       flashMessageType: 'success'
