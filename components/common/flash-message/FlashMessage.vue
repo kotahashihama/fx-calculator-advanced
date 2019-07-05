@@ -19,12 +19,14 @@
 import FlashMessageRedirectTop from '@/components/common/flash-message/FlashMessageRedirectTop.vue'
 import FlashMessageLoggedIn from '@/components/common/flash-message/FlashMessageLoggedIn.vue'
 import FlashMessageLoggedOut from '@/components/common/flash-message/FlashMessageLoggedOut.vue'
+import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
 
 export default {
   components: {
     FlashMessageRedirectTop,
     FlashMessageLoggedIn,
-    FlashMessageLoggedOut
+    FlashMessageLoggedOut,
+    FlashMessageDeleteCalculation
   }
 }
 </script>
@@ -70,10 +72,16 @@ export default {
     border-color: rgba(136, 187, 226, 0.9); // #88bbe2
   }
 
+  &--success {
+    background: rgba(221, 255, 227, 0.9); // #ddffe3
+    color: #196f29;
+    border-color: rgba(132, 204, 145, 0.9); // #84cc91
+  }
+
   &--danger {
-    background: rgba(255, 230, 222, 0.9); // #ffe6de
+    background: rgba(255, 236, 230, 0.9); // #ffece6
     color: #bf4925;
-    border-color: rgba(230, 119, 85, 0.9); // #e67755
+    border-color: rgba(234, 121, 86, 0.9); // #ea7956
   }
 }
 </style>

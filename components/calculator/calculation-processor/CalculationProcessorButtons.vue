@@ -31,7 +31,6 @@ export default {
 <style lang="scss" scoped>
 .calculation-processor-buttons {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -39,7 +38,7 @@ export default {
   transition: all 0.3s;
   white-space: nowrap;
   margin-right: 9px;
-  pcreateing: 0 1.3em;
+  padding: 0 1.3em;
   border: solid 1px #2b7194;
   border-radius: 3px;
   height: 32px;

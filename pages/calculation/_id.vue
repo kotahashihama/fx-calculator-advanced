@@ -2,9 +2,19 @@
   <div class="calculation-id">
     <div class="container">
       <article class="box">
-        <div class="box-date">{{ createdAt }} 保存</div>
-        <h1 class="box-title">{{ $store.state.calculation.title }}</h1>
-        <CalculatedResult :calculation-data="$store.state.calculation" />
+        <div class="box-header">
+          <div class="box-header__texts">
+            <div class="date">{{ createdAt }} 保存</div>
+            <h1 class="title">{{ calculation.title }}</h1>
+          </div>
+          <div class="box-header__buttons">
+            <button class="button button--danger" @click="deleteCalculation()">
+              削除
+            </button>
+            <button class="button">編集</button>
+          </div>
+        </div>
+        <CalculatedResult :calculation-data="calculation" />
       </article>
     </div>
   </div>
@@ -41,6 +51,13 @@ export default {
   methods: {
     getCalculation() {
       this.$store.dispatch('getCalculation', this.$route.params.id)
+    },
+    deleteCalculation() {
+      this.$store.dispatch(
+        'deleteCalculationWithFlashMessage',
+        this.$route.params.id
+      )
+      this.$router.push('/calculation')
     },
     getCurrentPrices() {
       const self = this
@@ -101,13 +118,57 @@ export default {
   background: #fff;
   border: solid 1px #d0d0d0;
 
-  &-date {
-    font-size: 0.9rem;
-    color: #9c9c9c;
+  &-header {
+    display: flex;
+
+    &__texts {
+      width: 100%;
+    }
+
+    &__buttons {
+      display: flex;
+    }
+  }
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #9c9c9c;
+}
+
+.title {
+  margin-bottom: 0.7em;
+}
+
+.button {
+  transition: all 0.3s;
+  white-space: nowrap;
+  margin-right: 9px;
+  padding: 0 1.3em;
+  border: solid 1px #2b7194;
+  border-radius: 3px;
+  height: 32px;
+  background: #2b7194;
+  color: #fff;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: #215975;
   }
 
-  &-title {
-    margin-bottom: 0.7em;
+  &:last-of-type {
+    margin: 0;
+  }
+
+  &--danger {
+    border-color: #e54058;
+    background: #fff;
+    color: #e54058;
+
+    &:hover {
+      background: #e54058;
+      color: #fff;
+    }
   }
 }
 </style>

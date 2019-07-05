@@ -486,6 +486,10 @@ export const mutations = {
         openPrice: openTrade.openPrice
       })
     })
+  },
+
+  deleteCalculation(state, index) {
+    state.calculations.splice(index, 1)
   }
 }
 
@@ -548,7 +552,7 @@ export const actions = {
     await dispatch('twitterLogin')
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageLoggedIn',
-      flashMessageType: 'info'
+      flashMessageType: 'success'
     })
     setTimeout(() => {
       commit('hideFlashMessage')
@@ -558,7 +562,7 @@ export const actions = {
     await dispatch('logout')
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageLoggedOut',
-      flashMessageType: 'info'
+      flashMessageType: 'success'
     })
     setTimeout(() => {
       commit('hideFlashMessage')
@@ -602,5 +606,30 @@ export const actions = {
         }),
         openTrades: state.openTrades
       })
+  },
+  deleteCalculation({ state, commit }, id) {
+    return new Promise(resolve => {
+      firestore
+        .collection('calculations')
+        .doc(id)
+        .delete()
+        .then(() => {
+          const index = state.calculations.findIndex(
+            calculation => calculation.id === id
+          )
+          commit('deleteCalculation', index)
+          resolve()
+        })
+    })
+  },
+  async deleteCalculationWithFlashMessage({ dispatch, commit }, id) {
+    await dispatch('deleteCalculation', id)
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageDeleteCalculation',
+      flashMessageType: 'success'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
   }
 }

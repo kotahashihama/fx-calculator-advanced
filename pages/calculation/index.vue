@@ -6,7 +6,7 @@
 
         <ul class="calculations-list">
           <li
-            v-for="calculation in $store.state.calculations"
+            v-for="calculation in calculations"
             :key="calculation.id"
             class="calculations-list__item"
           >
@@ -64,10 +64,18 @@
 export default {
   middleware: 'authentication',
   computed: {
+    calculations() {
+      return this.$store.state.calculations
+    },
     date: () => timestamp => {
       const date = new Date(timestamp * 1000)
       return `${date.getFullYear()}年${date.getMonth() +
         1}月${date.getDate()}日`
+    }
+  },
+  watch: {
+    calculations() {
+      this.getCalculations()
     }
   },
   mounted() {
