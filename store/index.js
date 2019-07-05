@@ -129,7 +129,9 @@ export const state = () => ({
     email: '',
     session: '',
     accountNumber: ''
-  }
+  },
+
+  calculationEdited: ''
 })
 
 export const getters = {
@@ -488,6 +490,25 @@ export const mutations = {
     })
   },
 
+  enableEditCalculation(state, id) {
+    state.calculationEdited = id
+  },
+  setCalculationEdited(state, calculation) {
+    state.title = calculation.title
+    state.balance = calculation.balance
+    state.targetMarginLevel = calculation.targetMarginLevel
+    state.broker = calculation.broker
+    state.tradingUnit[state.broker] = calculation.tradingUnit
+    state.leverage[state.broker] = calculation.leverage
+    calculation.currencyPairs.forEach(savedCurrencyPair => {
+      const currencyPair = state.currencyPairs.find(
+        storeCurrencyPair =>
+          storeCurrencyPair.symbol === savedCurrencyPair.symbol
+      )
+      currencyPair.assumedPrice = savedCurrencyPair.assumedPrice
+    })
+    state.openTrades = calculation.openTrades
+  },
   deleteCalculation(state, index) {
     state.calculations.splice(index, 1)
   }

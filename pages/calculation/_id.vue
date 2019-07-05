@@ -14,7 +14,7 @@
             >
               削除
             </button>
-            <button class="button">編集</button>
+            <button class="button" @click="editCalculation()">編集</button>
           </div>
         </div>
         <CalculatedResult :calculation-data="calculation" />
@@ -54,6 +54,11 @@ export default {
   methods: {
     showModalConfirmDeleteCalculation() {
       this.$store.commit('showModal', 'ModalConfirmDeleteCalculation')
+    },
+    editCalculation() {
+      this.$store.commit('enableEditCalculation', this.calculation.id)
+      this.$store.commit('setCalculationEdited', this.calculation)
+      this.$router.push('/')
     },
     getCalculation() {
       this.$store.dispatch('getCalculation', this.$route.params.id)
