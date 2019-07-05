@@ -4,7 +4,7 @@
       <div class="calculations">
         <h1 class="title">保存済み</h1>
 
-        <ul class="calculations-list">
+        <ul v-if="calculations.length" class="calculations-list">
           <li
             v-for="calculation in calculations"
             :key="calculation.id"
@@ -55,6 +55,11 @@
             </router-link>
           </li>
         </ul>
+        <div v-else class="calculations-list--disabled">
+          <p>
+            計算結果を保存するとここに表示されます。
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -119,6 +124,13 @@ export default {
       &-link {
         text-decoration: none;
       }
+    }
+
+    &--disabled {
+      padding: 16px;
+      border: dashed 1px #dadada;
+      background: #f7f7f7;
+      font-size: 0.9rem;
     }
   }
 }
