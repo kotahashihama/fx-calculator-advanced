@@ -618,22 +618,19 @@ export const actions = {
     }, 3000)
   },
   deleteCalculation({ state, commit }, id) {
-    return new Promise(resolve => {
-      firestore
-        .collection('calculations')
-        .doc(id)
-        .delete()
-        .then(() => {
-          const index = state.calculations.findIndex(
-            calculation => calculation.id === id
-          )
-          commit('deleteCalculation', index)
-          resolve()
-        })
-    })
+    firestore
+      .collection('calculations')
+      .doc(id)
+      .delete()
+      .then(() => {
+        const index = state.calculations.findIndex(
+          calculation => calculation.id === id
+        )
+        commit('deleteCalculation', index)
+      })
   },
-  async deleteCalculationWithFlashMessage({ dispatch, commit }, id) {
-    await dispatch('deleteCalculation', id)
+  deleteCalculationWithFlashMessage({ dispatch, commit }, id) {
+    dispatch('deleteCalculation', id)
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageDeleteCalculation',
       flashMessageType: 'success'
