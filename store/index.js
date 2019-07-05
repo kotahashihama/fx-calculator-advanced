@@ -607,7 +607,8 @@ export const actions = {
         openTrades: state.openTrades
       })
   },
-  createCalculationWithFlashMessage({ commit }) {
+  createCalculationWithFlashMessage({ dispatch, commit }) {
+    dispatch('createCalculation')
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageCreateCalculation',
       flashMessageType: 'success'
