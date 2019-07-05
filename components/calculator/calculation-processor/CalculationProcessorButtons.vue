@@ -4,17 +4,24 @@
     <span class="button button--skelton"></span>
   </div>
   <div v-else class="calculation-processor-buttons">
-    <button v-if="$store.state.isEditing" class="button button--danger">
-      新規計算
-    </button>
     <button class="button button--danger">リセット</button>
-    <button
-      v-if="$store.state.isLoggedIn"
-      class="button"
-      @click="createCalculation()"
-    >
-      保存
-    </button>
+    <template v-if="$store.state.isLoggedIn">
+      <template v-if="$store.state.calculationEdited">
+        <button class="button button--outline" @click="createCalculation()">
+          新規保存
+        </button>
+      </template>
+      <template v-else>
+        <button class="button" @click="createCalculation()">保存</button>
+      </template>
+      <button
+        v-if="$store.state.calculationEdited"
+        class="button"
+        @click="updateCalculation()"
+      >
+        上書き保存
+      </button>
+    </template>
   </div>
 </template>
 
@@ -23,6 +30,9 @@ export default {
   methods: {
     createCalculation() {
       this.$store.dispatch('createCalculationWithFlashMessage')
+    },
+    updateCalculation() {
+      this.$store.dispatch('updateCalculationWithFlashMessage')
     }
   }
 }
@@ -52,6 +62,17 @@ export default {
 
   &:last-of-type {
     margin: 0;
+  }
+
+  &--outline {
+    border-color: #2b7194;
+    background: #fff;
+    color: #2b7194;
+
+    &:hover {
+      background: #2b7194;
+      color: #fff;
+    }
   }
 
   &--danger {

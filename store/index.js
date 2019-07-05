@@ -638,6 +638,36 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
+  updateCalculation({ state }) {
+    firestore
+      .collection('calculations')
+      .doc(state.calculationEdited)
+      .update({
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+
+        title: state.title,
+        balance: state.balance,
+        targetMarginLevel: state.targetMarginLevel,
+        broker: state.broker,
+        tradingUnit: state.tradingUnit[state.broker],
+        leverage: state.leverage[state.broker],
+        currencyPairs: state.currencyPairs.map(currencyPair => {
+          const { symbol, currencies, assumedPrice } = currencyPair
+          return { symbol, currencies, assumedPrice }
+        }),
+        openTrades: state.openTrades
+      })
+  },
+  updateCalculationWithFlashMessage({ dispatch, commit }) {
+    dispatch('updateCalculation')
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageUpdateCalculation',
+      flashMessageType: 'success'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
   deleteCalculation({ state, commit }, id) {
     firestore
       .collection('calculations')
