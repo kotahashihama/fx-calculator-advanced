@@ -131,7 +131,17 @@ export const state = () => ({
     accountNumber: ''
   },
 
-  calculationEdited: ''
+  calculationEdited: {
+    id: '',
+    title: '',
+    balance: 0,
+    targetMarginLevel: 0,
+    broker: 0,
+    tradingUnit: 0,
+    leverage: 0,
+    currencyPairs: [],
+    openTrades: []
+  }
 })
 
 export const getters = {
@@ -490,24 +500,34 @@ export const mutations = {
     })
   },
 
-  enableEditCalculation(state, id) {
-    state.calculationEdited = id
-  },
   setCalculationEdited(state, calculation) {
-    state.title = calculation.title
-    state.balance = calculation.balance
-    state.targetMarginLevel = calculation.targetMarginLevel
-    state.broker = calculation.broker
-    state.tradingUnit[state.broker] = calculation.tradingUnit
-    state.leverage[state.broker] = calculation.leverage
-    calculation.currencyPairs.forEach(savedCurrencyPair => {
+    const calculationEdited = state.calculationEdited
+    calculationEdited.id = calculation.id
+    calculationEdited.title = calculation.title
+    calculationEdited.balance = calculation.balance
+    calculationEdited.targetMarginLevel = calculation.targetMarginLevel
+    calculationEdited.broker = calculation.broker
+    calculationEdited.tradingUnit = calculation.tradingUnit
+    calculationEdited.leverage = calculation.leverage
+    calculationEdited.currencyPairs = calculation.currencyPairs
+    calculationEdited.openTrades = [...calculation.openTrades]
+  },
+  getCalculationEdited(state) {
+    const calculationEdited = state.calculationEdited
+    state.title = calculationEdited.title
+    state.balance = calculationEdited.balance
+    state.targetMarginLevel = calculationEdited.targetMarginLevel
+    state.broker = calculationEdited.broker
+    state.tradingUnit[state.broker] = calculationEdited.tradingUnit
+    state.leverage[state.broker] = calculationEdited.leverage
+    calculationEdited.currencyPairs.forEach(savedCurrencyPair => {
       const currencyPair = state.currencyPairs.find(
         storeCurrencyPair =>
           storeCurrencyPair.symbol === savedCurrencyPair.symbol
       )
       currencyPair.assumedPrice = savedCurrencyPair.assumedPrice
     })
-    state.openTrades = calculation.openTrades
+    state.openTrades = [...calculationEdited.openTrades]
   },
   deleteCalculation(state, index) {
     state.calculations.splice(index, 1)
@@ -641,7 +661,7 @@ export const actions = {
   updateCalculation({ state }) {
     firestore
       .collection('calculations')
-      .doc(state.calculationEdited)
+      .doc(state.calculationEdited.id)
       .update({
         updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
 
@@ -684,6 +704,16 @@ export const actions = {
     dispatch('deleteCalculation', id)
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageDeleteCalculation',
+      flashMessageType: 'success'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
+  resetCalculationWithFlashMessage({ commit }) {
+    commit('getCalculationEdited')
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageResetCalculation',
       flashMessageType: 'success'
     })
     setTimeout(() => {

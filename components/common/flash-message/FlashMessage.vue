@@ -22,6 +22,7 @@ import FlashMessageLoggedOut from '@/components/common/flash-message/FlashMessag
 import FlashMessageCreateCalculation from '@/components/common/flash-message/FlashMessageCreateCalculation.vue'
 import FlashMessageUpdateCalculation from '@/components/common/flash-message/FlashMessageUpdateCalculation.vue'
 import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
+import FlashMessageResetCalculation from '@/components/common/flash-message/FlashMessageResetCalculation.vue'
 
 export default {
   components: {
@@ -30,7 +31,8 @@ export default {
     FlashMessageLoggedOut,
     FlashMessageCreateCalculation,
     FlashMessageUpdateCalculation,
-    FlashMessageDeleteCalculation
+    FlashMessageDeleteCalculation,
+    FlashMessageResetCalculation
   }
 }
 </script>

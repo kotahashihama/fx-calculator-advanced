@@ -4,9 +4,11 @@
     <span class="button button--skelton"></span>
   </div>
   <div v-else class="calculation-processor-buttons">
-    <button class="button button--danger">リセット</button>
+    <button class="button button--danger" @click="resetCalculation()">
+      リセット
+    </button>
     <template v-if="$store.state.isLoggedIn">
-      <template v-if="$store.state.calculationEdited">
+      <template v-if="$store.state.calculationEdited.id">
         <button class="button button--outline" @click="createCalculation()">
           新規保存
         </button>
@@ -15,7 +17,7 @@
         <button class="button" @click="createCalculation()">保存</button>
       </template>
       <button
-        v-if="$store.state.calculationEdited"
+        v-if="$store.state.calculationEdited.id"
         class="button"
         @click="updateCalculation()"
       >
@@ -33,6 +35,9 @@ export default {
     },
     updateCalculation() {
       this.$store.dispatch('updateCalculationWithFlashMessage')
+    },
+    resetCalculation() {
+      this.$store.dispatch('resetCalculationWithFlashMessage')
     }
   }
 }
