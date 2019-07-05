@@ -607,6 +607,15 @@ export const actions = {
         openTrades: state.openTrades
       })
   },
+  createCalculationWithFlashMessage({ commit }) {
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageCreateCalculation',
+      flashMessageType: 'success'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
   deleteCalculation({ state, commit }, id) {
     return new Promise(resolve => {
       firestore

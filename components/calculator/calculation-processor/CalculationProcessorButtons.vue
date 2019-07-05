@@ -22,7 +22,7 @@
 export default {
   methods: {
     createCalculation() {
-      this.$store.dispatch('createCalculation')
+      this.$store.dispatch('createCalculationWithFlashMessage')
     }
   }
 }

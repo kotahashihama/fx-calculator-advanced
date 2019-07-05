@@ -19,6 +19,7 @@
 import FlashMessageRedirectTop from '@/components/common/flash-message/FlashMessageRedirectTop.vue'
 import FlashMessageLoggedIn from '@/components/common/flash-message/FlashMessageLoggedIn.vue'
 import FlashMessageLoggedOut from '@/components/common/flash-message/FlashMessageLoggedOut.vue'
+import FlashMessageCreateCalculation from '@/components/common/flash-message/FlashMessageCreateCalculation.vue'
 import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
 
 export default {
@@ -26,6 +27,7 @@ export default {
     FlashMessageRedirectTop,
     FlashMessageLoggedIn,
     FlashMessageLoggedOut,
+    FlashMessageCreateCalculation,
     FlashMessageDeleteCalculation
   }
 }

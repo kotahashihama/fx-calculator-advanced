@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-myfxbook">
+  <div class="modal-confirm-delete-calculation">
     <ModalTitle>確認</ModalTitle>
 
     <p>本当に削除してもよろしいですか？</p>
