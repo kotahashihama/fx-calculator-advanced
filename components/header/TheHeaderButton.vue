@@ -1,5 +1,5 @@
 <template>
-  <button class="header-button"><slot /></button>
+  <button class="header-button" @click="$emit('click')"><slot /></button>
 </template>
 
 <style lang="scss" scoped>

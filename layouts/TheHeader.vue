@@ -7,7 +7,9 @@
 
     <div class="header__right">
       <TheHeaderUser />
-      <TheHeaderButton class="button">新規計算</TheHeaderButton>
+      <TheHeaderButton class="button" @click="newCalculation()"
+        >新規計算</TheHeaderButton
+      >
     </div>
 
     <TheHeaderDropdownOverlay />
@@ -28,6 +30,12 @@ export default {
     TheHeaderUser,
     TheHeaderButton,
     TheHeaderDropdownOverlay
+  },
+  methods: {
+    newCalculation() {
+      this.$router.push('/')
+      this.$store.dispatch('newCalculationWithFlashMessage')
+    }
   }
 }
 </script>

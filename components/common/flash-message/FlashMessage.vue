@@ -23,6 +23,7 @@ import FlashMessageCreateCalculation from '@/components/common/flash-message/Fla
 import FlashMessageUpdateCalculation from '@/components/common/flash-message/FlashMessageUpdateCalculation.vue'
 import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
 import FlashMessageResetCalculation from '@/components/common/flash-message/FlashMessageResetCalculation.vue'
+import FlashMessageNewCalculation from '@/components/common/flash-message/FlashMessageNewCalculation.vue'
 
 export default {
   components: {
@@ -32,7 +33,8 @@ export default {
     FlashMessageCreateCalculation,
     FlashMessageUpdateCalculation,
     FlashMessageDeleteCalculation,
-    FlashMessageResetCalculation
+    FlashMessageResetCalculation,
+    FlashMessageNewCalculation
   }
 }
 </script>

@@ -404,7 +404,6 @@ export const mutations = {
   },
   hideFlashMessage(state) {
     state.showsFlashMessage = false
-    state.currentModal = ''
     state.flashMessageType = ''
   },
 
@@ -466,9 +465,6 @@ export const mutations = {
   enableEditOpenTrade(state) {
     state.editsOpenTrade = true
   },
-  disableEditOpenTrade(state) {
-    state.editsOpenTrade = false
-  },
   setOpenTradeDefault(state) {
     state.openTradeEdited = { ...state.openTradeDefault }
   },
@@ -511,6 +507,12 @@ export const mutations = {
     })
   },
 
+  enableEditCalculation(state) {
+    state.editsCalculation = true
+  },
+  disableEditCalculation(state) {
+    state.editsCalculation = false
+  },
   setCalculationDefault(state) {
     const calculationDefault = state.calculationDefault
     state.id = ''
@@ -531,7 +533,6 @@ export const mutations = {
   },
   setCalculationEdited(state, calculation) {
     const calculationEdited = state.calculationEdited
-    state.editsCalculation = true
     calculationEdited.id = calculation.id
     calculationEdited.title = calculation.title
     calculationEdited.balance = calculation.balance
@@ -749,6 +750,17 @@ export const actions = {
     commit('showFlashMessage', {
       currentFlashMessage: 'FlashMessageResetCalculation',
       flashMessageType: 'success'
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 3000)
+  },
+  newCalculationWithFlashMessage({ commit }) {
+    commit('disableEditCalculation')
+    commit('setCalculationDefault')
+    commit('showFlashMessage', {
+      currentFlashMessage: 'FlashMessageNewCalculation',
+      flashMessageType: 'info'
     })
     setTimeout(() => {
       commit('hideFlashMessage')

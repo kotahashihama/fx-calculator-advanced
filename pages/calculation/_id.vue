@@ -56,6 +56,7 @@ export default {
       this.$store.commit('showModal', 'ModalConfirmDeleteCalculation')
     },
     editCalculation() {
+      this.$store.commit('enableEditCalculation')
       this.$store.commit('setCalculationEdited', this.calculation)
       this.$store.commit('getCalculationEdited', this.calculation)
       this.$router.push('/')
