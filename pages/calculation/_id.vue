@@ -8,7 +8,10 @@
             <h1 class="title">{{ calculation.title }}</h1>
           </div>
           <div class="box-header__buttons">
-            <button class="button button--danger" @click="deleteCalculation()">
+            <button
+              class="button button--danger"
+              @click="showModalConfirmDeleteCalculation()"
+            >
               削除
             </button>
             <button class="button">編集</button>
@@ -49,15 +52,11 @@ export default {
     this.getCurrentPrices()
   },
   methods: {
+    showModalConfirmDeleteCalculation() {
+      this.$store.commit('showModal', 'ModalConfirmDeleteCalculation')
+    },
     getCalculation() {
       this.$store.dispatch('getCalculation', this.$route.params.id)
-    },
-    deleteCalculation() {
-      this.$store.dispatch(
-        'deleteCalculationWithFlashMessage',
-        this.$route.params.id
-      )
-      this.$router.push('/calculation')
     },
     getCurrentPrices() {
       const self = this

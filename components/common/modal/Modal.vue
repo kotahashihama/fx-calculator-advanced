@@ -19,11 +19,13 @@
 <script>
 import ModalOpenTrades from '@/components/common/modal/ModalOpenTrades.vue'
 import ModalMyfxbook from '@/components/common/modal/ModalMyfxbook.vue'
+import ModalConfirmDeleteCalculation from '@/components/common/modal/ModalConfirmDeleteCalculation.vue'
 
 export default {
   components: {
     ModalOpenTrades,
-    ModalMyfxbook
+    ModalMyfxbook,
+    ModalConfirmDeleteCalculation
   },
   methods: {
     hideModal() {
