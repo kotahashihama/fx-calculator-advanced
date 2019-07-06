@@ -57,7 +57,7 @@
                     <div class="heading">証拠金維持率</div>
                     <div class="content">
                       <span class="value">{{
-                        $store.getters.marginTotal(calculation) | digitSeparator
+                        $store.getters.marginLevel(calculation) | digitSeparator
                       }}</span>
                       ％
                     </div>
