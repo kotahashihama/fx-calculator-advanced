@@ -96,6 +96,7 @@ export default {
 }
 
 .button {
+  transition: all 0.3s;
   padding: 0.4em 1.2em;
   border: solid 1px #dadada;
   border-top: none;
@@ -107,5 +108,9 @@ export default {
   color: #333;
   width: 82px;
   font-size: 0.9rem;
+
+  &:hover {
+    background: #dadada;
+  }
 }
 </style>

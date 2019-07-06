@@ -127,11 +127,7 @@ export default {
     padding: 0;
 
     &__item {
-      border-top: solid 1px #d6d6d6;
-
-      &:last-of-type {
-        border-bottom: solid 1px #d6d6d6;
-      }
+      border-bottom: solid 1px #d6d6d6;
 
       &-link {
         text-decoration: none;
@@ -148,7 +144,8 @@ export default {
 }
 
 .title {
-  margin-bottom: 0.7em;
+  padding-bottom: 0.7em;
+  border-bottom: solid 1px #d6d6d6;
   font-size: 1.5rem;
   font-weight: normal;
 }
@@ -158,14 +155,14 @@ export default {
   color: #333;
 
   &-date {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #9c9c9c;
   }
 
   &-title {
     transition: all 0.3s;
     margin-bottom: 11px;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   &:hover .box {
@@ -176,9 +173,9 @@ export default {
 
   &-info {
     display: flex;
-    padding: 8px 19px;
+    padding: 9px 18px;
     border: solid 2px #0090d8;
-    border-radius: 3px;
+    border-radius: 99px;
     background: #f3fbff;
 
     &--red {
