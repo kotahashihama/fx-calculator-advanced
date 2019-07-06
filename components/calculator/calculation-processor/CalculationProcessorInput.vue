@@ -8,7 +8,7 @@
       <div v-if="$store.state.editsCalculation" class="label">
         保存済
       </div>
-      <div v-else class="label">未保存</div>
+      <div v-else class="label label--secondary">未保存</div>
     </template>
     <template v-else>
       <span class="input input--disabled"
@@ -103,9 +103,15 @@ export default {
   position: absolute;
   right: 9px;
   padding: 0.15em 0.7em;
-  border: solid 1px #757575;
+  border: solid 1px #2b7194;
   border-radius: 99px;
-  color: #757575;
+  color: #2b7194;
   font-size: 0.7rem;
+
+  &--secondary {
+    border: solid 1px #808080;
+    border-radius: 99px;
+    color: #808080;
+  }
 }
 </style>
