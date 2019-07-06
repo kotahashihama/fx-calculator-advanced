@@ -21,6 +21,6 @@ export default {
   align-items: center;
   padding: 0 13px;
   height: $footer-height;
-  background: #827063;
+  background: #5f6167;
 }
 </style>

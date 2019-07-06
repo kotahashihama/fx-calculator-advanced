@@ -79,7 +79,7 @@ export default {
     align-items: center;
     padding-right: 9px;
     border-style: dashed;
-    background: #fff;
+    background: #f7f7f7;
     font-size: 0.8rem;
   }
 }

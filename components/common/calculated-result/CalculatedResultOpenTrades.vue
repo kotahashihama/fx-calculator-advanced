@@ -114,7 +114,7 @@ export default {
 
 .heading {
   padding: 0.4em 0.5em;
-  background: #6aa3bf;
+  background: #7cb6d4;
   color: #fff;
 
   &:first-of-type {

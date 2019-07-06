@@ -109,7 +109,7 @@ export default {
 
 <style lang="scss" scoped>
 .calculation-id {
-  background: #fff9f5;
+  background: #f1f1f1;
 }
 
 .container {
