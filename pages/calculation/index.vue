@@ -47,7 +47,7 @@
                     <div class="heading">含みピップス</div>
                     <div class="content">
                       <span class="value">{{
-                        $store.getters.floatingPipsTotal(calculation)
+                        $store.getters.floatingPipTotal(calculation)
                           | digitSeparator
                       }}</span>
                       pips

@@ -82,6 +82,9 @@ export const state = () => ({
   currentFlashMessage: '',
   flashMessagetType: '',
 
+  showsTooltip: false,
+  currentTooltip: '',
+
   title: '無題',
   currencyPairs,
   openTrades: [],
@@ -285,7 +288,7 @@ export const getters = {
     return Math.round(total)
   },
 
-  floatingPipsTotal: (state, getters) => (calculationData = null) => {
+  floatingPipTotal: (state, getters) => (calculationData = null) => {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
@@ -293,7 +296,7 @@ export const getters = {
     return (currencyPairs || [])
       .map(currencyPair => currencyPair.currencies)
       .reduce((sum, currencies) => {
-        const result = getters.floatingPips(
+        const result = getters.floatingPip(
           currencies[0],
           currencies[1],
           calculationData
@@ -301,7 +304,7 @@ export const getters = {
         return sum + result
       }, 0)
   },
-  floatingPips: state => (baseCurrency, quoteCurrency, calculationData) => {
+  floatingPip: state => (baseCurrency, quoteCurrency, calculationData) => {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
@@ -404,7 +407,17 @@ export const mutations = {
   },
   hideFlashMessage(state) {
     state.showsFlashMessage = false
+    state.currentFlashMessage = ''
     state.flashMessageType = ''
+  },
+
+  showTooltip(state, currentTooltip) {
+    state.showsTooltip = true
+    state.currentTooltip = currentTooltip
+  },
+  hideTooltip(state) {
+    state.showsTooltip = false
+    state.currentTooltip = ''
   },
 
   updateTitle(state, title) {

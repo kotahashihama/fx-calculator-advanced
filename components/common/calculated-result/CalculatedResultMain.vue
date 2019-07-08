@@ -8,7 +8,12 @@
         : ''
     ]"
   >
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipFloatingPl"
+      :calculation-data="calculationData"
+      @mouseover="showTooltip('TooltipFloatingPl')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         <span v-if="$store.getters.floatingPlTotal(calculationData) >= 0"
           >含み益</span
@@ -23,19 +28,29 @@
       </template>
     </CalculatedResultMainItem>
 
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipFloatingPip"
+      :calculation-data="calculationData"
+      @mouseover="showTooltip('TooltipFloatingPip')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         含みピップス
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPipsTotal(calculationData) | digitSeparator }}
+        {{ $store.getters.floatingPipTotal(calculationData) | digitSeparator }}
       </template>
       <template v-slot:unit>
         pips
       </template>
     </CalculatedResultMainItem>
 
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipMarginLevel"
+      :calculation-data="calculationData"
+      @mouseover="showTooltip('TooltipMarginLevel')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         証拠金維持率
       </template>
@@ -54,7 +69,11 @@
       $store.getters.floatingPlTotal() < 0 ? 'calculated-result-main--red' : ''
     ]"
   >
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipFloatingPl"
+      @mouseover="showTooltip('TooltipFloatingPl')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         <span v-if="$store.getters.floatingPlTotal() >= 0">含み益</span>
         <span v-else>含み損</span>
@@ -67,19 +86,27 @@
       </template>
     </CalculatedResultMainItem>
 
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipFloatingPip"
+      @mouseover="showTooltip('TooltipFloatingPip')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         含みピップス
       </template>
       <template v-slot:value>
-        {{ $store.getters.floatingPipsTotal() | digitSeparator }}
+        {{ $store.getters.floatingPipTotal() | digitSeparator }}
       </template>
       <template v-slot:unit>
         pips
       </template>
     </CalculatedResultMainItem>
 
-    <CalculatedResultMainItem>
+    <CalculatedResultMainItem
+      current-tooltip="TooltipMarginLevel"
+      @mouseover="showTooltip('TooltipMarginLevel')"
+      @mouseleave="hideTooltip()"
+    >
       <template v-slot:heading>
         証拠金維持率
       </template>
@@ -104,6 +131,14 @@ export default {
     calculationData: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    showTooltip(currentTooltip) {
+      this.$store.commit('showTooltip', currentTooltip)
+    },
+    hideTooltip() {
+      this.$store.commit('hideTooltip')
     }
   }
 }
