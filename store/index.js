@@ -361,6 +361,15 @@ export const getters = {
     } else {
       return 0
     }
+  },
+  balanceGap: (state, getters) => (calculationData = null) => {
+    const targetMarginLevel = calculationData
+      ? calculationData.targetMarginLevel
+      : state.targetMarginLevel
+    return Math.round(
+      (targetMarginLevel * getters.marginTotal(calculationData)) / 100 -
+        getters.equity(calculationData)
+    )
   }
 }
 
