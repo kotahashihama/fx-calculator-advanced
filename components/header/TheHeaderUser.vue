@@ -44,7 +44,7 @@ export default {
 }
 
 .button {
-  transition: all 0.3s;
+  transition: background 0.3s;
   position: relative;
   display: flex;
   justify-content: center;

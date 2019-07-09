@@ -69,7 +69,7 @@ export default {
 }
 
 .close-button {
-  transition: all 0.3s;
+  transition: color 0.3s;
   position: absolute;
   top: 0;
   right: 0;

@@ -72,7 +72,7 @@ export default {
       font-size: 0.9rem;
 
       &-link {
-        transition: all 0.3s;
+        transition: background 0.3s;
         display: flex;
         justify-content: center;
         align-items: center;

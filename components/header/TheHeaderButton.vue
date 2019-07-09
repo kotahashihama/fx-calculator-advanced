@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 .header-button {
-  transition: all 0.3s;
+  transition: background 0.3s;
   padding: 0.7em 1.3em;
   border: none;
   border-radius: 3px;

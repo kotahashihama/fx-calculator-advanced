@@ -182,6 +182,7 @@ export default {
     margin-right: 9px;
 
     &--secondary {
+      transition: background 0.3s, color 0.3s;
       border: solid 1px #808080;
       background: #fff;
       color: #808080;

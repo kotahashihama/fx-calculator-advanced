@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 .modal-form-button {
-  transition: all 0.3s;
+  transition: background 0.3s;
   padding: 0.4em 1.3em;
   border: none;
   border-radius: 3px;

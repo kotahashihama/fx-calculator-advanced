@@ -53,7 +53,7 @@ export default {
 }
 
 .button {
-  transition: all 0.3s;
+  transition: background 0.3s, color 0.3s;
   white-space: nowrap;
   margin-right: 9px;
   padding: 0 1.3em;

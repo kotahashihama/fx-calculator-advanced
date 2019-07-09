@@ -63,7 +63,7 @@ export default {
 }
 
 .button {
-  transition: all 0.3s;
+  transition: background 0.3s, color 0.3s;
   padding: 0.1em;
   border: solid 1px #2b7194;
   border-radius: 3px;

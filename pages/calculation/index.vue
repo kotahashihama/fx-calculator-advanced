@@ -270,7 +270,7 @@ export default {
   }
 
   &-title {
-    transition: all 0.3s;
+    transition: color 0.3s;
     margin-bottom: 11px;
     font-size: 1.1rem;
 

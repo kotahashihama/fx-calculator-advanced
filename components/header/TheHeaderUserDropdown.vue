@@ -49,7 +49,7 @@ export default {
 
     &__item {
       &-link {
-        transition: all 0.3s;
+        transition: background 0.3s;
         display: flex;
         padding: 0.7em 0.9em;
         border: none;

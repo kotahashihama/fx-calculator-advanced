@@ -96,7 +96,7 @@ export default {
 }
 
 .button {
-  transition: all 0.3s;
+  transition: background 0.3s;
   padding: 0.4em 1.2em;
   border: solid 1px #dadada;
   border-top: none;
