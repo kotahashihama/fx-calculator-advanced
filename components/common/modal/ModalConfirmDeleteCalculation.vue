@@ -31,8 +31,8 @@ export default {
     hideModal() {
       this.$store.commit('hideModal')
     },
-    deleteCalculation() {
-      this.$store.dispatch(
+    async deleteCalculation() {
+      await this.$store.dispatch(
         'deleteCalculationWithFlashMessage',
         this.$route.params.id
       )

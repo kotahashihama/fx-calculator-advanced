@@ -4,82 +4,106 @@
       <div class="calculations">
         <h1 class="title">保存済み</h1>
 
-        <ul v-if="calculations.length" class="calculations-list">
-          <li
-            v-for="calculation in calculations"
-            :key="calculation.id"
-            class="calculations-list__item"
-          >
-            <router-link
-              :to="'/calculation/' + calculation.id"
-              class="calculations-list__item-link"
+        <div v-if="calculations.length" class="content">
+          <ul class="calculations-list">
+            <li
+              v-for="calculation in calculationsDivided[currentPageNumber - 1]"
+              :key="calculation.id"
+              class="calculations-list__item"
             >
-              <article class="box">
-                <div class="box-date">
-                  {{ date(calculation.createdAt.seconds) }} 保存
-                </div>
-                <h1 class="box-title">{{ calculation.title }}</h1>
-                <div
-                  class="box-info"
-                  :class="[
-                    $store.getters.floatingPlTotal(calculation) < 0
-                      ? 'box-info--red'
-                      : ''
-                  ]"
-                >
-                  <div class="box-info__item">
-                    <div
-                      v-if="$store.getters.floatingPlTotal(calculation) >= 0"
-                      class="heading"
-                    >
-                      含み益
+              <router-link
+                :to="'/calculation/' + calculation.id"
+                class="calculations-list__item-link"
+              >
+                <article class="box">
+                  <div class="box-date">
+                    {{ date(calculation.createdAt.seconds) }} 保存
+                  </div>
+                  <h1 class="box-title">{{ calculation.title }}</h1>
+                  <div
+                    class="box-info"
+                    :class="[
+                      $store.getters.floatingPlTotal(calculation) < 0
+                        ? 'box-info--red'
+                        : ''
+                    ]"
+                  >
+                    <div class="box-info__item">
+                      <div
+                        v-if="$store.getters.floatingPlTotal(calculation) >= 0"
+                        class="heading"
+                      >
+                        含み益
+                      </div>
+                      <div v-else class="heading">含み損</div>
+                      <div class="content">
+                        <span class="value">{{
+                          $store.getters.floatingPlTotal(calculation)
+                            | digitSeparator
+                        }}</span>
+                        円
+                      </div>
                     </div>
-                    <div v-else class="heading">含み損</div>
-                    <div class="content">
-                      <span class="value">{{
-                        $store.getters.floatingPlTotal(calculation)
-                          | digitSeparator
-                      }}</span>
-                      円
+                    <div class="box-info__item">
+                      <div class="heading">含みピップス</div>
+                      <div class="content">
+                        <span class="value">{{
+                          $store.getters.floatingPipTotal(calculation)
+                            | digitSeparator
+                        }}</span>
+                        pips
+                      </div>
+                    </div>
+                    <div class="box-info__item">
+                      <div class="heading">証拠金維持率</div>
+                      <div class="content">
+                        <span class="value">{{
+                          $store.getters.marginLevel(calculation)
+                            | digitSeparator
+                        }}</span>
+                        ％
+                      </div>
                     </div>
                   </div>
-                  <div class="box-info__item">
-                    <div class="heading">含みピップス</div>
-                    <div class="content">
-                      <span class="value">{{
-                        $store.getters.floatingPipTotal(calculation)
-                          | digitSeparator
-                      }}</span>
-                      pips
-                    </div>
-                  </div>
-                  <div class="box-info__item">
-                    <div class="heading">証拠金維持率</div>
-                    <div class="content">
-                      <span class="value">{{
-                        $store.getters.marginLevel(calculation) | digitSeparator
-                      }}</span>
-                      ％
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </router-link>
-          </li>
-        </ul>
-        <div v-else class="calculations-list--disabled">
+                </article>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div v-else class="content content--disabled">
           <p>
             計算結果を保存するとここに表示されます。
           </p>
         </div>
+
+        <Pagination
+          :items-per-page-count="calculationsPerPageCount"
+          :total-page-count="totalPageCount"
+          :page-numbers="pageNumbers"
+          :current-page-number="currentPageNumber"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Pagination from '@/components/calculation/pagination/Pagination.vue'
+
 export default {
-  middleware: 'authentication',
+  // middleware: 'authentication',
+  components: {
+    Pagination
+  },
+  data() {
+    return {
+      calculationsDivided: [],
+      calculationsPerPageCount: 5,
+      totalPageCount: 1,
+      pageNumbers: [],
+      currentPageNumber: 1
+    }
+  },
   computed: {
     calculations() {
       return this.$store.state.calculations
@@ -90,17 +114,53 @@ export default {
         1}月${date.getDate()}日`
     }
   },
-  watch: {
-    calculations() {
-      this.getCalculations()
-    }
-  },
   mounted() {
-    this.getCalculations()
+    this.setCurrentPageNumber()
+    this.getCalculations().then(() => {
+      this.setTotalPageCount()
+      this.setCalculationsPerPage()
+      this.setPageNumbers()
+    })
   },
   methods: {
     getCalculations() {
-      this.$store.dispatch('getCalculations')
+      return new Promise(resolve => {
+        this.$store.dispatch('getCalculations').then(() => {
+          resolve()
+        })
+      })
+    },
+    setTotalPageCount() {
+      if (this.calculations.length / this.calculationsPerPageCount <= 1) {
+        this.totalPageCount = 1
+      } else {
+        this.totalPageCount = Math.ceil(
+          this.calculations.length / this.calculationsPerPageCount
+        )
+      }
+    },
+    setCalculationsPerPage() {
+      for (let i = 0; i < this.totalPageCount; i++) {
+        this.calculationsDivided.push(
+          this.calculations.slice(
+            i * this.calculationsPerPageCount,
+            this.calculationsPerPageCount + i * this.calculationsPerPageCount
+          )
+        )
+      }
+    },
+    setPageNumbers() {
+      for (let i = 0; i < this.totalPageCount; i++) {
+        this.pageNumbers.push(i + 1)
+      }
+    },
+    setCurrentPageNumber() {
+      this.currentPageNumber = parseInt(this.$route.query.page) || 1
+    }
+  },
+  watch: {
+    $route() {
+      this.setCurrentPageNumber()
     }
   }
 }
@@ -117,6 +177,15 @@ export default {
   max-width: 720px;
 }
 
+.content {
+  &--disabled {
+    padding: 16px;
+    border: dashed 1px #dadada;
+    background: #f7f7f7;
+    font-size: 0.9rem;
+  }
+}
+
 .calculations {
   padding: 28px 34px;
   border: solid 1px #d0d0d0;
@@ -127,25 +196,21 @@ export default {
     padding: 0;
 
     &__item {
-      border-bottom: solid 1px #d6d6d6;
+      border-top: solid 1px #d6d6d6;
+
+      &:last-of-type {
+        border-bottom: solid 1px #d6d6d6;
+      }
 
       &-link {
         text-decoration: none;
       }
-    }
-
-    &--disabled {
-      padding: 16px;
-      border: dashed 1px #dadada;
-      background: #f7f7f7;
-      font-size: 0.9rem;
     }
   }
 }
 
 .title {
   padding-bottom: 0.7em;
-  border-bottom: solid 1px #d6d6d6;
   font-size: 1.5rem;
   font-weight: normal;
 }

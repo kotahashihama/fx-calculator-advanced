@@ -70,6 +70,7 @@ export const state = () => ({
   isLoading: true,
   isLoggedIn: false,
   user: {},
+
   calculations: [],
   calculation: {},
 
@@ -610,18 +611,21 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
-  async getCalculations({ dispatch, state, commit }) {
-    await dispatch('checkAuthentication')
-    const docRef = firestore
-      .collection('calculations')
-      .where('uid', '==', state.user.uid)
-      .orderBy('createdAt', 'desc')
-    docRef.get().then(querySnapshot => {
-      const calculations = []
-      querySnapshot.forEach(doc => {
-        calculations.push(doc.data())
+  getCalculations({ dispatch, state, commit }) {
+    return new Promise(async resolve => {
+      await dispatch('checkAuthentication')
+      const docRef = firestore
+        .collection('calculations')
+        .where('uid', '==', state.user.uid)
+        .orderBy('createdAt', 'desc')
+      docRef.get().then(querySnapshot => {
+        const calculations = []
+        querySnapshot.forEach(doc => {
+          calculations.push(doc.data())
+        })
+        commit('setCalculations', calculations)
+        resolve()
       })
-      commit('setCalculations', calculations)
     })
   },
   async getCalculation({ dispatch, commit }, id) {
@@ -741,27 +745,29 @@ export const actions = {
       commit('hideFlashMessage')
     }, 3000)
   },
-  deleteCalculation({ state, commit }, id) {
-    firestore
-      .collection('calculations')
-      .doc(id)
-      .delete()
-      .then(() => {
-        const index = state.calculations.findIndex(
-          calculation => calculation.id === id
-        )
-        commit('deleteCalculation', index)
-      })
+  deleteCalculation({ state }, id) {
+    return new Promise(resolve => {
+      firestore
+        .collection('calculations')
+        .doc(id)
+        .delete()
+        .then(() => {
+          resolve()
+        })
+    })
   },
   deleteCalculationWithFlashMessage({ dispatch, commit }, id) {
-    dispatch('deleteCalculation', id)
-    commit('showFlashMessage', {
-      currentFlashMessage: 'FlashMessageDeleteCalculation',
-      flashMessageType: 'success'
+    return new Promise(async resolve => {
+      await dispatch('deleteCalculation', id)
+      commit('showFlashMessage', {
+        currentFlashMessage: 'FlashMessageDeleteCalculation',
+        flashMessageType: 'success'
+      })
+      setTimeout(() => {
+        commit('hideFlashMessage')
+      }, 3000)
+      resolve()
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 3000)
   },
   resetCalculationWithFlashMessage({ state, commit }) {
     if (state.editsCalculation) {
