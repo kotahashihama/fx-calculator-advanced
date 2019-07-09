@@ -1,5 +1,8 @@
 <template>
-  <div v-if="$store.state.isLoading" class="calculation-processor-buttons">
+  <div
+    v-if="$store.state.isLoadingAuthentication"
+    class="calculation-processor-buttons"
+  >
     <span class="button button--skelton"></span>
     <span class="button button--skelton"></span>
   </div>

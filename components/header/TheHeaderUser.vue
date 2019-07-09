@@ -1,6 +1,6 @@
 <template>
   <div class="heaader-user">
-    <button v-if="$store.state.isLoading" class="button">
+    <button v-if="$store.state.isLoadingAuthentication" class="button">
       <span class="name name--skelton"></span>
       <span class="image image--skelton"></span>
     </button>
@@ -82,7 +82,6 @@ export default {
   &--skelton {
     @include skelton-animation;
     display: inline-block;
-    border-radius: 99px;
     width: 110px;
     height: 0.9rem;
     background: #898b90;

@@ -4,84 +4,117 @@
       <div class="calculations">
         <h1 class="title">保存済み</h1>
 
-        <div v-if="calculations.length" class="content">
-          <ul class="calculations-list">
-            <li
-              v-for="calculation in calculationsDivided[currentPageNumber - 1]"
-              :key="calculation.id"
-              class="calculations-list__item"
-            >
-              <router-link
-                :to="'/calculation/' + calculation.id"
-                class="calculations-list__item-link"
+        <template v-if="$store.state.isLoadingCalculation">
+          <div class="content">
+            <ul class="calculations-list">
+              <li class="calculations-list__item">
+                <div class="box">
+                  <div class="box-date box-date--skelton"></div>
+                  <div class="box-title box-title--skelton"></div>
+                  <div class="box-info box-info--skelton"></div>
+                </div>
+              </li>
+              <li class="calculations-list__item">
+                <div class="box">
+                  <div class="box-date box-date--skelton"></div>
+                  <div class="box-title box-title--skelton"></div>
+                  <div class="box-info box-info--skelton"></div>
+                </div>
+              </li>
+              <li class="calculations-list__item">
+                <div class="box">
+                  <div class="box-date box-date--skelton"></div>
+                  <div class="box-title box-title--skelton"></div>
+                  <div class="box-info box-info--skelton"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </template>
+        <template v-else>
+          <div v-if="calculations.length" class="content">
+            <ul class="calculations-list">
+              <li
+                v-for="calculation in calculationsDivided[
+                  currentPageNumber - 1
+                ]"
+                :key="calculation.id"
+                class="calculations-list__item"
               >
-                <article class="box">
-                  <div class="box-date">
-                    {{ date(calculation.createdAt.seconds) }} 保存
-                  </div>
-                  <h1 class="box-title">{{ calculation.title }}</h1>
-                  <div
-                    class="box-info"
-                    :class="[
-                      $store.getters.floatingPlTotal(calculation) < 0
-                        ? 'box-info--red'
-                        : ''
-                    ]"
-                  >
-                    <div class="box-info__item">
-                      <div
-                        v-if="$store.getters.floatingPlTotal(calculation) >= 0"
-                        class="heading"
-                      >
-                        含み益
+                <router-link
+                  :to="'/calculation/' + calculation.id"
+                  class="calculations-list__item-link"
+                >
+                  <article class="box">
+                    <div class="box-date">
+                      {{ date(calculation.createdAt.seconds) }} 保存
+                    </div>
+                    <h1 class="box-title">{{ calculation.title }}</h1>
+                    <div
+                      class="box-info"
+                      :class="[
+                        $store.getters.floatingPlTotal(calculation) < 0
+                          ? 'box-info--red'
+                          : ''
+                      ]"
+                    >
+                      <div class="box-info__item">
+                        <div
+                          v-if="
+                            $store.getters.floatingPlTotal(calculation) >= 0
+                          "
+                          class="heading"
+                        >
+                          含み益
+                        </div>
+                        <div v-else class="heading">含み損</div>
+                        <div class="content">
+                          <span class="value">{{
+                            $store.getters.floatingPlTotal(calculation)
+                              | digitSeparator
+                          }}</span>
+                          円
+                        </div>
                       </div>
-                      <div v-else class="heading">含み損</div>
-                      <div class="content">
-                        <span class="value">{{
-                          $store.getters.floatingPlTotal(calculation)
-                            | digitSeparator
-                        }}</span>
-                        円
+                      <div class="box-info__item">
+                        <div class="heading">含みピップス</div>
+                        <div class="content">
+                          <span class="value">{{
+                            $store.getters.floatingPipTotal(calculation)
+                              | digitSeparator
+                          }}</span>
+                          pips
+                        </div>
+                      </div>
+                      <div class="box-info__item">
+                        <div class="heading">証拠金維持率</div>
+                        <div class="content">
+                          <span class="value">{{
+                            $store.getters.marginLevel(calculation)
+                              | digitSeparator
+                          }}</span>
+                          ％
+                        </div>
                       </div>
                     </div>
-                    <div class="box-info__item">
-                      <div class="heading">含みピップス</div>
-                      <div class="content">
-                        <span class="value">{{
-                          $store.getters.floatingPipTotal(calculation)
-                            | digitSeparator
-                        }}</span>
-                        pips
-                      </div>
-                    </div>
-                    <div class="box-info__item">
-                      <div class="heading">証拠金維持率</div>
-                      <div class="content">
-                        <span class="value">{{
-                          $store.getters.marginLevel(calculation)
-                            | digitSeparator
-                        }}</span>
-                        ％
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </router-link>
-            </li>
-          </ul>
-        </div>
-        <div v-else class="content content--disabled">
-          <p>
-            計算結果を保存するとここに表示されます。
-          </p>
-        </div>
+                  </article>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <div v-else class="content content--disabled">
+            <p>
+              計算結果を保存するとここに表示されます。
+            </p>
+          </div>
 
-        <Pagination
-          :items-per-page-count="calculationsPerPageCount"
-          :total-page-count="totalPageCount"
-          :page-numbers="pageNumbers"
-          :current-page-number="currentPageNumber"
-        />
+          <Pagination
+            :items-per-page-count="calculationsPerPageCount"
+            :total-page-count="totalPageCount"
+            :page-numbers="pageNumbers"
+            :current-page-number="currentPageNumber"
+          />
+        </template>
       </div>
     </div>
   </div>
@@ -112,6 +145,11 @@ export default {
       const date = new Date(timestamp * 1000)
       return `${date.getFullYear()}年${date.getMonth() +
         1}月${date.getDate()}日`
+    }
+  },
+  watch: {
+    $route() {
+      this.setCurrentPageNumber()
     }
   },
   mounted() {
@@ -156,11 +194,6 @@ export default {
     },
     setCurrentPageNumber() {
       this.currentPageNumber = parseInt(this.$route.query.page) || 1
-    }
-  },
-  watch: {
-    $route() {
-      this.setCurrentPageNumber()
     }
   }
 }
@@ -220,14 +253,30 @@ export default {
   color: #333;
 
   &-date {
+    margin-bottom: 0.3em;
     font-size: 0.85rem;
     color: #9c9c9c;
+    line-height: 1;
+
+    &--skelton {
+      @include skelton-animation;
+      width: 130px;
+      height: 0.85rem;
+      background: #c5c6ca;
+    }
   }
 
   &-title {
     transition: all 0.3s;
     margin-bottom: 11px;
     font-size: 1.1rem;
+
+    &--skelton {
+      @include skelton-animation;
+      width: 230px;
+      height: 1.1rem;
+      background: #c5c6ca;
+    }
   }
 
   &:hover .box {
@@ -260,6 +309,13 @@ export default {
       .value {
         font-weight: bold;
       }
+    }
+
+    &--skelton {
+      @include skelton-animation;
+      border: none;
+      height: 39px;
+      background: #c5c6ca;
     }
   }
 }

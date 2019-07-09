@@ -1,4 +1,4 @@
-import firebase, { firestore } from '@/plugins/firebase'
+import firebase, { firebaseAuth, firestore } from '@/plugins/firebase'
 
 const currencyPairs = [
   {
@@ -67,10 +67,11 @@ const currencyPairs = [
 ]
 
 export const state = () => ({
-  isLoading: true,
+  isLoadingAuthentication: true,
   isLoggedIn: false,
   user: {},
 
+  isLoadingCalculation: true,
   calculations: [],
   calculation: {},
 
@@ -375,8 +376,8 @@ export const getters = {
 }
 
 export const mutations = {
-  disableLoading(state) {
-    state.isLoading = false
+  disableLoadingAuthentication(state) {
+    state.isLoadingAuthentication = false
   },
   enableLoggedIn(state, user) {
     state.isLoggedIn = true
@@ -385,6 +386,12 @@ export const mutations = {
   },
   disableLoggedIn(state) {
     state.isLoggedIn = false
+  },
+  enableLoadingCalculation(state) {
+    state.isLoadingCalculation = true
+  },
+  disableLoadingCalculation(state) {
+    state.isLoadingCalculation = false
   },
   setCalculations(state, calculations) {
     state.calculations = calculations
@@ -591,8 +598,8 @@ export const mutations = {
 export const actions = {
   checkAuthentication({ commit }) {
     return new Promise(resolve => {
-      firebase.auth().onAuthStateChanged(user => {
-        commit('disableLoading')
+      firebaseAuth.onAuthStateChanged(user => {
+        commit('disableLoadingAuthentication')
         if (user) {
           commit('enableLoggedIn', user)
           resolve()
@@ -624,6 +631,7 @@ export const actions = {
           calculations.push(doc.data())
         })
         commit('setCalculations', calculations)
+        commit('disableLoadingCalculation')
         resolve()
       })
     })
@@ -633,17 +641,16 @@ export const actions = {
     const docRef = firestore.collection('calculations').doc(id)
     docRef.get().then(doc => {
       commit('setCalculation', doc.data())
+      commit('disableLoadingCalculation')
     })
   },
 
   async twitterLogin({ commit }) {
-    await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.TwitterAuthProvider())
+    await firebaseAuth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
     commit('hideDropdown')
   },
   async logout({ commit }) {
-    await firebase.auth().signOut()
+    await firebaseAuth.signOut()
     commit('hideDropdown')
   },
   async twitterLoginWithFlashMessage({ dispatch, commit }) {

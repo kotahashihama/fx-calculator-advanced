@@ -1,5 +1,8 @@
 <template>
-  <div v-if="$store.state.isLoading" class="calculation-processor-input">
+  <div
+    v-if="$store.state.isLoadingAuthentication"
+    class="calculation-processor-input"
+  >
     <span class="input input--skelton"></span>
   </div>
   <div v-else class="calculation-processor-input">
