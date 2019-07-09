@@ -1,7 +1,25 @@
 <template>
   <div class="calculation-id">
     <div class="container">
-      <article class="box">
+      <article v-if="$store.state.isLoadingCalculation" class="box">
+        <div class="box-header">
+          <div class="box-header__texts">
+            <div class="date date--skelton"></div>
+            <div class="title title--skelton"></div>
+          </div>
+          <div class="box-header__buttons">
+            <button
+              class="button button--danger"
+              @click="showModalConfirmDeleteCalculation()"
+            >
+              削除
+            </button>
+            <button class="button" @click="editCalculation()">編集</button>
+          </div>
+        </div>
+        <CalculatedResult :calculation-data="calculation" />
+      </article>
+      <article v-else class="box">
         <div class="box-header">
           <div class="box-header__texts">
             <div class="date">{{ createdAt }} 保存</div>
@@ -27,6 +45,7 @@
 import CalculatedResult from '@/components/common/calculated-result/CalculatedResult.vue'
 
 export default {
+  middleware: 'enable-loading-calculation',
   components: {
     CalculatedResult
   },
@@ -137,12 +156,29 @@ export default {
 }
 
 .date {
+  margin-bottom: 0.3em;
   font-size: 0.9rem;
   color: #9c9c9c;
+  line-height: 1;
+
+  &--skelton {
+    @include skelton-animation;
+    width: 180px;
+    height: 0.9rem;
+    background: #c5c6ca;
+  }
 }
 
 .title {
   margin-bottom: 0.7em;
+  font-size: 1.5rem;
+
+  &--skelton {
+    @include skelton-animation;
+    width: 280px;
+    height: 1.5rem;
+    background: #c5c6ca;
+  }
 }
 
 .button {

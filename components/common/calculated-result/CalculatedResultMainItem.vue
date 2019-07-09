@@ -6,7 +6,12 @@
   >
     <div class="heading"><slot name="heading" /></div>
     <div class="content">
-      <span class="value"><slot name="value"/></span> <slot name="unit" />
+      <span
+        v-if="$store.state.isLoadingCalculation"
+        class="value value--skelton"
+      ></span
+      ><span v-else class="value"><slot name="value"/></span>
+      <slot name="unit" />
     </div>
     <Tooltip
       :current-tooltip="currentTooltip"
@@ -42,11 +47,21 @@ export default {
 }
 
 .heading {
+  margin-bottom: 0.3em;
   font-size: 0.9rem;
+  line-height: 1;
 }
 
 .value {
   font-weight: bold;
   font-size: 1.6rem;
+
+  &--skelton {
+    @include skelton-animation;
+    display: inline-block;
+    width: 80px;
+    height: 1.6rem;
+    background: #c5c6ca;
+  }
 }
 </style>

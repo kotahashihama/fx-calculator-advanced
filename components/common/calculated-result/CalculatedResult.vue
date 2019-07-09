@@ -9,38 +9,49 @@
         <CalculatedResultAssumedPrices :calculation-data="calculationData" />
       </div>
 
-      <template v-if="calculationData">
-        <div v-if="savedOpenTradesLength" class="calculation-details__right">
-          <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
-
-          <CalculatedResultOpenTrades :calculation-data="calculationData" />
-        </div>
+      <template v-if="$store.state.isLoadingCalculation">
         <div
-          v-else
-          class="calculation-details__right calculation-details__right--disabled"
-        >
-          <p>
-            ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
-          </p>
-        </div>
+          class="calculation-details__right calculation-details__right--skelton"
+        ></div>
       </template>
       <template v-else>
-        <div
-          v-if="$store.state.openTrades.length"
-          class="calculation-details__right"
-        >
-          <CalculatedResultOpenTradeRatio :calculation-data="calculationData" />
+        <template v-if="calculationData">
+          <div v-if="savedOpenTradesLength" class="calculation-details__right">
+            <CalculatedResultOpenTradeRatio
+              :calculation-data="calculationData"
+            />
 
-          <CalculatedResultOpenTrades :calculation-data="calculationData" />
-        </div>
-        <div
-          v-else
-          class="calculation-details__right calculation-details__right--disabled"
-        >
-          <p>
-            ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
-          </p>
-        </div>
+            <CalculatedResultOpenTrades :calculation-data="calculationData" />
+          </div>
+          <div
+            v-else
+            class="calculation-details__right calculation-details__right--disabled"
+          >
+            <p>
+              ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
+            </p>
+          </div>
+        </template>
+        <template v-else>
+          <div
+            v-if="$store.state.openTrades.length"
+            class="calculation-details__right"
+          >
+            <CalculatedResultOpenTradeRatio
+              :calculation-data="calculationData"
+            />
+
+            <CalculatedResultOpenTrades :calculation-data="calculationData" />
+          </div>
+          <div
+            v-else
+            class="calculation-details__right calculation-details__right--disabled"
+          >
+            <p>
+              ポジションを追加すると、ロットの割合と保有ポジションがここに表示されます。
+            </p>
+          </div>
+        </template>
       </template>
     </div>
   </div>
@@ -109,6 +120,11 @@ export default {
       border: dashed 1px #dadada;
       background: #f7f7f7;
       font-size: 0.9rem;
+    }
+
+    &--skelton {
+      @include skelton-animation;
+      background: #c5c6ca;
     }
   }
 }

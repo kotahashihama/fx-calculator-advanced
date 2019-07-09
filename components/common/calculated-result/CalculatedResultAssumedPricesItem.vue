@@ -3,8 +3,13 @@
     <th class="heading">
       <slot name="pair" />
     </th>
-    <td class="content">
-      <slot name="assumed-price" />
+    <td v-if="$store.state.isLoadingCalculation" class="content">
+      <span class="value value--skelton"
+        ><slot name="assumed-price assumed-price--skelton"
+      /></span>
+    </td>
+    <td v-else class="content">
+      <span class="value"><slot name="assumed-price"/></span>
     </td>
   </tr>
 </template>
@@ -24,5 +29,15 @@
   padding-top: 0.5em;
   padding-bottom: 0.3em;
   text-align: right;
+}
+
+.value {
+  &--skelton {
+    @include skelton-animation;
+    display: inline-block;
+    width: 80px;
+    height: 1rem;
+    background: #c5c6ca;
+  }
 }
 </style>

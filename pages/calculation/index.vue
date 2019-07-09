@@ -125,6 +125,7 @@ import Pagination from '@/components/calculation/pagination/Pagination.vue'
 
 export default {
   // middleware: 'authentication',
+  middleware: 'enable-loading-calculation',
   components: {
     Pagination
   },

@@ -5,8 +5,11 @@
         <template v-slot:heading>
           残高
         </template>
-        <template v-slot:content>
-          {{ calculationData.balance | digitSeparator }} 円
+        <template v-slot:value>
+          {{ calculationData.balance | digitSeparator }}
+        </template>
+        <template v-slot:unit>
+          円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -14,17 +17,23 @@
         <template v-slot:heading>
           有効証拠金
         </template>
-        <template v-slot:content>
-          {{ $store.getters.equity(calculationData) | digitSeparator }} 円
+        <template v-slot:value>
+          {{ $store.getters.equity(calculationData) | digitSeparator }}
+        </template>
+        <template v-slot:unit>
+          円
         </template>
       </CalculatedResultCapitalItem>
 
       <CalculatedResultCapitalItem>
-        <template v-slot:heading>
-          余剰証拠金
+        <template v-slot:heading
+          >余剰証拠金
         </template>
-        <template v-slot:content>
-          {{ $store.getters.freeMargin(calculationData) | digitSeparator }} 円
+        <template v-slot:value>
+          {{ $store.getters.freeMargin(calculationData) | digitSeparator }}
+        </template>
+        <template v-slot:unit>
+          円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -32,8 +41,11 @@
         <template v-slot:heading>
           必要証拠金
         </template>
-        <template v-slot:content>
-          {{ $store.getters.marginTotal(calculationData) | digitSeparator }} 円
+        <template v-slot:value>
+          {{ $store.getters.marginTotal(calculationData) | digitSeparator }}
+        </template>
+        <template v-slot:unit>
+          円
         </template>
       </CalculatedResultCapitalItem>
 
@@ -41,7 +53,7 @@
         <template v-slot:heading>
           取引所
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.state.brokers[calculationData.broker] }}
         </template>
       </CalculatedResultCapitalItem>
@@ -50,8 +62,10 @@
         <template v-slot:heading>
           取引単位
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ calculationData.tradingUnit | digitSeparator }}
+        </template>
+        <template v-slot:unit>
           通貨
         </template>
       </CalculatedResultCapitalItem>
@@ -60,8 +74,10 @@
         <template v-slot:heading>
           レバレッジ
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ calculationData.leverage | digitSeparator }}
+        </template>
+        <template v-slot:unit>
           ％
         </template>
       </CalculatedResultCapitalItem>
@@ -73,7 +89,7 @@
         <template v-slot:heading>
           残高
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.state.balance | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
@@ -82,7 +98,7 @@
         <template v-slot:heading>
           有効証拠金
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.getters.equity() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
@@ -91,7 +107,7 @@
         <template v-slot:heading>
           余剰証拠金
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.getters.freeMargin() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
@@ -100,7 +116,7 @@
         <template v-slot:heading>
           必要証拠金
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.getters.marginTotal() | digitSeparator }} 円
         </template>
       </CalculatedResultCapitalItem>
@@ -109,7 +125,7 @@
         <template v-slot:heading>
           取引所
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.state.brokers[$store.state.broker] }}
         </template>
       </CalculatedResultCapitalItem>
@@ -118,7 +134,7 @@
         <template v-slot:heading>
           取引単位
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.state.tradingUnit[$store.state.broker] | digitSeparator }}
           通貨
         </template>
@@ -128,7 +144,7 @@
         <template v-slot:heading>
           レバレッジ
         </template>
-        <template v-slot:content>
+        <template v-slot:value>
           {{ $store.state.leverage[$store.state.broker] | digitSeparator }} ％
         </template>
       </CalculatedResultCapitalItem>

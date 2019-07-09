@@ -14,6 +14,7 @@ import CalculatedResult from '@/components/common/calculated-result/CalculatedRe
 import CalculationProcessor from '@/components/calculator/calculation-processor/CalculationProcessor.vue'
 
 export default {
+  middleware: 'disable-loading-calculation',
   components: {
     CalculatingForm,
     CalculatedResult,
