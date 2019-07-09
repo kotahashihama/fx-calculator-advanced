@@ -151,6 +151,8 @@ export default {
   watch: {
     $route() {
       this.setCurrentPageNumber()
+      if (this.calculations.length !== 0)
+        this.$store.commit('disableLoadingCalculation')
     }
   },
   mounted() {
