@@ -35,7 +35,7 @@ export default {
       const self = this
 
       this.$axios
-        .get('https://api.ratesapi.io/api/latest?base=JPY')
+        .get('https://kotahashihama.com/fx-calculator/ratesapi.php?base=JPY')
         .then(function(response) {
           const currentPrices = response.data.rates
           const currencyPairs = self.$store.state.currencyPairs.filter(
@@ -53,7 +53,7 @@ export default {
         })
 
       this.$axios
-        .get('https://api.ratesapi.io/api/latest?base=USD')
+        .get('https://kotahashihama.com/fx-calculator/ratesapi.php?base=USD')
         .then(function(response) {
           const currentPrices = response.data.rates
           const currencyPairs = self.$store.state.currencyPairs.filter(
