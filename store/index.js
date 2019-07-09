@@ -609,7 +609,7 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   },
   getCalculations({ dispatch, state, commit }) {
     return new Promise(async resolve => {
@@ -654,7 +654,7 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   },
   async logoutWithFlashMessage({ dispatch, commit }) {
     await dispatch('logout')
@@ -664,7 +664,7 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   },
 
   createCalculation({ state }) {
@@ -705,15 +705,32 @@ export const actions = {
         openTrades: state.openTrades
       })
   },
-  createCalculationWithFlashMessage({ dispatch, commit }) {
-    dispatch('createCalculation')
-    commit('showFlashMessage', {
-      currentFlashMessage: 'FlashMessageCreateCalculation',
-      flashMessageType: 'success'
+  createCalculationWithFlashMessage({ state, dispatch, commit }) {
+    const docRef = firestore
+      .collection('calculations')
+      .where('uid', '==', state.user.uid)
+      .orderBy('createdAt', 'desc')
+    docRef.get().then(querySnapshot => {
+      const savedCalculationLength = querySnapshot.size
+      if (savedCalculationLength < 15) {
+        dispatch('createCalculation')
+        commit('showFlashMessage', {
+          currentFlashMessage: 'FlashMessageCreateCalculation',
+          flashMessageType: 'success'
+        })
+        setTimeout(() => {
+          commit('hideFlashMessage')
+        }, 5000)
+      } else {
+        commit('showFlashMessage', {
+          currentFlashMessage: 'FlashMessageCannotCreateCalculation',
+          flashMessageType: 'danger'
+        })
+        setTimeout(() => {
+          commit('hideFlashMessage')
+        }, 5000)
+      }
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 3000)
   },
   updateCalculation({ state }) {
     firestore
@@ -743,7 +760,7 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   },
   deleteCalculation({ state }, id) {
     return new Promise(resolve => {
@@ -765,7 +782,7 @@ export const actions = {
       })
       setTimeout(() => {
         commit('hideFlashMessage')
-      }, 3000)
+      }, 5000)
       resolve()
     })
   },
@@ -781,7 +798,7 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   },
   newCalculationWithFlashMessage({ commit }) {
     commit('disableEditCalculation')
@@ -792,6 +809,6 @@ export const actions = {
     })
     setTimeout(() => {
       commit('hideFlashMessage')
-    }, 3000)
+    }, 5000)
   }
 }
