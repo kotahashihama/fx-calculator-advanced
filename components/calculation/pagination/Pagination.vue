@@ -64,20 +64,12 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      border-right: solid 1px #fff;
+      margin-right: 6px;
+      border: solid 1px #2b7194;
       width: 38px;
       height: 38px;
       color: #2b7194;
-
-      &:first-of-type {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-      }
-
-      &:last-of-type {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-      }
+      font-size: 0.9rem;
 
       &-link {
         transition: all 0.3s;
