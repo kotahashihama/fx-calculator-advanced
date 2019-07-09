@@ -310,7 +310,7 @@ export const getters = {
     const currencyPairs = calculationData
       ? calculationData.currencyPairs
       : state.currencyPairs
-    const currencyPair = currencyPairs.find(
+    const currencyPair = (currencyPairs || []).find(
       currencyPair => currencyPair.symbol === `${baseCurrency}/${quoteCurrency}`
     )
     const openTrades = calculationData
