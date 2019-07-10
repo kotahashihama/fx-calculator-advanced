@@ -83,7 +83,12 @@
                             $store.getters.floatingPipTotal(calculation)
                               | digitSeparator
                           }}</span>
-                          pips
+                          <span
+                            v-if="
+                              $store.getters.floatingPipTotal(calculation) === 1
+                            "
+                            >pip</span
+                          ><span v-else>pips</span>
                         </div>
                       </div>
                       <div class="box-info__item">

@@ -19,7 +19,15 @@
                   calculationData
                 ) | digitSeparator
               }}
-              pips
+              <span
+                v-if="
+                  $store.getters.floatingPip(
+                    ...currencyPair.currencies,
+                    calculationData
+                  ) === 1
+                "
+                >pip</span
+              ><span v-else>pips</span>
             </td>
           </tr>
         </tbody>

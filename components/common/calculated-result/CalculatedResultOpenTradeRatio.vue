@@ -9,7 +9,8 @@
       />
       <div class="chart__text">
         <span class="value">{{ openTradeLotsTotal(calculationData) }}</span
-        >ロット
+        ><span v-if="openTradeLotsTotal(calculationData) === 1">lot</span
+        ><span v-else>lots</span>
       </div>
     </div>
     <div class="chart-legend">
@@ -38,7 +39,8 @@
       />
       <div class="chart__text">
         <span class="value">{{ openTradeLotsTotal() }}</span
-        >ロット
+        ><span v-if="openTradeLotsTotal() === 1">lot</span
+        ><span v-else>lots</span>
       </div>
     </div>
     <div class="chart-legend">

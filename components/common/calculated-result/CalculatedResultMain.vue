@@ -41,7 +41,9 @@
         {{ $store.getters.floatingPipTotal(calculationData) | digitSeparator }}
       </template>
       <template v-slot:unit>
-        pips
+        <span v-if="$store.getters.floatingPipTotal(calculationData) === 1"
+          >pip</span
+        ><span v-else>pips</span>
       </template>
     </CalculatedResultMainItem>
 
@@ -98,7 +100,8 @@
         {{ $store.getters.floatingPipTotal() | digitSeparator }}
       </template>
       <template v-slot:unit>
-        pips
+        <span v-if="$store.getters.floatingPipTotal() === 1">pip</span
+        ><span v-else>pips</span>
       </template>
     </CalculatedResultMainItem>
 
