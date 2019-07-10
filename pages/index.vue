@@ -33,7 +33,11 @@ export default {
       quoteCurrency.substring(1).toLowerCase()
   },
   mounted() {
-    if (!this.$store.state.editsCalculation) this.getCurrentPrices()
+    if (
+      !this.$store.state.editsCalculation &&
+      this.$store.state.currencyPairs[0] === 0
+    )
+      this.getCurrentPrices()
   },
   methods: {
     getCurrentPrices() {
