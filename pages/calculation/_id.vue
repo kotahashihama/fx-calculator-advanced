@@ -155,6 +155,7 @@ export default {
     }
 
     &__buttons {
+      margin-left: 16px;
       display: flex;
     }
   }
