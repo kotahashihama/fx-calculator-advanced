@@ -129,6 +129,11 @@ export default {
   components: {
     Pagination
   },
+  head() {
+    return {
+      title: '保存済み'
+    }
+  },
   data() {
     return {
       calculationsDivided: [],

@@ -20,6 +20,11 @@ export default {
     CalculatedResult,
     CalculationProcessor
   },
+  head() {
+    return {
+      titleTemplate: 'ポジション計算機'
+    }
+  },
   computed: {
     currencyPairPascalCase: () => (baseCurrency, quoteCurrency) =>
       baseCurrency.charAt(0) +

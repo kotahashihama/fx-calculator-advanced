@@ -49,6 +49,11 @@ export default {
   components: {
     CalculatedResult
   },
+  head() {
+    return {
+      title: this.calculation.title
+    }
+  },
   data() {
     return {
       createdAt: ''
