@@ -7,7 +7,7 @@
         >
       </li>
       <li class="header-navigation-list__item">
-        <router-link to="/" class="header-navigation-list__item-link"
+        <router-link to="/terms" class="header-navigation-list__item-link"
           >利用規約</router-link
         >
       </li>
