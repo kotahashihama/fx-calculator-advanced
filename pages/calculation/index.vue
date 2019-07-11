@@ -169,8 +169,8 @@ export default {
     this.setCurrentPageNumber()
     this.getCalculations().then(() => {
       this.setTotalPageCount()
-      this.setCalculationsPerPage()
       this.setPageNumbers()
+      this.setCalculationsPerPage()
     })
   },
   methods: {
@@ -182,31 +182,26 @@ export default {
       })
     },
     setTotalPageCount() {
-      if (this.calculations.length / this.calculationsPerPageCount <= 1) {
-        this.totalPageCount = 1
-      } else {
-        this.totalPageCount = Math.ceil(
-          this.calculations.length / this.calculationsPerPageCount
-        )
-      }
-    },
-    setCalculationsPerPage() {
-      for (let i = 0; i < this.totalPageCount; i++) {
-        this.calculationsDivided.push(
-          this.calculations.slice(
-            i * this.calculationsPerPageCount,
-            this.calculationsPerPageCount + i * this.calculationsPerPageCount
-          )
-        )
-      }
+      this.totalPageCount = Math.ceil(
+        this.calculations.length / this.calculationsPerPageCount
+      )
     },
     setPageNumbers() {
-      for (let i = 0; i < this.totalPageCount; i++) {
-        this.pageNumbers.push(i + 1)
-      }
+      this.pageNumbers = [...Array(this.totalPageCount).keys()]
     },
     setCurrentPageNumber() {
       this.currentPageNumber = parseInt(this.$route.query.page) || 1
+    },
+    setCalculationsPerPage() {
+      this.pageNumbers.forEach(pageNumber => {
+        this.calculationsDivided.push(
+          this.calculations.slice(
+            pageNumber * this.calculationsPerPageCount,
+            this.calculationsPerPageCount +
+              pageNumber * this.calculationsPerPageCount
+          )
+        )
+      })
     }
   }
 }

@@ -2,23 +2,21 @@
   <nav class="pagination">
     <ul class="pagination-list">
       <li
-        v-for="(pageNumber, index) in pageNumbers"
-        :key="index"
+        v-for="pageNumber in pageNumbers"
+        :key="pageNumber"
         class="pagination-list__item"
       >
-        <span v-if="pageNumber === currentPageNumber">{{ pageNumber }}</span>
+        <span v-if="pageNumber + 1 === currentPageNumber">{{
+          pageNumber + 1
+        }}</span>
         <template v-else>
           <router-link
-            v-if="pageNumber === 1"
-            to="/calculation"
+            :to="
+              '/calculation' +
+                (pageNumber > 0 ? '?page=' + (pageNumber + 1) : '')
+            "
             class="pagination-list__item-link"
-            >{{ pageNumber }}</router-link
-          >
-          <router-link
-            v-else
-            :to="'/calculation?page=' + pageNumber"
-            class="pagination-list__item-link"
-            >{{ pageNumber }}</router-link
+            >{{ pageNumber + 1 }}</router-link
           >
         </template>
       </li>
