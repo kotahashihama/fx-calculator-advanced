@@ -51,7 +51,7 @@ export default {
   },
   head() {
     return {
-      title: this.calculation.title
+      title: `${this.calculation.title || '無題'} |`
     }
   },
   data() {

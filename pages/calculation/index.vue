@@ -135,7 +135,7 @@ export default {
   },
   head() {
     return {
-      title: '保存済み'
+      title: '保存済み |'
     }
   },
   data() {
