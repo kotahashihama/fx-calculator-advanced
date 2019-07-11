@@ -35,7 +35,7 @@ export default {
   mounted() {
     if (
       !this.$store.state.editsCalculation &&
-      this.$store.state.currencyPairs[0] === 0
+      this.$store.state.currencyPairs[0].assumedPrice === 0
     )
       this.getCurrentPrices()
   },

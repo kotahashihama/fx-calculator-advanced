@@ -73,7 +73,8 @@ export default {
   },
   mounted() {
     this.getCalculation()
-    if (this.$store.state.currencyPairs[0] === 0) this.getCurrentPrices()
+    if (this.$store.state.currencyPairs[0].currentPrice === 0)
+      this.getCurrentPrices()
   },
   methods: {
     showModalConfirmDeleteCalculation() {
