@@ -129,7 +129,6 @@
 import Pagination from '@/components/calculation/pagination/Pagination.vue'
 
 export default {
-  // middleware: 'authentication',
   middleware: 'enable-loading-calculation',
   components: {
     Pagination
@@ -156,6 +155,9 @@ export default {
       const date = new Date(timestamp * 1000)
       return `${date.getFullYear()}年${date.getMonth() +
         1}月${date.getDate()}日`
+    },
+    isLoadingAuthentication() {
+      return this.$store.state.isLoadingAuthentication
     }
   },
   watch: {
@@ -163,6 +165,12 @@ export default {
       this.setCurrentPageNumber()
       if (this.calculations.length !== 0)
         this.$store.commit('disableLoadingCalculation')
+    },
+    isLoadingAuthentication() {
+      if (this.$store.state.isLoggedIn === false) {
+        this.$router.push('/')
+        this.$store.dispatch('redirectTopWithFlashMessage')
+      }
     }
   },
   mounted() {

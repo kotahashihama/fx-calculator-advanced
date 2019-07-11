@@ -28,6 +28,7 @@ export default {
       this.$store.dispatch('twitterLoginWithFlashMessage')
     },
     logout() {
+      this.$router.push('/')
       this.$store.dispatch('logoutWithFlashMessage')
     }
   }
