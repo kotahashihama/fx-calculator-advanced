@@ -218,7 +218,7 @@ ol {
 .container {
   margin: 0 auto;
   padding: 32px 0;
-  max-width: 980px;
+  max-width: 720px;
 }
 
 .box {
