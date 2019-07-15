@@ -113,4 +113,22 @@ export default {
   width: 100%;
   height: 50px;
 }
+
+@media screen and (max-width: 720px) {
+  .monitor {
+    flex-direction: column;
+  }
+
+  .calculating-form {
+    padding: 23px 2%;
+    border-right: none;
+    border-bottom: solid 1px #d0d0d0;
+    width: 100%;
+  }
+
+  .calculated-result {
+    padding: 23px 2%;
+    width: 100%;
+  }
+}
 </style>

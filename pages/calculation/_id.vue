@@ -219,4 +219,29 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 96%;
+  }
+
+  .box {
+    padding: 28px 3%;
+
+    &-header {
+      flex-direction: column;
+
+      &__buttons {
+        justify-content: flex-end;
+        margin-bottom: 19px;
+      }
+    }
+  }
+}
 </style>

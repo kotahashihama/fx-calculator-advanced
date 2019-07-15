@@ -12,6 +12,7 @@
 
 <style lang="scss" scoped>
 .heading {
+  white-space: nowrap;
   text-align: left;
 }
 

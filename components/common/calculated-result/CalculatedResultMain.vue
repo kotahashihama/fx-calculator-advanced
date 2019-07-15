@@ -163,4 +163,11 @@ export default {
     background: #fff7f8;
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .calculated-result-main {
+    flex-direction: column;
+    border-radius: 28px;
+  }
+}
 </style>
