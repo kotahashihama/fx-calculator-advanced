@@ -99,7 +99,7 @@ export default {
 }
 
 .calculating-form {
-  border-right: solid 1px #d0d0d0;
+  border-right: solid 2px #d0d0d0;
   padding: 23px;
   width: $calculating-form-width;
 }
@@ -122,13 +122,15 @@ export default {
   .calculating-form {
     padding: 23px 2%;
     border-right: none;
-    border-bottom: solid 1px #d0d0d0;
+    border-bottom: solid 2px #d0d0d0;
     width: 100%;
+    height: calc((100vh - (#{$header-height} + #{$footer-height})) / 2);
   }
 
   .calculated-result {
     padding: 23px 2%;
     width: 100%;
+    height: calc((100vh - (#{$header-height} + #{$footer-height})) / 2);
   }
 }
 </style>

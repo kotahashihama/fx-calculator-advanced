@@ -319,6 +319,7 @@ export default {
       font-size: 0.8rem;
 
       .heading {
+        white-space: nowrap;
         margin-right: 0.5em;
       }
 
@@ -332,6 +333,33 @@ export default {
       border: none;
       height: 39px;
       background: #c5c6ca;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 96%;
+  }
+
+  .calculations {
+    padding: 28px 3%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .box {
+    &-info {
+      flex-direction: column;
+
+      &__item {
+        justify-content: center;
+        margin-bottom: 4px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
