@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .modal {
   position: relative;
-  z-index: 99;
+  z-index: $modal-z-index;
 
   &-enter-active,
   &-leave-active {

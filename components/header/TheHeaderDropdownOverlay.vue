@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .header-dropdown-overlay {
-  z-index: 20;
+  z-index: $header-dropdown-overlay-z-index;
   position: absolute;
   top: 0;
   left: 0;

@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .tooltip {
-  z-index: 5;
+  z-index: $tooltip-z-index;
   position: absolute;
   padding: 13px;
   border-radius: 3px;

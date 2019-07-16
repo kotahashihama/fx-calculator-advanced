@@ -1,6 +1,12 @@
 $header-height: 56px;
 $footer-height: 37px;
 $calculating-form-width: 320px;
-
 $calculation-processor-height: 52px;
 $calculation-processor-sp-height: 84px;
+
+$modal-z-index: 99;
+$header-user-dropdown-z-index: 25;
+$header-dropdown-overlay-z-index: 20;
+$header-z-index: 15;
+$flash-message-z-index: 10;
+$tooltip-z-index: 5;
