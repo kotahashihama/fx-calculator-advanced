@@ -33,7 +33,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/filters.js'],
+  plugins: [
+    { src: '@/plugins/filters.js' },
+    { src: '@/plugins/router-option.js' }
+  ],
   /*
    ** Nuxt.js modules
    */

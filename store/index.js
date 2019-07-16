@@ -87,6 +87,8 @@ export const state = () => ({
   showsTooltip: false,
   currentTooltip: '',
 
+  showsHamburgerNavigation: false,
+
   title: '無題',
   currencyPairs,
   openTrades: [],
@@ -435,6 +437,13 @@ export const mutations = {
   hideTooltip(state) {
     state.showsTooltip = false
     state.currentTooltip = ''
+  },
+
+  toggleHamburgerNavigation(state) {
+    state.showsHamburgerNavigation = !state.showsHamburgerNavigation
+  },
+  hideHamburgerNavigation(state) {
+    state.showsHamburgerNavigation = false
   },
 
   updateTitle(state, title) {

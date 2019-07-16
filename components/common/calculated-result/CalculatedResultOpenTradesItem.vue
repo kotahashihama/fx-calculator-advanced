@@ -88,4 +88,15 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 980px) {
+  .button {
+    margin-bottom: 6px;
+    width: 100%;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
 </style>

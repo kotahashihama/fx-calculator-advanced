@@ -105,7 +105,7 @@ export default {
   display: flex;
 
   &__left {
-    margin-right: 17px;
+    margin-right: 22px;
     width: 380px;
   }
 
@@ -125,6 +125,31 @@ export default {
     &--skelton {
       @include skelton-animation;
       background: #c5c6ca;
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .calculation-details {
+    flex-direction: column;
+
+    &__left {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 22px;
+      width: 100%;
+    }
+
+    &__right {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .calculation-details {
+    &__left {
+      flex-direction: column;
     }
   }
 }

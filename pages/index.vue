@@ -90,7 +90,7 @@ export default {
 
 .monitor {
   display: flex;
-  height: calc(100% - 50px);
+  height: calc(100% - #{$calculation-processor-height});
 }
 
 .calculating-form,
@@ -99,7 +99,7 @@ export default {
 }
 
 .calculating-form {
-  border-right: solid 1px #d0d0d0;
+  border-right: solid 2px #d0d0d0;
   padding: 23px;
   width: $calculating-form-width;
 }
@@ -112,5 +112,31 @@ export default {
 .calculation-processer {
   width: 100%;
   height: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  .monitor {
+    height: calc(100% - #{$calculation-processor-sp-height});
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .monitor {
+    flex-direction: column;
+  }
+
+  .calculating-form {
+    padding: 23px 4%;
+    border-right: none;
+    border-bottom: solid 2px #d0d0d0;
+    width: 100%;
+    height: calc((100vh - (#{$header-height} + #{$footer-height})) / 2);
+  }
+
+  .calculated-result {
+    padding: 23px 4%;
+    width: 100%;
+    height: calc((100vh - (#{$header-height} + #{$footer-height})) / 2);
+  }
 }
 </style>

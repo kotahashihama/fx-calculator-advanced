@@ -64,4 +64,14 @@ export default {
     background: #c5c6ca;
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .calculated-result-main-item {
+    margin-bottom: 12px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
 </style>

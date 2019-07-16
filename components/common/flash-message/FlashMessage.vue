@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .flash-message {
-  z-index: 10;
+  z-index: $flash-message-z-index;
   position: fixed;
   top: calc(#{$header-height} + 11px);
   width: 100%;
@@ -60,9 +60,6 @@ export default {
   &-leave,
   &-enter-to {
     opacity: 1;
-  }
-  &-move {
-    transition: transform 0.3s;
   }
 }
 

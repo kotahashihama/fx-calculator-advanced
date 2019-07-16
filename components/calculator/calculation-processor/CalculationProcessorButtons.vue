@@ -105,4 +105,10 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 375px) {
+  .button {
+    padding: 0 0.9em;
+  }
+}
 </style>

@@ -245,4 +245,14 @@ ol {
   margin-top: 1.7rem;
   text-align: right;
 }
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 96%;
+  }
+
+  .box {
+    padding: 28px 4%;
+  }
+}
 </style>

@@ -175,4 +175,16 @@ export default {
   padding: 16px;
   width: 100%;
 }
+
+@media screen and (max-width: 1280px) {
+  .calculated-result-capital {
+    margin-right: 22px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .calculated-result-capital {
+    margin-right: 0;
+  }
+}
 </style>
