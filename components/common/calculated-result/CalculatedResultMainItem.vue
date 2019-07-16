@@ -67,7 +67,7 @@ export default {
 
 @media screen and (max-width: 1080px) {
   .calculated-result-main-item {
-    margin-bottom: 17px;
+    margin-bottom: 12px;
 
     &:last-of-type {
       margin-bottom: 0;

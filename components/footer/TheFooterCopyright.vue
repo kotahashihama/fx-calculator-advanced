@@ -1,7 +1,9 @@
 <template>
   <p class="footer-copyright">
     <small class="footer-copyright__text"
-      >&copy; ポジション計算機 developed by Kota Hashihama</small
+      >&copy; ポジション計算機<span class="developed-by"
+        >developed by Kota Hashihama</span
+      ></small
     >
   </p>
 </template>
@@ -13,6 +15,12 @@
 
   &__text {
     font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .developed-by {
+    display: none;
   }
 }
 </style>

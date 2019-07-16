@@ -232,7 +232,7 @@ export default {
   }
 
   .box {
-    padding: 28px 3%;
+    padding: 28px 4%;
 
     &-header {
       flex-direction: column;

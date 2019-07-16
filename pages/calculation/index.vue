@@ -343,7 +343,7 @@ export default {
   }
 
   .calculations {
-    padding: 28px 3%;
+    padding: 28px 4%;
   }
 }
 
@@ -351,6 +351,7 @@ export default {
   .box {
     &-info {
       flex-direction: column;
+      border-radius: 14px;
 
       &__item {
         justify-content: center;

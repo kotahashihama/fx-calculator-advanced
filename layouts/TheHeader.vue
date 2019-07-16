@@ -8,7 +8,10 @@
     <div class="header__right">
       <TheHeaderUser />
       <TheHeaderButton class="button" @click="newCalculation()"
-        >新規計算</TheHeaderButton
+        ><span class="button__text">新規計算</span
+        ><i class="material-icons">
+          add
+        </i></TheHeaderButton
       >
     </div>
 
@@ -69,5 +72,23 @@ export default {
 .button {
   display: flex;
   align-items: center;
+
+  .material-icons {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .button {
+    padding: 0.7em;
+
+    &__text {
+      display: none;
+    }
+
+    .material-icons {
+      display: inline;
+    }
+  }
 }
 </style>

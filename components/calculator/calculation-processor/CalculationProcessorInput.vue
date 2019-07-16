@@ -117,4 +117,10 @@ export default {
     color: #808080;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .calculation-processor-input {
+    margin-bottom: 6px;
+  }
+}
 </style>

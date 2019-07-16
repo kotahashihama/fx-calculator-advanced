@@ -99,4 +99,20 @@ export default {
     background: #898b90;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .button {
+    margin-right: 6px;
+    padding: 0 0.5em;
+    padding-right: 27px;
+
+    &::before {
+      right: 5px;
+    }
+  }
+
+  .name {
+    display: none;
+  }
+}
 </style>
