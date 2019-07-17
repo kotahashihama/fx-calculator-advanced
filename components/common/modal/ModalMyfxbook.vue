@@ -103,9 +103,10 @@ export default {
               value: response.data.session
             })
           } else {
-            alert(
-              'ログインできませんでした。時間をおくか、メールアドレスとパスワードをもう一度ご確認ください'
-            )
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotLoginMyfxbook',
+              flashMessageType: 'danger'
+            })
           }
         })
     },
@@ -126,7 +127,10 @@ export default {
               value: ''
             })
           } else {
-            alert('ログアウトできませんでした。時間をおいてお試しください')
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotLogoutMyfxbook',
+              flashMessageType: 'danger'
+            })
           }
         })
     },
@@ -148,9 +152,10 @@ export default {
           if (response.data.error === false) {
             self.$store.commit('getOpenTrades', response.data.openTrades)
           } else {
-            alert(
-              '取得できませんでした。時間をおくか、一度ログアウトしてからお試しください'
-            )
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotGetOpenTrades',
+              flashMessageType: 'danger'
+            })
           }
         })
 

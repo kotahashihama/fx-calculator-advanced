@@ -605,6 +605,16 @@ export const mutations = {
 }
 
 export const actions = {
+  showFlashMessage({ commit }, payload) {
+    commit('showFlashMessage', {
+      currentFlashMessage: payload.currentFlashMessage,
+      flashMessageType: payload.flashMessageType
+    })
+    setTimeout(() => {
+      commit('hideFlashMessage')
+    }, 5000)
+  },
+
   checkAuthentication({ commit }) {
     return new Promise(resolve => {
       firebaseAuth.onAuthStateChanged(user => {
@@ -618,14 +628,11 @@ export const actions = {
       })
     })
   },
-  redirectTopWithFlashMessage({ commit }) {
-    commit('showFlashMessage', {
+  redirectTopWithFlashMessage({ dispatch }) {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageRedirectTop',
       flashMessageType: 'danger'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   },
   getCalculations({ dispatch, state, commit }) {
     return new Promise(async resolve => {
@@ -664,23 +671,17 @@ export const actions = {
   },
   async twitterLoginWithFlashMessage({ dispatch, commit }) {
     await dispatch('twitterLogin')
-    commit('showFlashMessage', {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageLoggedIn',
       flashMessageType: 'success'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   },
   async logoutWithFlashMessage({ dispatch, commit }) {
     await dispatch('logout')
-    commit('showFlashMessage', {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageLoggedOut',
       flashMessageType: 'success'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   },
 
   createCalculation({ state }) {
@@ -730,21 +731,15 @@ export const actions = {
       const savedCalculationLength = querySnapshot.size
       if (savedCalculationLength < 15) {
         dispatch('createCalculation')
-        commit('showFlashMessage', {
+        dispatch('showFlashMessage', {
           currentFlashMessage: 'FlashMessageCreateCalculation',
           flashMessageType: 'success'
         })
-        setTimeout(() => {
-          commit('hideFlashMessage')
-        }, 5000)
       } else {
-        commit('showFlashMessage', {
+        dispatch('showFlashMessage', {
           currentFlashMessage: 'FlashMessageCannotCreateCalculation',
           flashMessageType: 'danger'
         })
-        setTimeout(() => {
-          commit('hideFlashMessage')
-        }, 5000)
       }
     })
   },
@@ -770,13 +765,10 @@ export const actions = {
   },
   updateCalculationWithFlashMessage({ dispatch, commit }) {
     dispatch('updateCalculation')
-    commit('showFlashMessage', {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageUpdateCalculation',
       flashMessageType: 'success'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   },
   deleteCalculation({ state }, id) {
     return new Promise(resolve => {
@@ -792,39 +784,30 @@ export const actions = {
   deleteCalculationWithFlashMessage({ dispatch, commit }, id) {
     return new Promise(async resolve => {
       await dispatch('deleteCalculation', id)
-      commit('showFlashMessage', {
+      dispatch('showFlashMessage', {
         currentFlashMessage: 'FlashMessageDeleteCalculation',
         flashMessageType: 'success'
       })
-      setTimeout(() => {
-        commit('hideFlashMessage')
-      }, 5000)
       resolve()
     })
   },
-  resetCalculationWithFlashMessage({ state, commit }) {
+  resetCalculationWithFlashMessage({ state, commit, dispatch }) {
     if (state.editsCalculation) {
       commit('getCalculationEdited')
     } else {
       commit('setCalculationDefault')
     }
-    commit('showFlashMessage', {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageResetCalculation',
       flashMessageType: 'success'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   },
-  newCalculationWithFlashMessage({ commit }) {
+  newCalculationWithFlashMessage({ commit, dispatch }) {
     commit('disableEditCalculation')
     commit('setCalculationDefault')
-    commit('showFlashMessage', {
+    dispatch('showFlashMessage', {
       currentFlashMessage: 'FlashMessageNewCalculation',
       flashMessageType: 'info'
     })
-    setTimeout(() => {
-      commit('hideFlashMessage')
-    }, 5000)
   }
 }

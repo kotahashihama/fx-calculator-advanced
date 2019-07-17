@@ -25,6 +25,9 @@ import FlashMessageUpdateCalculation from '@/components/common/flash-message/Fla
 import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
 import FlashMessageResetCalculation from '@/components/common/flash-message/FlashMessageResetCalculation.vue'
 import FlashMessageNewCalculation from '@/components/common/flash-message/FlashMessageNewCalculation.vue'
+import FlashMessageCannotLoginMyfxbook from '@/components/common/flash-message/FlashMessageCannotLoginMyfxbook.vue'
+import FlashMessageCannotLogoutMyfxbook from '@/components/common/flash-message/FlashMessageCannotLogoutMyfxbook.vue'
+import FlashMessageCannotGetOpenTrades from '@/components/common/flash-message/FlashMessageCannotGetOpenTrades.vue'
 
 export default {
   components: {
@@ -36,7 +39,10 @@ export default {
     FlashMessageUpdateCalculation,
     FlashMessageDeleteCalculation,
     FlashMessageResetCalculation,
-    FlashMessageNewCalculation
+    FlashMessageNewCalculation,
+    FlashMessageCannotLoginMyfxbook,
+    FlashMessageCannotLogoutMyfxbook,
+    FlashMessageCannotGetOpenTrades
   }
 }
 </script>
