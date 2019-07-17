@@ -226,4 +226,17 @@ export default {
   justify-content: center;
   margin-top: 43px;
 }
+
+@media screen and (max-width: 720px) {
+  .form {
+    &-content {
+      flex-direction: column;
+
+      &__left {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
 </style>

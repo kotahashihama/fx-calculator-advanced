@@ -64,8 +64,11 @@ export default {
 }
 
 .window {
+  overflow: auto;
   position: relative;
   background: #fff;
+  max-width: 94%;
+  max-height: 60%;
 }
 
 .close-button {
@@ -83,7 +86,13 @@ export default {
 }
 
 .content {
-  margin: 0 38px 32px;
-  margin-top: 46px;
+  margin: 46px 38px 32px;
+  text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+  .content {
+    margin: 46px 24px 22px;
+  }
 }
 </style>

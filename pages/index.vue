@@ -95,7 +95,7 @@ export default {
 
 .calculating-form,
 .calculated-result {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .calculating-form {

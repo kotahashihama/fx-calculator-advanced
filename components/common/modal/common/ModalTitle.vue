@@ -8,4 +8,10 @@
   text-align: center;
   font-size: 1.5rem;
 }
+
+@media screen and (max-width: 720px) {
+  .modal-title {
+    margin-bottom: 28px;
+  }
+}
 </style>
