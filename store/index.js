@@ -666,14 +666,14 @@ export const actions = {
   async twitterLoginWithFlashMessage({ dispatch, commit }) {
     await dispatch('twitterLogin')
     dispatch('showFlashMessage', {
-      currentFlashMessage: 'FlashMessageLoggedIn',
+      currentFlashMessage: 'FlashMessageLogin',
       flashMessageType: 'success'
     })
   },
   async logoutWithFlashMessage({ dispatch, commit }) {
     await dispatch('logout')
     dispatch('showFlashMessage', {
-      currentFlashMessage: 'FlashMessageLoggedOut',
+      currentFlashMessage: 'FlashMessageLogout',
       flashMessageType: 'success'
     })
   },
