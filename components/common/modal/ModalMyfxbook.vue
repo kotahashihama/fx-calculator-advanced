@@ -102,6 +102,10 @@ export default {
               option: 'session',
               value: response.data.session
             })
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageLoginMyfxbook',
+              flashMessageType: 'success'
+            })
           } else {
             self.$store.dispatch('showFlashMessage', {
               currentFlashMessage: 'FlashMessageCannotLoginMyfxbook',
@@ -125,6 +129,10 @@ export default {
             self.$store.commit('updateMyfxbook', {
               option: 'session',
               value: ''
+            })
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageLogoutMyfxbook',
+              flashMessageType: 'success'
             })
           } else {
             self.$store.dispatch('showFlashMessage', {
@@ -150,7 +158,18 @@ export default {
         )
         .then(response => {
           if (response.data.error === false) {
-            self.$store.commit('getOpenTrades', response.data.openTrades)
+            if (response.data.openTrades.length === 0) {
+              self.$store.dispatch('showFlashMessage', {
+                currentFlashMessage: 'FlashMessageGetNoOpenTrades',
+                flashMessageType: 'danger'
+              })
+            } else {
+              self.$store.commit('getOpenTrades', response.data.openTrades)
+              self.$store.dispatch('showFlashMessage', {
+                currentFlashMessage: 'FlashMessageGetOpenTrades',
+                flashMessageType: 'success'
+              })
+            }
           } else {
             self.$store.dispatch('showFlashMessage', {
               currentFlashMessage: 'FlashMessageCannotGetOpenTrades',
