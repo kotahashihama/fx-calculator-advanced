@@ -17,32 +17,47 @@
 
 <script>
 import FlashMessageRedirectTop from '@/components/common/flash-message/FlashMessageRedirectTop.vue'
-import FlashMessageLoggedIn from '@/components/common/flash-message/FlashMessageLoggedIn.vue'
-import FlashMessageLoggedOut from '@/components/common/flash-message/FlashMessageLoggedOut.vue'
+import FlashMessageLogin from '@/components/common/flash-message/FlashMessageLogin.vue'
+import FlashMessageLogout from '@/components/common/flash-message/FlashMessageLogout.vue'
 import FlashMessageCannotCreateCalculation from '@/components/common/flash-message/FlashMessageCannotCreateCalculation.vue'
 import FlashMessageCreateCalculation from '@/components/common/flash-message/FlashMessageCreateCalculation.vue'
 import FlashMessageUpdateCalculation from '@/components/common/flash-message/FlashMessageUpdateCalculation.vue'
 import FlashMessageDeleteCalculation from '@/components/common/flash-message/FlashMessageDeleteCalculation.vue'
 import FlashMessageResetCalculation from '@/components/common/flash-message/FlashMessageResetCalculation.vue'
 import FlashMessageNewCalculation from '@/components/common/flash-message/FlashMessageNewCalculation.vue'
+import FlashMessageLoginMyfxbook from '@/components/common/flash-message/FlashMessageLoginMyfxbook.vue'
+import FlashMessageLogoutMyfxbook from '@/components/common/flash-message/FlashMessageLogoutMyfxbook.vue'
+import FlashMessageCannotLoginMyfxbook from '@/components/common/flash-message/FlashMessageCannotLoginMyfxbook.vue'
+import FlashMessageCannotLogoutMyfxbook from '@/components/common/flash-message/FlashMessageCannotLogoutMyfxbook.vue'
+import FlashMessageCannotGetOpenTrades from '@/components/common/flash-message/FlashMessageCannotGetOpenTrades.vue'
+import FlashMessageGetOpenTrades from '@/components/common/flash-message/FlashMessageGetOpenTrades.vue'
+import FlashMessageGetNoOpenTrades from '@/components/common/flash-message/FlashMessageGetNoOpenTrades.vue'
 
 export default {
   components: {
     FlashMessageRedirectTop,
-    FlashMessageLoggedIn,
-    FlashMessageLoggedOut,
+    FlashMessageLogin,
+    FlashMessageLogout,
     FlashMessageCannotCreateCalculation,
     FlashMessageCreateCalculation,
     FlashMessageUpdateCalculation,
     FlashMessageDeleteCalculation,
     FlashMessageResetCalculation,
-    FlashMessageNewCalculation
+    FlashMessageNewCalculation,
+    FlashMessageLoginMyfxbook,
+    FlashMessageLogoutMyfxbook,
+    FlashMessageCannotLoginMyfxbook,
+    FlashMessageCannotLogoutMyfxbook,
+    FlashMessageCannotGetOpenTrades,
+    FlashMessageGetOpenTrades,
+    FlashMessageGetNoOpenTrades
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .flash-message {
+  pointer-events: none;
   z-index: $flash-message-z-index;
   position: fixed;
   top: calc(#{$header-height} + 11px);
@@ -64,6 +79,7 @@ export default {
 }
 
 .box {
+  pointer-events: auto;
   margin: 0 auto;
   padding: 0.9em 1.1em;
   border: solid 1px rgba(0, 0, 0, 0.9);

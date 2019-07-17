@@ -102,10 +102,15 @@ export default {
               option: 'session',
               value: response.data.session
             })
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageLoginMyfxbook',
+              flashMessageType: 'success'
+            })
           } else {
-            alert(
-              'ログインできませんでした。時間をおくか、メールアドレスとパスワードをもう一度ご確認ください'
-            )
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotLoginMyfxbook',
+              flashMessageType: 'danger'
+            })
           }
         })
     },
@@ -125,8 +130,15 @@ export default {
               option: 'session',
               value: ''
             })
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageLogoutMyfxbook',
+              flashMessageType: 'success'
+            })
           } else {
-            alert('ログアウトできませんでした。時間をおいてお試しください')
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotLogoutMyfxbook',
+              flashMessageType: 'danger'
+            })
           }
         })
     },
@@ -146,11 +158,23 @@ export default {
         )
         .then(response => {
           if (response.data.error === false) {
-            self.$store.commit('getOpenTrades', response.data.openTrades)
+            if (response.data.openTrades.length === 0) {
+              self.$store.dispatch('showFlashMessage', {
+                currentFlashMessage: 'FlashMessageGetNoOpenTrades',
+                flashMessageType: 'danger'
+              })
+            } else {
+              self.$store.commit('getOpenTrades', response.data.openTrades)
+              self.$store.dispatch('showFlashMessage', {
+                currentFlashMessage: 'FlashMessageGetOpenTrades',
+                flashMessageType: 'success'
+              })
+            }
           } else {
-            alert(
-              '取得できませんでした。時間をおくか、一度ログアウトしてからお試しください'
-            )
+            self.$store.dispatch('showFlashMessage', {
+              currentFlashMessage: 'FlashMessageCannotGetOpenTrades',
+              flashMessageType: 'danger'
+            })
           }
         })
 
