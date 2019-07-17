@@ -18,6 +18,8 @@ export default {
 
 <style lang="scss" scoped>
 .header-hamburger-button {
+  border: none;
+  background: transparent;
   color: #fff;
   width: 44px;
   height: 44px;
