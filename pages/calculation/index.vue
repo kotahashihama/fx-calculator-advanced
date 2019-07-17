@@ -339,11 +339,13 @@ export default {
 
 @media screen and (max-width: 800px) {
   .container {
-    max-width: 96%;
+    max-width: none;
   }
 
   .calculations {
     padding: 28px 4%;
+    border-right: 0;
+    border-left: 0;
   }
 }
 

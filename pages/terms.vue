@@ -248,11 +248,13 @@ ol {
 
 @media screen and (max-width: 800px) {
   .container {
-    max-width: 96%;
+    max-width: none;
   }
 
   .box {
     padding: 28px 4%;
+    border-right: 0;
+    border-left: 0;
   }
 }
 </style>
