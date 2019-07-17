@@ -628,12 +628,6 @@ export const actions = {
       })
     })
   },
-  redirectTopWithFlashMessage({ dispatch }) {
-    dispatch('showFlashMessage', {
-      currentFlashMessage: 'FlashMessageRedirectTop',
-      flashMessageType: 'danger'
-    })
-  },
   getCalculations({ dispatch, state, commit }) {
     return new Promise(async resolve => {
       await dispatch('checkAuthentication')

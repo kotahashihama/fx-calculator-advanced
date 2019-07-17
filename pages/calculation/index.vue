@@ -169,7 +169,10 @@ export default {
     isLoadingAuthentication() {
       if (this.$store.state.isLoggedIn === false) {
         this.$router.push('/')
-        this.$store.dispatch('redirectTopWithFlashMessage')
+        this.$store.dispatch('showFlashMessage', {
+          currentFlashMessage: 'FlashMessageRedirectTop',
+          flashMessageType: 'danger'
+        })
       }
     }
   },
