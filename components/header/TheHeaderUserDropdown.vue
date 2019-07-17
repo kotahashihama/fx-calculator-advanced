@@ -14,7 +14,7 @@
           class="header-dropdown-list__item-link"
           @click="twitterLogin()"
         >
-          Twitterでログイン
+          Twitterログイン
         </button>
       </li>
     </ul>

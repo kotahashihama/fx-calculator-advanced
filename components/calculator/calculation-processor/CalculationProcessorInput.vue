@@ -15,12 +15,11 @@
     </template>
     <template v-else>
       <span class="input input--disabled"
-        >ログインすると、ここから計算結果を保存することができます。<button
-          class="button button--danger"
-          @click="twitterLogin"
-        >
-          Twitterでログイン
-        </button></span
+        ><span class="text"
+          >ログインすると、ここから計算結果を保存することができます。</span
+        ><button class="button button--danger" @click="twitterLogin">
+          Twitterログイン</button
+        ><span class="text-sp">で保存ができます。</span></span
       >
     </template>
   </div>
@@ -89,7 +88,6 @@ export default {
 
 .button {
   transition: background 0.3s;
-  margin-left: 9px;
   padding: 0.2em 1.3em;
   border: none;
   border-radius: 3px;
@@ -118,9 +116,28 @@ export default {
   }
 }
 
+.text {
+  margin-right: 9px;
+
+  &-sp {
+    display: none;
+    margin-left: 9px;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .calculation-processor-input {
     margin-bottom: 6px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .text {
+    display: none;
+
+    &-sp {
+      display: inline;
+    }
   }
 }
 </style>
