@@ -91,4 +91,10 @@ export default {
     border-color: rgba(234, 121, 86, 0.9); // #ea7956
   }
 }
+
+@media screen and (max-width: 720px) {
+  .box {
+    max-width: 96%;
+  }
+}
 </style>
