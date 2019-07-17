@@ -35,7 +35,8 @@ export default {
    */
   plugins: [
     { src: '@/plugins/filters.js' },
-    { src: '@/plugins/router-option.js' }
+    { src: '@/plugins/router-option.js' },
+    { src: '@/plugins/google-analytics.js' }
   ],
   /*
    ** Nuxt.js modules
