@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .flash-message {
+  pointer-events: none;
   z-index: $flash-message-z-index;
   position: fixed;
   top: calc(#{$header-height} + 11px);
@@ -70,6 +71,7 @@ export default {
 }
 
 .box {
+  pointer-events: auto;
   margin: 0 auto;
   padding: 0.9em 1.1em;
   border: solid 1px rgba(0, 0, 0, 0.9);
